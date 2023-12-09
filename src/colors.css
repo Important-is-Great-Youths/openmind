@@ -1,0 +1,18 @@
+:root {
+  --grayscale-60: #000;
+  --grayscale-50: #515151;
+  --grayscale-40: #818181;
+  --grayscale-30: #cfcfcf;
+  --grayscale-20: #f9f9f9;
+  --grayscale-10: #fff;
+
+  --brown-50: #341909;
+  --brown-40: #542f1a;
+  --brown-30: #c7bbb5;
+  --brown-20: #e4d5c9;
+  --brown-10: #f5f1ee;
+
+  --blue: #1877f2;
+  --yellow: #fee500;
+  --red: #b93333;
+}
