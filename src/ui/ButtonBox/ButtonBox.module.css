@@ -9,15 +9,18 @@
   cursor: pointer;
   border: 2px solid transparent;
   background: var(--brown-40, #542f1a);
+}
+.qnaBtn span {
   color: #fff;
 }
-
 .qnaBtn.answerBtn {
   border: 1px solid var(--brown-40, #542f1a);
   background: var(--brown-10, #f5f1ee);
-  color: #542f1a;
 }
 
+.qnaBtn.answerBtn span {
+  color: var(--brown-40, #542f1a);
+}
 .qnaWidth {
   width: 100%;
 }
