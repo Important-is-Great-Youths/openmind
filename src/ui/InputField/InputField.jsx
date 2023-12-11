@@ -6,7 +6,7 @@ const cx = classNames.bind(styles);
 
 const InputField = () => {
   return (
-    <div className={cx("inputWrap")}>
+    <div className={cx("input-wrap")}>
       <input className={cx("input")} type="text" placeholder="이름을 입력하세요" />
       <IconPerson className={cx("icon")} />
     </div>
