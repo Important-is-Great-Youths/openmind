@@ -1,0 +1,25 @@
+.FooterSns {
+  display: flex;
+  gap: 0.75rem;
+}
+.link,
+.kakao,
+.facebook {
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50px;
+}
+
+.link {
+  background: var(--brown-40, #542f1a);
+}
+.kakao {
+  background: var(--yellow-50, #fee500);
+}
+
+.facebook {
+  background: var(--blue-50, #1877f2);
+}
