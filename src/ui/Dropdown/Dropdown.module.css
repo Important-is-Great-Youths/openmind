@@ -1,0 +1,29 @@
+.container {
+  display: inline-block;
+}
+.button {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  padding: 8px 12px;
+  border: 1px solid #000;
+  border-radius: 8px;
+  background-color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 18px;
+  margin-bottom: 4px;
+  cursor: pointer;
+}
+.list {
+  border-radius: 8px;
+  padding: 4px 0;
+  margin: 0;
+  border: solid 1px #cfcfcf;
+  list-style: none;
+  box-shadow: 0px 4px 4px 0px rgba(140, 140, 140, 0.25);
+}
+.item {
+  padding: 6px 16px;
+  font-size: 14px;
+}

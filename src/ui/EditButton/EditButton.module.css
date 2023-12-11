@@ -1,0 +1,25 @@
+.button {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 6px 16px;
+  border: none;
+  background-color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 18px;
+  color: #515151;
+  cursor: pointer;
+}
+.button:hover {
+  background: #f9f9f9;
+  color: #000;
+}
+.icon {
+  width: 14px;
+  height: 14px;
+  fill: #515151;
+}
+.button:hover .icon {
+  fill: #000;
+}
