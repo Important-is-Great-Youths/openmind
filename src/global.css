@@ -3,3 +3,6 @@
   --grayscale-40: #818181;
   --brown-40: #542f1a;
 }
+@import "./colors.css";
+@import "./reset.css";
+@import "./variables.css";

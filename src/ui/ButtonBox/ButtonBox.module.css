@@ -1,0 +1,93 @@
+.qnaBtn {
+  border-radius: 0.5rem;
+  padding: 12px 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  border: 2px solid transparent;
+  background: var(--brown-40, #542f1a);
+}
+.qnaBtn span {
+  color: #fff;
+}
+.qnaBtn.answerBtn {
+  border: 1px solid var(--brown-40, #542f1a);
+  background: var(--brown-10, #f5f1ee);
+}
+
+.qnaBtn.answerBtn span {
+  color: var(--brown-40, #542f1a);
+}
+.qnaWidth {
+  width: 100%;
+}
+
+.qnaInactivate {
+  border: 2px solid var(--brown-30, #c7bbb5);
+  background: var(--brown-30, #c7bbb5);
+}
+.qnaBtn.answerBtn.qnaInactivate {
+  color: #c7bbb5;
+  border: 1px solid var(--brown-30, #c7bbb5);
+  background: var(--brown-10, #f5f1ee);
+}
+
+.arrowNext {
+  width: 18px;
+  height: 18px;
+  fill: #fff;
+  margin-top: 3px;
+}
+
+.qnaBtn.answerBtn .arrowNext {
+  width: 18px;
+  height: 18px;
+  fill: #542f1a;
+  margin-top: 3px;
+}
+
+.qnaBtn.answerBtn.qnaInactivate .arrowNext {
+  fill: #c7bbb5;
+}
+
+.qnaBtn:hover {
+  border: 2px solid var(--brown-50, #341909);
+}
+
+.qnaBtn.answerBtn:hover {
+  border: 2px solid var(--brown-40, #542f1a);
+}
+
+.qnaBtn:active {
+  background: var(--brown-50, #341909);
+}
+
+.qnaBtn.answerBtn:active {
+  background: var(--brown-20, #e4d5c9);
+}
+
+.qnaInactivate:hover {
+  border: 2px solid var(--brown-30, #c7bbb5);
+}
+.qnaBtn.answerBtn.qnaInactivate:hover {
+  border: 1px solid var(--brown-30, #c7bbb5);
+}
+
+.qnaInactivate:active {
+  background: var(--brown-30, #c7bbb5);
+}
+
+.qnaBtn.answerBtn.qnaInactivate:active {
+  background: var(--brown-10, #f5f1ee);
+}
+
+@media screen and (max-width: 375px) {
+  .qnaBtn {
+    padding: 0.5rem 0.75rem;
+    gap: 0.25rem;
+    font-size: 0.875rem;
+  }
+}
