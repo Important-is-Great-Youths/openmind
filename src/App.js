@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
-import InputTextarea from "./ui/InputTextarea/InputTextarea";
-import "./global.css";
+import InputTextarea from "./components/ui/InputTextarea/InputTextarea";
+import "./styles/global.css";
 
 function App() {
   return (
