@@ -1,8 +1,28 @@
+import styles from "./MainPage.module.css";
+import classNames from "classnames/bind";
+import ButtonBox from "../../ui/ButtonBox/ButtonBox";
+import InputField from "../../ui/InputField/InputField";
+import { Link } from "react-router-dom";
+
 export const MainPage = () => {
+  const cx = classNames.bind(styles);
+
   return (
     <>
-      <h1>MainPage 입니다.</h1>
-      <h2>/test로 TestPage에 이동할 수 있습니다.</h2>
+      <div className={cx("wrap")}>
+        <Link to="/list" className={cx("question")} style={{ textDecoration: "none" }}>
+          <ButtonBox text={"질문하러 가기"} qnaBtn="answerBtn" />
+        </Link>
+        <div className={cx("wrapInner")}>
+          <div className={cx("imgBox")}>
+            <img src="assets/main-logo.png" alt="오픈마인드 로고" />
+          </div>
+          <div className={cx("inputName")}>
+            <InputField className={cx("inputField")} />
+            <ButtonBox text={"질문받기"} qnaWidth="qnaWidth" />
+          </div>
+        </div>
+      </div>
     </>
   );
 };
