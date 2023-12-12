@@ -1,6 +1,5 @@
 import styles from "./PostHeader.module.css";
 import classNames from "classnames/bind";
-import ButtonShare from "../../ui/ButtonShare";
 
 export default function PostHeader() {
   const cx = classNames.bind(styles);
