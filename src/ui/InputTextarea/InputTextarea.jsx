@@ -1,12 +1,21 @@
-import styled from "styled-components";
-import stylesheet from "InputTextarea.module.css";
+import stylesheet from "./InputTextarea.module.css";
+import cs from "classnames/bind";
+const cx = cs.bind(stylesheet);
 
-function Textarea() {
-  const [input, setInput] = useState("");
+const focusing = (e) => {
+  // 필요한 작업을 수행
+};
 
-  const handleInputText = (e) => {
-    setInput(e.target.value);
-  };
+function InputTextarea() {
+  return (
+    <form className={cx("inputarea")}>
+      <textarea
+        className={cx("input")}
+        placeholder="이름을 입력하세요"
+        onFocus={focusing}
+      />
+    </form>
+  );
 }
 
-export default Textarea;
+export default InputTextarea;

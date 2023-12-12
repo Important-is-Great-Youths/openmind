@@ -1,12 +1,25 @@
-.input {
-  display: flex;
+.inputarea {
   width: 336px;
   height: 140px;
+}
+
+.input {
+  display: flex;
   padding: 16px;
   justify-content: center;
   align-items: center;
   gap: 10px;
-  flex-shrink: 0;
   border-radius: 8px;
   background: var(--grayscale-20);
+}
+
+.input:focus,
+textarea:focus {
+  border: 1px solid #ff0000; /* 빨간색으로 변경 */
+}
+
+.text {
+  color: var(--grayscale-40, #818181);
+  font-feature-settings: "clig" off, "liga" off;
+  line-height: 22px; /* 137.5% */
 }
