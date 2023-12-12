@@ -1,8 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import App from "./App";
-import { MainPage } from "./page-layout/MainPage/MainPage";
-import { TestPage } from "./page-layout/TestPage/TestPage";
-import { PostPage } from "./page-layout/PostPage/PostPage";
+import { MainPage } from "./pages/MainPage/MainPage";
+import { TestPage } from "./pages/TestPage/TestPage";
+import { PostPage } from "./pages/PostPage/PostPage";
 
 function Main() {
   return (
