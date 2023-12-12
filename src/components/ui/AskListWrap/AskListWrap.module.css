@@ -1,0 +1,16 @@
+.askListWrap {
+  padding: 16px 24px;
+  border-radius: 16px;
+  border: 1px solid var(--brown-20);
+  background: var(--brown-10);
+}
+.titleWrap {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.icon {
+  fill: var(--brown-40);
+}
