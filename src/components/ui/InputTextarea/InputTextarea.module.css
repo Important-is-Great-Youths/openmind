@@ -1,0 +1,28 @@
+.inputarea {
+  height: 140px;
+}
+
+.input {
+  width: 100%;
+  display: flex;
+  padding: 16px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 8px;
+  background: var(--grayscale-20);
+  outline: none;
+  border: 1px solid transparent;
+  font-size: 16px;
+  line-height: 22px;
+}
+
+.input:focus {
+  border: 1px solid #542f1a;
+}
+
+.text {
+  color: var(--grayscale-40, #818181);
+  font-feature-settings: "clig" off, "liga" off;
+  line-height: 22px; /* 137.5% */
+}
