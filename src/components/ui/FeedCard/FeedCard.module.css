@@ -1,0 +1,10 @@
+.cardList {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.cardWrap {
+  padding: 32px;
+  background-color: #fff;
+  border-radius: 16px
+}
