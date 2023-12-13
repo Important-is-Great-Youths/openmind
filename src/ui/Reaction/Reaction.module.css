@@ -1,0 +1,20 @@
+.buttondiv {
+  display: inline-flex;
+  align-items: center;
+  border: none;
+  gap: 6px;
+  color: var(--grayscale-40);
+  background-color: #ffffff;
+}
+.img {
+  width: 16px;
+  height: 16px;
+  color: var(--grayscale-40);
+}
+.buttondiv:hover {
+  background: #f9f9f9;
+  color: var(--grayscale-60);
+}
+.buttondiv:visited {
+  color: var(--blue-50, #1877f2);
+}
