@@ -13,13 +13,13 @@
   background: var(--grayscale-20);
 }
 
-.input:focus,
-textarea:focus {
-  border: 1px solid #ff0000; /* 빨간색으로 변경 */
+.input:focus {
+  border: 1px solid var(--brown-40);
+  outline: none;
 }
 
 .text {
   color: var(--grayscale-40, #818181);
   font-feature-settings: "clig" off, "liga" off;
-  line-height: 22px; /* 137.5% */
+  line-height: 22px;
 }
