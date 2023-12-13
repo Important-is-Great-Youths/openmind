@@ -10,12 +10,12 @@ export default function PostHeader() {
         <div className={cx("header-img")} />
         <img
           className={cx("logo")}
-          src="assets/main-logo.png"
+          src="/assets/main-logo.png"
           alt="OpenmindLogo"
         />
         <img
           className={cx("profile-photo")}
-          src="assets/temp-profile.png"
+          src="/assets/temp-profile.png"
           alt="ProfileImg"
         />
         <h2 className={cx("username")}>아초는고양이</h2>

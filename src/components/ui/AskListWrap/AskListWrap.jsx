@@ -6,7 +6,7 @@ import { ReactComponent as IconMessages } from "../../../icon/icon-messages.svg"
 const cx = classNames.bind(styles);
 
 const AskListWrap = ({ children, title }) => {
-  const hasChildren = React.Children.count(children) == 0;
+  const hasChildren = React.Children.count(children) === 0;
 
   const askListWrapHeight = {
     height: hasChildren && "330px",
