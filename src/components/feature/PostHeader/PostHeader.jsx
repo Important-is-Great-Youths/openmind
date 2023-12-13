@@ -1,6 +1,7 @@
 import styles from "./PostHeader.module.css";
 import classNames from "classnames/bind";
 import ButtonShare from "../../ui/ButtonShare/ButtonShare";
+import { Link } from "react-router-dom";
 
 export default function PostHeader() {
   const cx = classNames.bind(styles);
@@ -8,11 +9,13 @@ export default function PostHeader() {
     <>
       <div className={cx("header")}>
         <div className={cx("header-img")} />
-        <img
-          className={cx("logo")}
-          src="/assets/main-logo.png"
-          alt="OpenmindLogo"
-        />
+        <Link to="../">
+          <img
+            className={cx("logo")}
+            src="assets/main-logo.png"
+            alt="OpenmindLogo"
+          />
+        </Link>
         <img
           className={cx("profile-photo")}
           src="/assets/temp-profile.png"
