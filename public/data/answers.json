@@ -1,0 +1,23 @@
+[
+  {
+    "id": 0,
+    "questionId": 1,
+    "content": "답변 1-1",
+    "isRejected": false,
+    "createdAt": "2023-12-13T10:15:18.794Z"
+  },
+  {
+    "id": 1,
+    "questionId": 1,
+    "content": "답변 1-2",
+    "isRejected": true,
+    "createdAt": "2023-12-13T10:16:18.794Z"
+  },
+  {
+    "id": 2,
+    "questionId": 2,
+    "content": "답변 2-1",
+    "isRejected": false,
+    "createdAt": "2023-12-13T10:17:18.794Z"
+  }
+]
