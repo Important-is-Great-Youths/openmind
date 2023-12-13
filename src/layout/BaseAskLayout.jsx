@@ -3,7 +3,6 @@ const BaseAskLayout = ({ children }) => {
     <>
       <header></header>
       <main>{children}</main>
-      <footer></footer>
     </>
   );
 };
