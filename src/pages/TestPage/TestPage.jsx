@@ -1,4 +1,4 @@
-import { useGetSubjects } from "../../data-access/useGetSubjects";
+import { useGetSubjects } from "../../data-access/subjects/useGetSubjects";
 
 const GetSubject = () => {
   const { data } = useGetSubjects();
