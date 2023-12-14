@@ -1,3 +1,3 @@
 // import InputTextarea from "./InputTextarea";
 
-export default InputTextarea;
+export { default as InputTextarea } from "./InputTextarea";
