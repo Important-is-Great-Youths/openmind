@@ -1,0 +1,33 @@
+[
+  {
+    "count": 3,
+    "next": "/subjects?page=2",
+    "previous": null,
+    "results": [
+      {
+        "id": 1,
+        "name": "이서영",
+        "imageSource": "https://images.unsplash.com/photo-1495615080073-6b89c9839ce0?q=80&w=1212&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "questionCount": 15,
+        "createdAt": "2023-12-14T08:30:00.000Z",
+        "team": "2-3"
+      },
+      {
+        "id": 2,
+        "name": "임광열",
+        "imageSource": "https://images.unsplash.com/photo-1597589827317-4c6d6e0a90bd?q=80&w=1180&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "questionCount": 10,
+        "createdAt": "2023-12-14T09:45:00.000Z",
+        "team": "2-3"
+      },
+      {
+        "id": 3,
+        "name": "문다님",
+        "imageSource": "https://images.unsplash.com/photo-1504600770771-fb03a6961d33?q=80&w=1182&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "questionCount": 8,
+        "createdAt": "2023-12-14T10:20:00.000Z",
+        "team": "2-3"
+      }
+    ]
+  }
+]
