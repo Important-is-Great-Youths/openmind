@@ -1,6 +1,12 @@
 import { Link } from "react-router-dom";
+import React from "react";
 import ButtonBox from "../../components/ui/ButtonBox/ButtonBox";
-import PostHeader from "../../components/feature/PostHeader/PostHeader";
+import answers from "../../data/answers.json";
+import subjects from "../../data/subjects.json";
+import questions from "../../data/questions.json";
+import AnswerList from "../../components/feature/MockUpTest/AnswerList";
+import QuestionList from "../../components/feature/MockUpTest/QuestionList";
+import SubjectList from "../../components/feature/MockUpTest/SubjectList";
 
 export const TestPage = () => {
   return (
@@ -10,7 +16,9 @@ export const TestPage = () => {
       <h2>h2</h2>
       <h3>h3</h3>
       <ButtonBox text={"안녕"} qnaBtn="answerBtn" />
-      <PostHeader />
+      <AnswerList items={answers} />
+      <QuestionList items={questions} />
+      <SubjectList items={subjects} />
     </>
   );
 };
