@@ -8,7 +8,7 @@ export default function Reaction() {
   const cx = classNames.bind(stylesheet);
   const [like, setLike] = useState(0);
   const [hate, setHate] = useState(0);
-  console.log(like);
+
   return (
     <>
       <button
