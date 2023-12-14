@@ -1,1 +1,1 @@
-export default Reaction;
+export { default as Reaction } from "./Reaction";
