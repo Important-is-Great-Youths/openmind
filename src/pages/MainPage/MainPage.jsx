@@ -4,6 +4,7 @@ import ButtonBox from "../../components/ui/ButtonBox/ButtonBox";
 import InputField from "../../components/ui/InputField/InputField";
 import { Link } from "react-router-dom";
 
+
 export const MainPage = () => {
   const cx = classNames.bind(styles);
 

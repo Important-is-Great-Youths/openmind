@@ -1,0 +1,21 @@
+.askListWrap {
+  max-width: 716px;
+  padding: 16px 24px;
+  margin: 0 auto;
+  border: 1px solid var(--brown-20);
+  border-radius: 16px;
+  background: var(--brown-10);
+}
+.titleWrap {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+.icon {
+  fill: var(--brown-40);
+}
+
+/* @media (max-width: 768px) {
+} */
