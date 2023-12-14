@@ -1,0 +1,63 @@
+:local {
+    /* Define local scope styles here */
+}
+
+.usecard {
+    width: 490px;
+    height: 227px;
+    box-sizing: border-box;
+    border: 1px solid var(--grayscale-40, #818181);
+    border-radius: 16px;
+    margin: 0;
+    padding: 0;
+    font: inherit;
+    vertical-align: inherit;
+    outline: none;
+    letter-spacing: inherit;
+    cursor: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.deviceBox {
+    width: 220px;
+    height: 187px;
+    padding: 20px;
+    border-radius: 16px;
+    border: 1px solid var(--grayscale-40, #818181);
+    background: var(--grayscale-10, #FFF);
+}
+
+.frame51 {
+    width: 188px;
+    height: 22px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+    align-self: stretch;
+    content: "아초는 고양이";
+}
+
+.frame59 {
+    width: 188px;
+    height: 84px;
+    align-self: stretch;
+}
+
+.imgContainer {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+}
+
+.textContainer {
+    text-align: center;
+}
+
+.text {
+    color: var(--grayscale-50, #515151);
+}
+
