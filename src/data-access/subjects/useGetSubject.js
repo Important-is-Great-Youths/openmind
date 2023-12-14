@@ -1,27 +1,9 @@
-import { useEffect, useState } from "react";
 import { axiosInstance } from "../../util/axiosInstance";
+import { useAsync } from "../../util/useAsync";
 
 const useGetSubject = (subjectId) => {
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [data, setData] = useState(null);
-  console.log(subjectId);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        const response = await axiosInstance.get(`subjects/${subjectId}/`);
-        setData(response.data);
-      } catch (error) {
-        setError(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, [subjectId]);
+  const getSubject = () => axiosInstance.get(`subjects/${subjectId}/`);
+  const { loading, error, data } = useAsync(getSubject);
 
   return { loading, error, data };
 };
