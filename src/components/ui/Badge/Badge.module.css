@@ -1,29 +1,26 @@
+/* Badge.module.css*/
 :local {
     /* Define local scope styles here */
 }
 
-.container {
-    /* 전체적인 스타일 정보 */
+.badge {
+    width: 76px;
+
+    display: inline-block;
+    font-weight: 500;
+    padding: 4px 12px;
+    border-radius: 8px;
+    border: 1px solid #000;
+    gap: 10px;
+    color: #000;
 }
 
 .complete {
-    width: 76px;
-    height: 26px;
-    padding: 4px 12px;
-    border-radius: 8px;
-    border: 1px solid var(--grayscale-60, #000);
-    gap: 10px;
-    color: var(--grayscale-60, #000);
+    background-color: #4CAF50; /*답변완료 배경색*/
+    font-size:16px; /*텍스트 크기*/
 }
 
-.incomplete {
-    width: 61px;
-    height: 26px;
-    padding: 4px 12px;
-    border-radius: 8px;
-    border: 1px solid var(--grayscale-60, #000);
-    gap: 10px;
-    color: var(--grayscale-60, #000);
-}
-
-
+ .incomplete{
+     background-color: #FFC107; /*미답변 배경색*/
+     font-size:14px; /*텍스트 크기*/
+ }
