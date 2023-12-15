@@ -1,9 +1,6 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import Usercard from "../../components/ui/Usercad/Usercard"
-import ButtonBox from "../../components/ui/ButtonBox/ButtonBox";
-import PostHeader from "../../components/feature/PostHeader/PostHeader";
-import Badge from "../../components/ui/Badge/Badge"
+import Usercard from "../../components/ui/Usercad/Usercard";
+import Badge from "../../components/ui/Badge/Badge";
 import { useGetSubjects } from "../../data-access/subjects/useGetSubjects";
 import { usePostSubjects } from "../../data-access/subjects/usePostSubjects";
 
@@ -85,7 +82,7 @@ export const TestPage = () => {
       <h1>testpage</h1>
       <PostSubjects />
       <Usercard />
-      <Badge Completed/>
+      <Badge Completed />
       <Badge />
       <GetSubjects />
     </>
