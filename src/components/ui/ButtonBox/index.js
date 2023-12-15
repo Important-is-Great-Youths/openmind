@@ -1,1 +1,3 @@
-export * from "./ButtonBox";
+import ButtonBox from "./ButtonBox";
+
+export default ButtonBox;
