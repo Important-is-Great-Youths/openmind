@@ -1,1 +1,3 @@
-export * from "./ButtonFloating";
+import ButtonFloating from "./ButtonFloating";
+
+export default ButtonFloating;
