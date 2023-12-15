@@ -3,7 +3,7 @@
   align-items: center;
   border: none;
   gap: 6px;
-  color: var(--grayscale-40);
+  color: var(--grayscale-40, #818181);
   background-color: #ffffff;
 }
 .img {
@@ -15,7 +15,8 @@
   background: #f9f9f9;
   color: var(--grayscale-60);
 }
-.buttondiv:visited {
+.buttondiv:active {
+  /*like=true이면 button 클래스 먹이거나*/
   /*눌렀는지 안눌렀는지 확인하는 함수를 하나 더 만들어서 작용*/
   color: var(--blue-50, #1877f2);
 }
