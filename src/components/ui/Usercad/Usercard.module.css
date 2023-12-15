@@ -1,63 +1,89 @@
-:local {
-    /* Define local scope styles here */
+/* Usercard.module.css */
+
+.usercardLink {
+    /* 링크 스타일을 여기에 추가하세요. */
+    text-decoration: none;
+    color: inherit;
 }
 
-.usecard {
-    width: 490px;
-    height: 227px;
-    box-sizing: border-box;
-    border: 1px solid var(--grayscale-40, #818181);
-    border-radius: 16px;
-    margin: 0;
-    padding: 0;
-    font: inherit;
-    vertical-align: inherit;
-    outline: none;
-    letter-spacing: inherit;
-    cursor: inherit;
+.usercard {
+    /* 전체 스타일을 여기에 추가하세요. */
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.deviceBox {
     width: 220px;
     height: 187px;
     padding: 20px;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-shrink: 0;
     border-radius: 16px;
     border: 1px solid var(--grayscale-40, #818181);
     background: var(--grayscale-10, #FFF);
+    gap:auto;
 }
-
-.frame51 {
-    width: 188px;
-    height: 22px;
+.profileInfo{
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    align-self: stretch;
+
+}
+
+.profileImage {
+    display: flex;
+    width: 60px;
+    height: 60px;
+    justify-content: center;
     align-items: center;
-    flex-shrink: 0;
-    align-self: stretch;
-    content: "아초는 고양이";
 }
 
-.frame59 {
-    width: 188px;
-    height: 84px;
-    align-self: stretch;
+
+.profileName {
+    /* 텍스트 스타일을 여기에 추가하세요. */
+    font-size: 18px;
+    font-weight: bold;
 }
 
-.imgContainer {
+.messageInfo {
+    /* 메시지 정보 부분 스타일을 여기에 추가하세요. */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     width: 100%;
-    height: 100%;
-    background-size: cover;
+
+
+
 }
 
-.textContainer {
-    text-align: center;
+.messageType {
+    /* 메시지 타입 부분 스타일을 여기에 추가하세요. */
+    display: flex;
+    align-items: center;
+    margin-right: 16px;
+    margin-right: 16px;
+
 }
 
-.text {
-    color: var(--grayscale-50, #515151);
+.messageIcon {
+    /* 메시지 아이콘 스타일을 여기에 추가하세요. */
+    display: flex;
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
 }
 
+.messageLabel {
+    /* 메시지 라벨 스타일을 여기에 추가하세요. */
+    font-size: 14px;
+
+}
+
+.messageCount {
+    /* 메시지 개수 스타일을 여기에 추가하세요. */
+    font-size: 16px;
+    font-weight: bold;
+
+
+
+}

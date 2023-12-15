@@ -1,3 +1,8 @@
+import { Link } from "react-router-dom";
+import Usercard from "../../components/ui/Usercad/Usercard"
+import ButtonBox from "../../components/ui/ButtonBox/ButtonBox";
+import PostHeader from "../../components/feature/PostHeader/PostHeader";
+import Badge from "../../components/ui/Badge/Badge"
 import { useGetSubjects } from "../../data-access/subjects/useGetSubjects";
 import useGetSubject from "../../data-access/subjects/useGetSubject";
 
@@ -63,6 +68,9 @@ const GetSubject = ({ subjectId }) => {
 export const TestPage = () => {
   return (
     <>
+      <Usercard />
+      <Badge Completed/>
+      <Badge />
       <GetSubjects />
       <GetSubject subjectId={1279} />
     </>
