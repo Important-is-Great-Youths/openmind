@@ -1,16 +1,10 @@
-.inputarea {
-  width: 336px;
-  height: 140px;
-}
-
 .input {
-  display: flex;
   padding: 16px;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
   border-radius: 8px;
   background: var(--grayscale-20);
+  border: 1px solid transparent;
+  width: 100%;
+  resize: none;
 }
 
 .input:focus {
