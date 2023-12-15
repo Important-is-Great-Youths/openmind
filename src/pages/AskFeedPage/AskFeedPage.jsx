@@ -1,15 +1,20 @@
+import { Link } from "react-router-dom";
+import BasePostLayout from "../../layout/BasePostLayout";
 import AskListWrap from "../../components/ui/AskListWrap/AskListWrap";
 import FeedCard from "../../components/ui/FeedCard/FeedCard";
-import BaseAskLayout from "../../layout/BaseAskLayout";
 
-const AskFeedPage = () => {
+export const AskFeedPage = () => {
   return (
-    <BaseAskLayout>
-      <AskListWrap title={"3개의 질문이 있습니다"} >
-        <FeedCard/>
-      </AskListWrap>
-    </BaseAskLayout>
+    <>
+      <BasePostLayout>
+        <h1>PostPage</h1>
+        <h3>
+          <Link to="/">MainPage가는 링크</Link>
+        </h3>
+        <AskListWrap title={"3개의 질문이 있습니다"}>
+          <FeedCard />
+        </AskListWrap>
+      </BasePostLayout>
+    </>
   );
 };
-
-export default AskFeedPage;

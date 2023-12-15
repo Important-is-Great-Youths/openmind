@@ -1,0 +1,10 @@
+.main {
+  position: relative;
+  padding: 0 24px 136px;
+  background-color: var(--grayscale-20);
+}
+.button {
+  position: absolute;
+  right: 24px;
+  bottom: 24px;
+}

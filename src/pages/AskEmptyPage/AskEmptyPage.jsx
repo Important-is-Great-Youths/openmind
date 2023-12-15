@@ -1,13 +1,12 @@
 import AskListWrap from "../../components/ui/AskListWrap/AskListWrap";
-import BaseAskLayout from "../../layout/BaseAskLayout";
+import BasePostLayout from "../../layout/BasePostLayout";
 
 const AskEmptyPage = () => {
   return (
-    <BaseAskLayout>
-      <AskListWrap title={"아직 질문이 없습니다"} >
-      </AskListWrap>
-    </BaseAskLayout>
+    <BasePostLayout>
+      <AskListWrap title={"아직 질문이 없습니다"}></AskListWrap>
+    </BasePostLayout>
   );
-}
+};
 
-export default AskEmptyPage
+export default AskEmptyPage;

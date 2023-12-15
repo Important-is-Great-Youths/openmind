@@ -1,5 +1,7 @@
 .askListWrap {
+  max-width: 716px;
   padding: 16px 24px;
+  margin: 0 auto;
   border: 1px solid var(--brown-20);
   border-radius: 16px;
   background: var(--brown-10);
@@ -14,3 +16,6 @@
 .icon {
   fill: var(--brown-40);
 }
+
+/* @media (max-width: 768px) {
+} */
