@@ -2,9 +2,21 @@ import { useGetSubjects } from "../../data-access/subjects/useGetSubjects";
 import useGetSubject from "../../data-access/subjects/useGetSubject";
 
 const GetSubjects = () => {
-  const { data } = useGetSubjects();
+  const { loading, error, data } = useGetSubjects();
   const { count, next, previous, results } = data || {};
   const subjectsCount = data ? { count, next, previous, results } : null;
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p>Error: {error.message}</p>;
+  }
+
+  if (!data) {
+    return <p>No data available.</p>;
+  }
   return (
     <>
       <h1>Subjects</h1>
