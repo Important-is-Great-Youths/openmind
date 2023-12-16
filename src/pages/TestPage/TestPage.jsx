@@ -3,6 +3,7 @@ import { useGetSubjects } from "../../data-access/subjects/useGetSubjects";
 import { usePostSubjects } from "../../data-access/subjects/usePostSubjects";
 import { useDeleteSubject } from "../../data-access/subjects/useDeleteSubject";
 import { useGetSubjectQuestions } from "../../data-access/subjects/useGetSubjectQuestions";
+import { usePostSubjectQustions } from "../../data-access/subjects/usePostSubjectQuestions";
 
 const PostSubjects = () => {
   const [name, setName] = useState("");
@@ -14,6 +15,7 @@ const PostSubjects = () => {
 
   return (
     <div>
+      <h1>PostSubjects</h1>
       <label>Name: </label>
       <input
         type="text"
@@ -54,13 +56,13 @@ const GetSubjects = () => {
       <p>next: {subjects ? subjects.next : null}</p>
       <p>previous: {subjects ? subjects.previous : null}</p>
       {results.map((result) => (
-        <GetSubjectResult key={result.id} result={result} />
+        <GetSubject key={result.id} result={result} />
       ))}
     </>
   );
 };
 
-const GetSubjectResult = ({ result: subject }) => {
+const GetSubject = ({ result: subject }) => {
   return (
     <>
       <div>
@@ -71,7 +73,8 @@ const GetSubjectResult = ({ result: subject }) => {
           <img src={subject.imageSource} alt={subject.name} />
           <p>Question Count: {subject.questionCount}</p>
           <DeleteSubjectButton subjectId={subject.id} />
-          <GetQuestionsButton subjectId={subject.id} />
+          <PostQuesionsForm subjectId={subject.id} />
+          <GetQuestions subjectId={subject.id} />
           <hr />
         </div>
       </div>
@@ -98,28 +101,60 @@ const DeleteSubjectButton = ({ subjectId }) => {
   );
 };
 
-const GetQuestionsButton = ({ subjectId }) => {
+const GetQuestions = ({ subjectId }) => {
   const {
     loading,
     error,
     data: getquestionsData,
-    getSubjectQuestions,
   } = useGetSubjectQuestions({ subjectId });
 
-  const handleGetQuestion = () => {
-    getSubjectQuestions(subjectId);
+  return (
+    <div>
+      {loading && <p>Loading...</p>}
+      {error && <p>Error: {error.message}</p>}
+      {getquestionsData && (
+        <div>
+          <h3>Question Data</h3>
+          <p>{JSON.stringify(getquestionsData)}</p>
+        </div>
+      )}
+    </div>
+  );
+};
+
+const PostQuesionsForm = ({ subjectId }) => {
+  const [content, setContent] = useState("");
+
+  const { loading, error, postData, postSubjectQuestions } =
+    usePostSubjectQustions();
+
+  const handleQuestionSumbit = async () => {
+    const questionData = {
+      subjectId,
+      content,
+      like: 0,
+      dislike: 0,
+      team: "2-3",
+    };
+    await postSubjectQuestions(subjectId, questionData);
   };
 
   return (
     <div>
-      <button onClick={handleGetQuestion} disabled={loading}>
-        Get Questions
+      <h3>PostQuesionsInput</h3>
+      <label>Question Content: </label>
+      <input
+        type="text"
+        value={content}
+        onChange={(e) => setContent(e.target.value)}
+      />
+      <br />
+      <button onClick={handleQuestionSumbit} disabled={loading}>
+        Submit Question
       </button>
       {loading && <p>Loading...</p>}
       {error && <p>Error: {error.message}</p>}
-      {getquestionsData && (
-        <p>Quesion Data: {JSON.stringify(getquestionsData)}</p>
-      )}
+      {postData && <p>Data Posted: {JSON.stringify(postData)}</p>}
     </div>
   );
 };
@@ -127,7 +162,6 @@ const GetQuestionsButton = ({ subjectId }) => {
 export const TestPage = () => {
   return (
     <>
-      <h1>testpage</h1>
       <PostSubjects />
       <GetSubjects />
     </>
