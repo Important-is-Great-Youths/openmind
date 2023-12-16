@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import Usercard from "../../components/ui/Usercad/Usercard";
-import Badge from "../../components/ui/Badge/Badge";
 import { useGetSubjects } from "../../data-access/subjects/useGetSubjects";
 import { usePostSubjects } from "../../data-access/subjects/usePostSubjects";
+import { useDeleteSubject } from "../../data-access/subjects/useDeleteSubject";
 
 const PostSubjects = () => {
   const [name, setName] = useState("");
@@ -60,19 +59,40 @@ const GetSubjects = () => {
   );
 };
 
-const GetSubjectResult = ({ result }) => {
+const GetSubjectResult = ({ result: subject }) => {
   return (
     <>
       <div>
         <h2>Subject List</h2>
         <div>
-          <p>Name: {result.name}</p>
-          <img src={result.imageSource} alt={result.name} />
-          <p>Question Count: {result.questionCount}</p>
+          <p>Name: {subject.name}</p>
+          <p>Subejct ID: {subject.id}</p>
+          <img src={subject.imageSource} alt={subject.name} />
+          <p>Question Count: {subject.questionCount}</p>
+          <DeleteSubjectButton subjectId={subject.id} />
           <hr />
         </div>
       </div>
     </>
+  );
+};
+
+const DeleteSubjectButton = ({ subjectId }) => {
+  const { loading, error, deleteData, deleteSubject } = useDeleteSubject();
+
+  const handleDelete = () => {
+    deleteSubject(subjectId);
+  };
+
+  return (
+    <div>
+      <button onClick={handleDelete} disabled={loading}>
+        Delete Subject
+      </button>
+      {loading && <p>Loading...</p>}
+      {error && <p>Error: {error.message}</p>}
+      {deleteData && <p>Data Deleted: {JSON.stringify(deleteData)}</p>}
+    </div>
   );
 };
 
@@ -81,9 +101,6 @@ export const TestPage = () => {
     <>
       <h1>testpage</h1>
       <PostSubjects />
-      <Usercard />
-      <Badge Completed />
-      <Badge />
       <GetSubjects />
     </>
   );
