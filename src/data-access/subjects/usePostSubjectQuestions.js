@@ -27,3 +27,42 @@ export const usePostSubjectQustions = () => {
 
   return { loading, error, postData: postQuestionData, postSubjectQuestions };
 };
+
+// 이하 적용 예시
+
+// const PostQuesionsForm = ({ subjectId }) => {
+//   const [content, setContent] = useState("");
+
+//   const { loading, error, postData, postSubjectQuestions } =
+//     usePostSubjectQustions();
+
+//   const handleQuestionSumbit = async () => {
+//     const questionData = {
+//       subjectId,
+//       content,
+//       like: 0,
+//       dislike: 0,
+//       team: "2-3",
+//     };
+//     await postSubjectQuestions(subjectId, questionData);
+//   };
+
+//   return (
+//     <div>
+//       <h3>PostQuesionsInput</h3>
+//       <label>Question Content: </label>
+//       <input
+//         type="text"
+//         value={content}
+//         onChange={(e) => setContent(e.target.value)}
+//       />
+//       <br />
+//       <button onClick={handleQuestionSumbit} disabled={loading}>
+//         Submit Question
+//       </button>
+//       {loading && <p>Loading...</p>}
+//       {error && <p>Error: {error.message}</p>}
+//       {postData && <p>Data Posted: {JSON.stringify(postData)}</p>}
+//     </div>
+//   );
+// };
