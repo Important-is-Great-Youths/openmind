@@ -1,0 +1,26 @@
+/* Badge.module.css*/
+:local {
+    /* Define local scope styles here */
+}
+
+.badge {
+    width: 76px;
+
+    display: inline-block;
+    font-weight: 500;
+    padding: 4px 12px;
+    border-radius: 8px;
+    border: 1px solid #000;
+    gap: 10px;
+    color: #000;
+}
+
+.complete {
+    background-color: #4CAF50; /*답변완료 배경색*/
+    font-size:16px; /*텍스트 크기*/
+}
+
+ .incomplete{
+     background-color: #FFC107; /*미답변 배경색*/
+     font-size:14px; /*텍스트 크기*/
+ }

@@ -18,7 +18,7 @@ export default function PostHeader() {
         </Link>
         <img
           className={cx("profile-photo")}
-          src="assets/temp-profile.png"
+          src="/assets/temp-profile.png"
           alt="ProfileImg"
         />
         <h2 className={cx("username")}>아초는고양이</h2>
