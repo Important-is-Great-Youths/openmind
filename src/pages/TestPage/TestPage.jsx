@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useGetSubjects } from "../../data-access/subjects/useGetSubjects";
 import { usePostSubjects } from "../../data-access/subjects/usePostSubjects";
 import { useDeleteSubject } from "../../data-access/subjects/useDeleteSubject";
+import { useGetSubjectQuestions } from "../../data-access/subjects/useGetSubjectQuestions";
 
 const PostSubjects = () => {
   const [name, setName] = useState("");
@@ -70,6 +71,7 @@ const GetSubjectResult = ({ result: subject }) => {
           <img src={subject.imageSource} alt={subject.name} />
           <p>Question Count: {subject.questionCount}</p>
           <DeleteSubjectButton subjectId={subject.id} />
+          <GetQuestionsButton subjectId={subject.id} />
           <hr />
         </div>
       </div>
@@ -92,6 +94,32 @@ const DeleteSubjectButton = ({ subjectId }) => {
       {loading && <p>Loading...</p>}
       {error && <p>Error: {error.message}</p>}
       {deleteData && <p>Data Deleted: {JSON.stringify(deleteData)}</p>}
+    </div>
+  );
+};
+
+const GetQuestionsButton = ({ subjectId }) => {
+  const {
+    loading,
+    error,
+    data: getquestionsData,
+    getSubjectQuestions,
+  } = useGetSubjectQuestions({ subjectId });
+
+  const handleGetQuestion = () => {
+    getSubjectQuestions(subjectId);
+  };
+
+  return (
+    <div>
+      <button onClick={handleGetQuestion} disabled={loading}>
+        Get Questions
+      </button>
+      {loading && <p>Loading...</p>}
+      {error && <p>Error: {error.message}</p>}
+      {getquestionsData && (
+        <p>Quesion Data: {JSON.stringify(getquestionsData)}</p>
+      )}
     </div>
   );
 };
