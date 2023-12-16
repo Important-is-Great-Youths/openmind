@@ -1,10 +1,14 @@
 import { Link } from "react-router-dom";
-import Usercard from "../../components/ui/Usercad/Usercard"
+import Usercard from "../../components/ui/Usercad/Usercard";
 import ButtonBox from "../../components/ui/ButtonBox/ButtonBox";
 import PostHeader from "../../components/feature/PostHeader/PostHeader";
-import Badge from "../../components/ui/Badge/Badge"
+import Badge from "../../components/ui/Badge/Badge";
 import { useGetSubjects } from "../../data-access/subjects/useGetSubjects";
 import useGetSubject from "../../data-access/subjects/useGetSubject";
+import FeedCard from "../../components/ui/FeedCard/FeedCard";
+import { useState } from "react";
+import ButtonFloating from "../../../src/components/ui/ButtonFloating";
+import ButtonShare from "../../components/ui/ButtonShare";
 
 const GetSubjects = () => {
   const { data } = useGetSubjects();
@@ -66,10 +70,12 @@ const GetSubject = ({ subjectId }) => {
 };
 
 export const TestPage = () => {
+  const [askFeed, setAskFeed] = useState(true);
   return (
     <>
+      <FeedCard askFeed={askFeed} />
       <Usercard />
-      <Badge Completed/>
+      <Badge Completed />
       <Badge />
       <GetSubjects />
       <GetSubject subjectId={1279} />
