@@ -22,6 +22,8 @@ function Main() {
           <Route path="test">
             <Route index element={<TestPage />} />
           </Route>
+          {/* 정의되지 않은 경로 접속시 MainPage로 이동 */}
+          <Route path="*" element={<MainPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
