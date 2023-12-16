@@ -11,7 +11,7 @@ export const useGetSubjectQuestions = ({ subjectId }) => {
   // 기본값 설정 (data가 undefined인 경우 빈 배열을 가진 객체로 초기화)
   const subjectsData = data || { results: [] };
 
-  return { loading, error, data: subjectsData };
+  return { loading, error, data: subjectsData, getSubjectQuestions };
 };
 
 // 이하 사용 예시

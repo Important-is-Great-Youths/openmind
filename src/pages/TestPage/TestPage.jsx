@@ -1,11 +1,9 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import Usercard from "../../components/ui/Usercad/Usercard"
-import ButtonBox from "../../components/ui/ButtonBox/ButtonBox";
-import PostHeader from "../../components/feature/PostHeader/PostHeader";
-import Badge from "../../components/ui/Badge/Badge"
 import { useGetSubjects } from "../../data-access/subjects/useGetSubjects";
 import { usePostSubjects } from "../../data-access/subjects/usePostSubjects";
+import { useDeleteSubject } from "../../data-access/subjects/useDeleteSubject";
+import { useGetSubjectQuestions } from "../../data-access/subjects/useGetSubjectQuestions";
+import { usePostSubjectQustions } from "../../data-access/subjects/usePostSubjectQuestions";
 
 const PostSubjects = () => {
   const [name, setName] = useState("");
@@ -17,6 +15,7 @@ const PostSubjects = () => {
 
   return (
     <div>
+      <h1>PostSubjects</h1>
       <label>Name: </label>
       <input
         type="text"
@@ -57,21 +56,25 @@ const GetSubjects = () => {
       <p>next: {subjects ? subjects.next : null}</p>
       <p>previous: {subjects ? subjects.previous : null}</p>
       {results.map((result) => (
-        <GetSubjectResult key={result.id} result={result} />
+        <GetSubject key={result.id} result={result} />
       ))}
     </>
   );
 };
 
-const GetSubjectResult = ({ result }) => {
+const GetSubject = ({ result: subject }) => {
   return (
     <>
       <div>
         <h2>Subject List</h2>
         <div>
-          <p>Name: {result.name}</p>
-          <img src={result.imageSource} alt={result.name} />
-          <p>Question Count: {result.questionCount}</p>
+          <p>Name: {subject.name}</p>
+          <p>Subejct ID: {subject.id}</p>
+          <img src={subject.imageSource} alt={subject.name} />
+          <p>Question Count: {subject.questionCount}</p>
+          <DeleteSubjectButton subjectId={subject.id} />
+          <PostQuesionsForm subjectId={subject.id} />
+          <GetQuestions subjectId={subject.id} />
           <hr />
         </div>
       </div>
@@ -79,14 +82,87 @@ const GetSubjectResult = ({ result }) => {
   );
 };
 
+const DeleteSubjectButton = ({ subjectId }) => {
+  const { loading, error, deleteData, deleteSubject } = useDeleteSubject();
+
+  const handleDelete = () => {
+    deleteSubject(subjectId);
+  };
+
+  return (
+    <div>
+      <button onClick={handleDelete} disabled={loading}>
+        Delete Subject
+      </button>
+      {loading && <p>Loading...</p>}
+      {error && <p>Error: {error.message}</p>}
+      {deleteData && <p>Data Deleted: {JSON.stringify(deleteData)}</p>}
+    </div>
+  );
+};
+
+const GetQuestions = ({ subjectId }) => {
+  const {
+    loading,
+    error,
+    data: getquestionsData,
+  } = useGetSubjectQuestions({ subjectId });
+
+  return (
+    <div>
+      {loading && <p>Loading...</p>}
+      {error && <p>Error: {error.message}</p>}
+      {getquestionsData && (
+        <div>
+          <h3>Question Data</h3>
+          <p>{JSON.stringify(getquestionsData)}</p>
+        </div>
+      )}
+    </div>
+  );
+};
+
+const PostQuesionsForm = ({ subjectId }) => {
+  const [content, setContent] = useState("");
+
+  const { loading, error, postData, postSubjectQuestions } =
+    usePostSubjectQustions();
+
+  const handleQuestionSumbit = async () => {
+    const questionData = {
+      subjectId,
+      content,
+      like: 0,
+      dislike: 0,
+      team: "2-3",
+    };
+    await postSubjectQuestions(subjectId, questionData);
+  };
+
+  return (
+    <div>
+      <h3>PostQuesionsInput</h3>
+      <label>Question Content: </label>
+      <input
+        type="text"
+        value={content}
+        onChange={(e) => setContent(e.target.value)}
+      />
+      <br />
+      <button onClick={handleQuestionSumbit} disabled={loading}>
+        Submit Question
+      </button>
+      {loading && <p>Loading...</p>}
+      {error && <p>Error: {error.message}</p>}
+      {postData && <p>Data Posted: {JSON.stringify(postData)}</p>}
+    </div>
+  );
+};
+
 export const TestPage = () => {
   return (
     <>
-      <h1>testpage</h1>
       <PostSubjects />
-      <Usercard />
-      <Badge Completed/>
-      <Badge />
       <GetSubjects />
     </>
   );
