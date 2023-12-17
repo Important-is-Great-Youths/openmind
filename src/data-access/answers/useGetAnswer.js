@@ -36,7 +36,7 @@ export const useGetAnswer = (answerId) => {
 //       <p>id: {answer.id}</p>
 //       <p>questionId: {answer.questionId}</p>
 //       <p>content: {answer.content}</p>
-//       <p>isRejected: {answer.isRejected}</p>
+//       <p>isRejected: {String(answer.isRejected)}</p>
 //       <p>createdAt: {answer.createdAt}</p>
 //     </div>
 //   );
