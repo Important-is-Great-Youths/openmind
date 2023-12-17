@@ -45,7 +45,7 @@
       <option name="presentableId" value="Default" />
       <updated>1702519499845</updated>
       <workItem from="1702519506614" duration="17832000" />
-      <workItem from="1702603304335" duration="13864000" />
+      <workItem from="1702603304335" duration="20746000" />
     </task>
     <servers />
   </component>
@@ -62,5 +62,17 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/components/ui/Badge/Badge.jsx</url>
+          <line>8</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
