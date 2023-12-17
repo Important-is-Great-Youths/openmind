@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useGetAnswer } from "../../data-access/answers/useGetAnswer";
 import { usePutAnswer } from "../../data-access/answers/usePutAnswer";
 import usePatchAnswer from "../../data-access/answers/usePatchAnswer";
+import { useDeleteAnswer } from "../../data-access/answers/useDeleteAnswer";
 
 const GetAnswer = ({ answerId }) => {
   const { loading, error, data } = useGetAnswer(answerId);
@@ -135,8 +136,27 @@ const PatchAnswerForm = ({ answerId }) => {
   );
 };
 
+const DeleteAnswerButton = ({ answerId }) => {
+  const { loading, error, deleteData, deleteAnswer } = useDeleteAnswer();
+
+  const handleDelete = () => {
+    deleteAnswer(answerId);
+  };
+
+  return (
+    <div>
+      <button onClick={handleDelete} disabled={loading}>
+        Delete Answer
+      </button>
+      {loading && <p>Loading...</p>}
+      {error && <p>Error: {error.message}</p>}
+      {deleteData && <p>Data Deleted: {JSON.stringify(deleteData)}</p>}
+    </div>
+  );
+};
+
 export const TestPage = () => {
-  const ANSWER_ID = "1590";
+  const ANSWER_ID = "1641";
   return (
     <>
       <GetAnswer answerId={ANSWER_ID} />
@@ -144,6 +164,8 @@ export const TestPage = () => {
       <PutAnswerForm answerId={ANSWER_ID} />
       <br />
       <PatchAnswerForm answerId={ANSWER_ID} />
+      <br />
+      <DeleteAnswerButton answerId={ANSWER_ID} />
     </>
   );
 };

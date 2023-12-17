@@ -1,7 +1,7 @@
 import { useState } from "react";
-import axios from "axios";
+import { axiosInstance } from "../../util/axiosInstance";
 
-export const useDeleteSubject = ({ answerId }) => {
+export const useDeleteAnswer = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [deleteData, setDeleteData] = useState(null);
@@ -10,9 +10,7 @@ export const useDeleteSubject = ({ answerId }) => {
     try {
       setLoading(true);
 
-      const response = await axios.delete(
-        `https://openmind-api.vercel.app/2-3/answers/${answerId}/`
-      );
+      const response = await axiosInstance.delete(`answers/${answerId}/`);
       setDeleteData(response.data);
     } catch (error) {
       setError(error);
@@ -25,17 +23,17 @@ export const useDeleteSubject = ({ answerId }) => {
 };
 
 // 이하 사용 예시
-// const DeleteSubjectButton = ({ subjectId }) => {
-//   const { loading, error, deleteData, deleteSubject } = useDeleteSubject();
+// const DeleteAnswerButton = ({ answerId }) => {
+//   const { loading, error, deleteData, deleteAnswer } = useDeleteAnswer();
 
 //   const handleDelete = () => {
-//     deleteSubject(subjectId);
+//     deleteAnswer(answerId);
 //   };
 
 //   return (
 //     <div>
 //       <button onClick={handleDelete} disabled={loading}>
-//         Delete Subject
+//         Delete Answer
 //       </button>
 //       {loading && <p>Loading...</p>}
 //       {error && <p>Error: {error.message}</p>}
