@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useGetAnswer } from "../../data-access/answers/useGetAnswer";
 import { usePutAnswer } from "../../data-access/answers/usePutAnswer";
+import usePatchAnswer from "../../data-access/answers/usePatchAnswer";
 
 const GetAnswer = ({ answerId }) => {
   const { loading, error, data } = useGetAnswer(answerId);
@@ -50,6 +51,7 @@ const PutAnswerForm = ({ answerId }) => {
 
   return (
     <form onSubmit={handlePutAnswer}>
+      <h1>Put</h1>
       <label>
         Content :
         <input
@@ -77,6 +79,62 @@ const PutAnswerForm = ({ answerId }) => {
   );
 };
 
+const PatchAnswerForm = ({ answerId }) => {
+  const [content, setContent] = useState("");
+  const [isRejected, setIsRejected] = useState(false);
+
+  const {
+    loading,
+    error,
+    patchData,
+    patchAnswerContent,
+    patchAnswerIsRejected,
+  } = usePatchAnswer();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      // 질문 내용이 있다면 content patch
+      if (content !== "") {
+        await patchAnswerContent(answerId, content);
+      }
+      // isRejected를 전송
+      await patchAnswerIsRejected(answerId, isRejected);
+    } catch (error) {
+      console.error("Error while updating answer:", error);
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <h1>Patch</h1>
+      <label>
+        Content:
+        <input
+          type="text"
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+        />
+      </label>
+      <br />
+      <label>
+        Is Rejected:
+        <input
+          type="checkbox"
+          checked={isRejected}
+          onChange={(e) => setIsRejected(e.target.checked)}
+        />
+      </label>
+      <br />
+      <button type="submit" disabled={loading}>
+        {loading ? "Updating..." : "Update Answer"}
+      </button>
+      {error && <p>Error: {error.message}</p>}
+      {patchData && <p>Answer updated successfully!</p>}
+    </form>
+  );
+};
+
 export const TestPage = () => {
   const ANSWER_ID = "1590";
   return (
@@ -84,6 +142,8 @@ export const TestPage = () => {
       <GetAnswer answerId={ANSWER_ID} />
       <br />
       <PutAnswerForm answerId={ANSWER_ID} />
+      <br />
+      <PatchAnswerForm answerId={ANSWER_ID} />
     </>
   );
 };
