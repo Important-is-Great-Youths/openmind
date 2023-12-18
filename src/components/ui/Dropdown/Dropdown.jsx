@@ -4,6 +4,7 @@ import classNames from "classnames/bind";
 import { ReactComponent as IconArrowDown } from "../../../icon/icon-arrow-down.svg";
 
 const cx = classNames.bind(styles);
+const [control, setControl]
 
 const Dropdown = () => {
   const [isOpen, setIsOpen] = useState(false);

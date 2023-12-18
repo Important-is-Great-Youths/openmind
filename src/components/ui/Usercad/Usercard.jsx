@@ -1,26 +1,35 @@
 // Usercard.jsx
-import React from 'react';
-import styles from './Usercard.module.css';
-import {ReactComponent as IconMessage} from '../../../icon/icon-messages.svg'
+import { Link } from "react-router-dom";
+import React from "react";
+import styles from "./Usercard.module.css";
+import { ReactComponent as IconMessage } from "../../../icon/icon-messages.svg";
+// import { useGetSubjects } from "../../data-access/subjects/useGetSubjects";
+import { useState, useEffect } from "react";
+// import { axiosInstance } from "../../util/axiosInstance";
+import classNames from "classnames/bind";
 
-const Usercard = () => {
-    return (
-        <a href="/post/1261" className={styles.usercardLink}>
-            <div className={styles.usercard}>
-                <div className={styles.profileInfo}>
-                    <img className={styles.profileImage} src='assets/temp-profile.png' alt='temp-profile'/>
-                    <p className={styles.profileName}>아초는 고양이</p>
-                </div>
-                <div className={styles.messageInfo}>
+const cx = classNames.bind(styles);
 
-                    <IconMessage className={styles.messageIcon}/>
-                    <p className={styles.messageLabel}>받은 질문</p>
-
-                    <p className={styles.messageCount}>0개</p>
-                </div>
-            </div>
-        </a>
-    );
-};
+function Usercard({ data }) {
+  return (
+    <Link to="/post/1261" className={cx("usercardLink")}>
+      <div className={cx("usercard")}>
+        <div className={cx("profileInfo")}>
+          <img
+            className={cx("profileImage")}
+            src={data.imageSource}
+            alt="temp-profile"
+          />
+          <p className={cx("profileName")}>{data.name}</p>
+        </div>
+        <div className={cx("messageInfo")}>
+          <IconMessage className={cx("messageIcon")} />
+          <p className={cx("messageLabel")}>받은 질문</p>
+          <p className={cx("messageCount")}>{data.questionCount}</p>
+        </div>
+      </div>
+    </Link>
+  );
+}
 
 export default Usercard;
