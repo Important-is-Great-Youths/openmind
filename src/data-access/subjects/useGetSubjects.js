@@ -3,7 +3,7 @@ import { axiosInstance } from "../../util/axiosInstance";
 
 // count(답변자의 수), next, previous, results(모든 subject의 데이터)를 가져오는 Hook
 
-export const useGetSubjects = () => {
+export const useGetSubjects = (customLimit, customOffset) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [data, setData] = useState({ results: [] });
@@ -13,7 +13,12 @@ export const useGetSubjects = () => {
       setLoading(true);
       setError(null);
 
-      const response = await axiosInstance.get("subjects/");
+      const response = await axiosInstance.get("subjects/", {
+        params: {
+          limit: customLimit, // 전달 받은 customLimit 사용
+          offset: customOffset,
+        },
+      });
       setData(response.data);
     } catch (error) {
       setError(error);
