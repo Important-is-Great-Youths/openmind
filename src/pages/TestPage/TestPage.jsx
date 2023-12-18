@@ -1,49 +1,65 @@
-import React from "react";
-import { useGetSubjectQuestions } from "../../data-access/subjects/useGetSubjectQuestions";
+import React, { useState, useEffect } from "react";
+import { useGetSubjects } from "../../data-access/subjects/useGetSubjects";
 
-const GetSubjectQuestions = ({ subjectId }) => {
-  const { loading, error, data } = useGetSubjectQuestions({ subjectId });
-  const { count, next, previous, results } = data || {};
-  const subjectQuestions = data ? { count, next, previous, results } : null;
+const SearchSubjectForm = () => {
+  const { data: subjectsData } = useGetSubjects(99);
+  const { count, next, previous, results } = subjectsData || {};
+  const subjects = subjectsData ? { count, next, previous, results } : null;
 
-  if (loading) {
-    return <p>Loading...</p>;
-  }
+  const [name, setName] = useState("");
+  const [nameArray, setNameArray] = useState([]);
 
-  if (error) {
-    return <p>Error: {error.message}</p>;
-  }
+  const handleSubmit = (e) => {
+    try {
+      const nameIndex = nameArray.indexOf(name);
 
-  if (!data) {
-    return <p>No data available.</p>;
-  }
+      if (nameIndex !== -1) {
+        alert(`Name ${name} found at index ${nameIndex}`);
+      } else {
+        alert("No name");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  // 여기서 data를 사용하여 원하는 렌더링을 수행
-  return (
-    <div>
-      <h1>useGetSubjectQuestions</h1>
-      <p>count: {subjectQuestions ? subjectQuestions.count : null}</p>
-      <p>next: {subjectQuestions ? subjectQuestions.next : null}</p>
-      <p>previous: {subjectQuestions ? subjectQuestions.previous : null}</p>
-      {results.map((result) => (
-        <GetSubjectQuestionsResult key={result.id} result={result} />
-      ))}
-    </div>
-  );
-};
+  const handleNameChange = (e) => {
+    setName(e.target.value);
+  };
 
-const GetSubjectQuestionsResult = ({ result }) => {
+  useEffect(() => {
+    // subjects.results가 존재하고 데이터가 있을 때만 배열을 생성
+    if (subjects && subjects.results) {
+      const newArray = subjects.results.map((subject) => subject.name);
+      setNameArray(newArray);
+    }
+  }, []);
+
   return (
     <>
+      <form onSubmit={handleSubmit}>
+        <p>count: {subjects ? subjects.count : null}</p>
+        <label htmlFor="nameInput">
+          Name:
+          <input
+            id="nameInput"
+            type="text"
+            value={name}
+            onChange={handleNameChange}
+          />
+        </label>
+        <button type="submit">Submit</button>
+      </form>
       <div>
-        <h2>subjectQuesion</h2>
-        <div>
-          <p>Q. {result.content}</p>
-          <p>like : {result.like}</p>
-          <p>dislike : {result.dislike}</p>
-          <p>createdAt : {result.createdAt}</p>
-          <hr />
-        </div>
+        {subjects && subjects.results.length > 0 && (
+          <ul>
+            {subjects.results.map((subject) => (
+              <li key={subject.id}>
+                ID: {subject.id}, Name: {subject.name}
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </>
   );
@@ -52,8 +68,8 @@ const GetSubjectQuestionsResult = ({ result }) => {
 export const TestPage = () => {
   return (
     <>
-      <GetSubjectQuestions subjectId="1277" />
+      <h1>테스트 페이지</h1>
+      <SearchSubjectForm />
     </>
-
   );
 };
