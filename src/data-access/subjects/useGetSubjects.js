@@ -1,16 +1,32 @@
-import { useAsync } from "../../util/useAsync";
+import { useState, useEffect } from "react";
 import { axiosInstance } from "../../util/axiosInstance";
 
 // count(답변자의 수), next, previous, results(모든 subject의 데이터)를 가져오는 Hook
 
 export const useGetSubjects = () => {
-  const getSubjects = () => axiosInstance.get("subjects/");
-  const { loading, error, data } = useAsync(getSubjects);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [data, setData] = useState({ results: [] });
 
-  // 기본값 설정 (data가 undefined인 경우 빈 배열을 가진 객체로 초기화)
-  const subjectsData = data || { results: [] };
+  const getSubjects = async () => {
+    try {
+      setLoading(true);
+      setError(null);
 
-  return { loading, error, data: subjectsData, getSubjects };
+      const response = await axiosInstance.get("subjects/");
+      setData(response.data);
+    } catch (error) {
+      setError(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getSubjects();
+  }, []);
+
+  return { loading, error, data, getSubjects };
 };
 
 // 이하 사용 예시
