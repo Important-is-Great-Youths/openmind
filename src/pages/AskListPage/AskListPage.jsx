@@ -26,6 +26,10 @@ export const AskListPage = () => {
           </div>
           <ul className={cx("list")}>
             <li className={cx("cards")}>
+              //api 받아오는 데이터 map메소드 usecard쓰는 건 프롭스로
+              <Usercard className={cx("card")} />
+            </li>
+            {/* <li className={cx("cards")}>
               <Usercard className={cx("card")} />
             </li>
             <li className={cx("cards")}>
@@ -45,12 +49,12 @@ export const AskListPage = () => {
             </li>
             <li className={cx("cards")}>
               <Usercard className={cx("card")} />
-            </li>
-            <li className={cx("cards")}>
-              <Usercard className={cx("card")} />
-            </li>
+            </li> */}
           </ul>
         </div>
+        {/* <footer>
+        <pagenation></pagenation>
+      </footer> */}
       </div>
     </div>
   );
