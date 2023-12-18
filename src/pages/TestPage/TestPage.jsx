@@ -1,3 +1,4 @@
+
 import React from "react";
 import { useGetSubjectQuestions } from "../../data-access/subjects/useGetSubjectQuestions";
 
@@ -48,11 +49,10 @@ const GetSubjectQuestionsResult = ({ result }) => {
     </>
   );
 };
-
 export const TestPage = () => {
   return (
     <>
-      <GetSubjectQuestions subjectId="1277" />
+
     </>
 
   );

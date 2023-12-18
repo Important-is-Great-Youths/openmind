@@ -1,0 +1,62 @@
+/* pagenation.module.css */
+
+.prePage{
+    color: var(--grayscale-40, #818181);
+    text-align: center;
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: Actor;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 25px;
+
+
+}
+
+.pageItem {
+    color: var(--grayscale-40, #818181);
+    text-align: center;
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: Actor;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 25px; /* 125% */
+    width: 40px;
+    height: 40px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+}
+.nextPage{
+    color: var(--grayscale-40, #818181);
+    text-align: center;
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: Actor;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 25px; /* 125% */
+}
+
+.currentPage {
+    color: var(--brown-40, #542F1A);
+    text-align: center;
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: Actor;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 25px; /* 125% */
+
+}
+
+.pageItem,
+.prePage,
+.nextPage {
+    background: none;
+    border: none
+
+
+}
