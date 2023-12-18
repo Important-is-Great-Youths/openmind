@@ -13,9 +13,9 @@ const Usercard = () => {
                 </div>
                 <div className={styles.messageInfo}>
 
-                    <IconMessage className={styles.messageIcon}/>
-                    <p className={styles.messageLabel}>받은 질문</p>
-
+                        <IconMessage className={styles.messageIcon}/>
+                        <p className={styles.messageLabel}>받은 질문</p>
+                    
                     <p className={styles.messageCount}>0개</p>
                 </div>
             </div>
