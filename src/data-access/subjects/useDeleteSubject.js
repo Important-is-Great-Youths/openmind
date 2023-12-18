@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { axiosInstance } from "../../util/axiosInstance";
 
@@ -40,4 +41,5 @@ export const useDeleteSubject = () => {
 //       {deleteData && <p>Data Deleted: {JSON.stringify(deleteData)}</p>}
 //     </div>
 //   );
+
 // };
