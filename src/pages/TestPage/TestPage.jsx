@@ -1,46 +1,15 @@
-import { Link } from "react-router-dom";
-import Usercard from "../../components/ui/Usercad/Usercard"
-import ButtonBox from "../../components/ui/ButtonBox/ButtonBox";
-import PostHeader from "../../components/feature/PostHeader/PostHeader";
-import Badge from "../../components/ui/Badge/Badge"
-import { useGetSubjects } from "../../data-access/subjects/useGetSubjects";
-import useGetSubject from "../../data-access/subjects/useGetSubject";
+import React, { useState } from "react";
+import { useGetAnswer } from "../../data-access/answers/useGetAnswer";
+import { usePutAnswer } from "../../data-access/answers/usePutAnswer";
+import usePatchAnswer from "../../data-access/answers/usePatchAnswer";
+import { useDeleteAnswer } from "../../data-access/answers/useDeleteAnswer";
 
-const GetSubjects = () => {
-  const { data } = useGetSubjects();
-  const { count, next, previous, results } = data || {};
-  const subjectsCount = data ? { count, next, previous, results } : null;
-  return (
-    <>
-      <h1>Subjects</h1>
-      <p>count: {subjectsCount ? subjectsCount.count : null}</p>
-      <p>next: {subjectsCount ? subjectsCount.next : null}</p>
-      <p>previous: {subjectsCount ? subjectsCount.previous : null}</p>
-      {results.map((result) => (
-        <GetSubjectResult key={result.id} result={result} />
-      ))}
-    </>
-  );
-};
-
-const GetSubjectResult = ({ result }) => {
-  return (
-    <>
-      <div>
-        <h2>Subject List</h2>
-        <div>
-          <p>Name: {result.name}</p>
-          <img src={result.imageSource} alt={result.name} />
-          <p>Question Count: {result.questionCount}</p>
-          <hr />
-        </div>
-      </div>
-    </>
-  );
-};
-
-const GetSubject = ({ subjectId }) => {
-  const { loading, error, data } = useGetSubject(subjectId);
+const GetAnswer = ({ answerId }) => {
+  const { loading, error, data } = useGetAnswer(answerId);
+  const { id, questionId, content, isRejected, createdAt } = data || {};
+  const answer = data
+    ? { id, questionId, content, isRejected, createdAt }
+    : null;
 
   if (loading) {
     return <p>Loading...</p>;
@@ -54,25 +23,150 @@ const GetSubject = ({ subjectId }) => {
     return <p>No data available.</p>;
   }
 
-  // 여기서 data를 사용하여 원하는 렌더링을 수행
   return (
     <div>
-      <h1>useGetSubject</h1>
-      <p>name: {data.name}</p>
-      <img src={data.imageSource} alt={data.name} />
-      <p>questionCount: {data.questionCount}</p>
+      <h1>Answer</h1>
+      <p>id: {answer.id}</p>
+      <p>questionId: {answer.questionId}</p>
+      <p>content: {answer.content}</p>
+      <p>isRejected: {String(answer.isRejected)}</p>
+      <p>createdAt: {answer.createdAt}</p>
+    </div>
+  );
+};
+
+const PutAnswerForm = ({ answerId }) => {
+  const [content, setContent] = useState("");
+  const [isRejected, setIsRejected] = useState(false);
+
+  const { loading, error, putData, putAnswer } = usePutAnswer();
+
+  const handlePutAnswer = async (e) => {
+    e.preventDefault();
+    try {
+      await putAnswer(answerId, content, isRejected);
+    } catch (error) {
+      console.error("Error while updateing answer: ", error);
+    }
+  };
+
+  return (
+    <form onSubmit={handlePutAnswer}>
+      <h1>Put</h1>
+      <label>
+        Content :
+        <input
+          type="text"
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+        />
+      </label>
+      <br />
+      <label>
+        IsRejected :
+        <input
+          type="checkbox"
+          checked={isRejected}
+          onChange={(e) => setIsRejected(e.target.checked)}
+        />
+      </label>
+      <br />
+      <button type="submit" disabled={loading}>
+        {loading ? "Updating..." : "Update Answer"}
+      </button>
+      {error && <p>Error: {error.message}</p>}
+      {putData && <p>Answer updated successfully!</p>}
+    </form>
+  );
+};
+
+const PatchAnswerForm = ({ answerId }) => {
+  const [content, setContent] = useState("");
+  const [isRejected, setIsRejected] = useState(false);
+
+  const {
+    loading,
+    error,
+    patchData,
+    patchAnswerContent,
+    patchAnswerIsRejected,
+  } = usePatchAnswer();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      // 질문 내용이 있다면 content patch
+      if (content !== "") {
+        await patchAnswerContent(answerId, content);
+      }
+      // isRejected를 전송
+      await patchAnswerIsRejected(answerId, isRejected);
+    } catch (error) {
+      console.error("Error while updating answer:", error);
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <h1>Patch</h1>
+      <label>
+        Content:
+        <input
+          type="text"
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+        />
+      </label>
+      <br />
+      <label>
+        Is Rejected:
+        <input
+          type="checkbox"
+          checked={isRejected}
+          onChange={(e) => setIsRejected(e.target.checked)}
+        />
+      </label>
+      <br />
+      <button type="submit" disabled={loading}>
+        {loading ? "Updating..." : "Update Answer"}
+      </button>
+      {error && <p>Error: {error.message}</p>}
+      {patchData && <p>Answer updated successfully!</p>}
+    </form>
+  );
+};
+
+const DeleteAnswerButton = ({ answerId }) => {
+  const { loading, error, deleteData, deleteAnswer } = useDeleteAnswer();
+
+  const handleDelete = () => {
+    deleteAnswer(answerId);
+  };
+
+  return (
+    <div>
+      <button onClick={handleDelete} disabled={loading}>
+        Delete Answer
+      </button>
+      {loading && <p>Loading...</p>}
+      {error && <p>Error: {error.message}</p>}
+      {deleteData && <p>Data Deleted: {JSON.stringify(deleteData)}</p>}
     </div>
   );
 };
 
 export const TestPage = () => {
+  const ANSWER_ID = "1641";
   return (
     <>
-      <Usercard />
-      <Badge Completed/>
-      <Badge />
-      <GetSubjects />
-      <GetSubject subjectId={1279} />
+      <GetAnswer answerId={ANSWER_ID} />
+      <br />
+      <PutAnswerForm answerId={ANSWER_ID} />
+      <br />
+      <PatchAnswerForm answerId={ANSWER_ID} />
+      <br />
+      <DeleteAnswerButton answerId={ANSWER_ID} />
     </>
+
   );
 };
