@@ -1,5 +1,6 @@
+
 import { useState } from "react";
-import axios from "axios";
+import { axiosInstance } from "../../util/axiosInstance";
 
 export const useDeleteSubject = () => {
   const [loading, setLoading] = useState(false);
@@ -9,10 +10,8 @@ export const useDeleteSubject = () => {
   const deleteSubject = async (subjectId) => {
     try {
       setLoading(true);
-
-      const response = await axios.delete(
-        `https://openmind-api.vercel.app/2-3/subjects/${subjectId}/`
-      );
+      setError(null);
+      const response = await axiosInstance.delete(`subjects/${subjectId}/`);
       setDeleteData(response.data);
     } catch (error) {
       setError(error);
@@ -42,4 +41,5 @@ export const useDeleteSubject = () => {
 //       {deleteData && <p>Data Deleted: {JSON.stringify(deleteData)}</p>}
 //     </div>
 //   );
+
 // };
