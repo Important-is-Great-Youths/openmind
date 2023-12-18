@@ -16,6 +16,7 @@ export const AskListPage = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [data, setData] = useState(null);
+  const [sortBy, setSortBy] = useState("최신순");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -42,17 +43,25 @@ export const AskListPage = () => {
     }
   }, [data]);
 
-  // 페이지 네이션을 위한 상태
-  const itemsPerPage = 8;
-  const [currentPage, setCurrentPage] = useState(1);
+  // 추가: 정렬 기준이 변경될 때마다 데이터 정렬
+  useEffect(() => {
+    if (data && sortBy === "이름순") {
+      let copy = [...data];
+      copy.sort((a, b) =>
+        a.name.toUpperCase() < b.name.toUpperCase() ? -1 : 1
+      );
+      setData(copy);
+    } else if (data && sortBy === "최신순") {
+      let dateCopy = [...data];
+      dateCopy.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+      setData(dateCopy);
+    }
+  }, [data, sortBy]);
 
-  // 현재 페이지의 데이터 계산
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = data?.slice(indexOfFirstItem, indexOfLastItem);
-
-  // 페이지 변경 시 실행될 함수
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  // 추가: 정렬 기준 변경 함수
+  const handleSortChange = (option) => {
+    setSortBy(option);
+  };
 
   return (
     <div className={cx("wrap")}>
@@ -69,7 +78,8 @@ export const AskListPage = () => {
         <div className={cx("listWrap")}>
           <div className={cx("choiceHeader")}>
             <h1>누구에게 질문할까요?</h1>
-            <Dropdown />
+            {/* 추가: Dropdown에 정렬 기준 변경 함수 전달 */}
+            <Dropdown onSortChange={handleSortChange} />
           </div>
           <ul className={cx("list")}>
             {loading && <p>Loading...</p>}
@@ -83,12 +93,7 @@ export const AskListPage = () => {
           </ul>
         </div>
         <footer className={cx("pagenation")}>
-          <Pagenation
-            itemsPerPage={itemsPerPage}
-            totalItems={data?.length}
-            paginate={paginate}
-            currentPage={currentPage}
-          />
+          <Pagenation />
         </footer>
       </div>
     </div>
