@@ -4,12 +4,13 @@ import FeedCardAnswer from "../FeedCardAnswer/FeedCardAnswer";
 import FeedCardQuestion from "../FeedCardQuestion/FeedCardQuestion";
 import { ReactComponent as More } from "../../../icon/icon-more.svg";
 import { useState, useEffect } from "react";
-
+import Badge from "../Badge/Badge";
 /* 
 more 버튼을 숨기고 싶은 경우,
 부모 컴포넌트에 다음 코드를 추가해주세요
 
-const [askFeed, setAskFeed] = useState(false);
+const [askFeed, setAskFeed] = useState(false); 숨기고 싶은 경우
+const [askFeed, setAskFeed] = useState(true); 보이고 싶은 경우
 <FeedCard askFeed={askFeed} />
 */
 
@@ -17,6 +18,7 @@ export default function FeedCard({ askFeed }) {
   const cx = classNames.bind(styles);
   const [toggle, setToggle] = useState(false);
   const [answerText, setAnswerText] = useState("");
+  const [invisible, setInvisible] = useState(true);
 
   const delAndRejectionHandler = (event) => {
     event.stopPropagation();
@@ -30,6 +32,7 @@ export default function FeedCard({ askFeed }) {
   const rejectionBtnHandler = () => {
     setToggle(false);
     setAnswerText("답변거절");
+    setInvisible(false);
   };
 
   useEffect(() => {
@@ -44,31 +47,44 @@ export default function FeedCard({ askFeed }) {
     color: answerText === "답변거절" ? "#B93333" : "inherit",
   };
 
+  const delAndRejectionStyle = {
+    bottom: answerText === "답변거절" ? "-42px" : "-72px",
+  };
+
+  // 댭변거절 || testArea에 글이 있을 경우 ( badge에 Completed 답변완료)
+  //
+
   return (
-    <div className={cx("feedCard")}>
-      <div className={cx("feedTop")}>
-        <div>답변완료</div>
-        {askFeed && (
-          <div className={cx("delAndRejectionToggle")}>
-            <More className={cx("moreBtn")} onClick={delAndRejectionHandler} />
-            {toggle && (
-              <div className={cx("delAndRejection")}>
-                <div className={cx("rejection")} onClick={rejectionBtnHandler}>
-                  답변거절
-                </div>
-                <div className={cx("delete")}>질문삭제</div>
+    <ul className={cx("cardList")}>
+      <li className={cx("cardWrap")}>
+        <div className={cx("feedCard")}>
+          <div className={cx("feedTop")}>
+            <Badge />
+            {askFeed && (
+              <div className={cx("delAndRejectionToggle")}>
+                <More className={cx("moreBtn")} onClick={delAndRejectionHandler} />
+                {toggle && (
+                  <div className={cx("delAndRejection")} style={delAndRejectionStyle}>
+                    {invisible && (
+                      <div className={cx("rejection")} onClick={rejectionBtnHandler}>
+                        답변거절
+                      </div>
+                    )}
+                    <div className={cx("delete")}>질문삭제</div>
+                  </div>
+                )}
               </div>
             )}
           </div>
-        )}
-      </div>
-      <FeedCardQuestion />
-      <FeedCardAnswer text={answerText} style={answerStyle} />
-      <i className={cx("feedBar")}></i>
-      <div>
-        <span>좋아요 </span>
-        <span>싫어요</span>
-      </div>
-    </div>
+          <FeedCardQuestion />
+          <FeedCardAnswer answerText={answerText} style={answerStyle} />
+          <i className={cx("feedBar")}></i>
+          <div>
+            <span>좋아요 </span>
+            <span>싫어요</span>
+          </div>
+        </div>
+      </li>
+    </ul>
   );
 }

@@ -2,14 +2,44 @@ import styles from "./ButtonShare.module.css";
 import { ReactComponent as IconLink } from "../../../icon/icon-link.svg";
 import { ReactComponent as IconKakaotalk } from "../../../icon/icon-kakaotalk.svg";
 import { ReactComponent as IconFacebook } from "../../../icon/icon-facebook.svg";
+import Toast from "../Toast/Toast";
+import { useEffect, useState } from "react";
+import classNames from "classnames/bind";
 
 export default function ButtonShare() {
-  const shareToOpenMind = () => {
-    navigator.share({
-      title: "Important-is-Great-Youths",
-      text: "중요한 건 멋진 젊은이들의 오픈마인드사이트",
-      url: "https://www.codeit.kr",
-    });
+  const [showToast, setShowToast] = useState(false);
+  const cx = classNames.bind(styles);
+
+  const shareToOpenMind = async (text) => {
+    try {
+      await navigator.clipboard.writeText("https://www.codeit.kr");
+      setShowToast(true);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const REACT_APP_SHARE_KAKAO_LINK_KEY = "7df72a9443d6a8672a6a96715723c486";
+
+  const shareToKakaotalk = () => {
+    if (window.Kakao) {
+      const kakao = window.Kakao;
+      if (!kakao.isInitialized()) {
+        kakao.init(REACT_APP_SHARE_KAKAO_LINK_KEY);
+      }
+
+      kakao.Link.sendDefault({
+        objectType: "feed",
+        content: {
+          title: "IGY openmind",
+          description: "IGY openmind",
+          imageUrl: "이미지 url",
+          link: {
+            mobileWebUrl: "https://www.naver.com",
+            webUrl: "https://www.naver.com",
+          },
+        },
+      });
+    }
   };
 
   const shareToFacebook = () => {
@@ -17,17 +47,28 @@ export default function ButtonShare() {
     window.open(`http://www.facebook.com/sharer/sharer.php?u=${sharedLink}`);
   };
 
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://developers.kakao.com/sdk/js/kakao.js";
+    script.async = true;
+    document.body.appendChild(script);
+    return () => document.body.removeChild(script);
+  });
+
   return (
-    <div className={styles.FooterSns}>
-      <div className={styles.link} onClick={shareToOpenMind}>
-        <IconLink width="18" height="18" fill="#fff" />
+    <div>
+      <div className={cx("FooterSns")}>
+        <div className={cx("link")} onClick={shareToOpenMind}>
+          <IconLink width="18" height="18" fill="#fff" />
+        </div>
+        <div className={cx("kakao")} onClick={shareToKakaotalk}>
+          <IconKakaotalk width="18" height="18" />
+        </div>
+        <div className={cx("facebook")} onClick={shareToFacebook}>
+          <IconFacebook width="18" height="18" fill="#fff" />
+        </div>
       </div>
-      <div className={styles.kakao}>
-        <IconKakaotalk width="18" height="18" />
-      </div>
-      <div className={styles.facebook} onClick={shareToFacebook}>
-        <IconFacebook width="18" height="18" fill="#fff" />
-      </div>
+      <div className={cx("toastLocation")}>{showToast && <Toast />}</div>
     </div>
   );
 }

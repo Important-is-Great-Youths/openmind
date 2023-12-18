@@ -1,10 +1,27 @@
 .btn {
   border-radius: 50px;
-  font-size: 1.25rem;
+  font-size: 20px;
   border: none;
-  width: 208px;
   height: 54px;
+  padding: 12px 42px;
   color: #fff;
   background: var(--brown-40, #542f1a);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}
+
+.btn.small {
+  font-size: 15px;
+  padding: 12px 26px;
+  height: auto;
+}
+
+@media screen and (max-width: 375px) {
+  .btn {
+    padding: 12px 24px;
+  }
+  .btn.small {
+    font-size: 10px;
+    padding: 8px 20px;
+  }
 }
