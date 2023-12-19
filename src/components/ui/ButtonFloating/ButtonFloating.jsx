@@ -9,7 +9,9 @@ export default function ButtonFloating({ text, small, onClick }) {
   const cx = classNames.bind(styles);
   return (
     <>
-      <button className={cx("btn", small) onClick={onClick}}>{text}</button>
+      <button className={cx("btn", small)} onClick={onClick}>
+        {text}
+      </button>
     </>
   );
 }
