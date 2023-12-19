@@ -14,22 +14,22 @@ const PostSubjects = () => {
   };
 
   return (
-      <div>
-        <h1>PostSubjects</h1>
-        <label>Name: </label>
-        <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-        />
-        <br />
-        <button onClick={handleSubmit} disabled={loading}>
-          Submit
-        </button>
-        {loading && <p>Loading...</p>}
-        {error && <p>Error: {error.message}</p>}
-        {postData && <p>Data Posted: {JSON.stringify(postData)}</p>}
-      </div>
+    <div>
+      <h1>PostSubjects</h1>
+      <label>Name: </label>
+      <input
+        type="text"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+      />
+      <br />
+      <button onClick={handleSubmit} disabled={loading}>
+        Submit
+      </button>
+      {loading && <p>Loading...</p>}
+      {error && <p>Error: {error.message}</p>}
+      {postData && <p>Data Posted: {JSON.stringify(postData)}</p>}
+    </div>
   );
 };
 
@@ -50,35 +50,35 @@ const GetSubjects = () => {
     return <p>No data available.</p>;
   }
   return (
-      <>
-        <h1>Subjects</h1>
-        <p>count: {subjects ? subjects.count : null}</p>
-        <p>next: {subjects ? subjects.next : null}</p>
-        <p>previous: {subjects ? subjects.previous : null}</p>
-        {results.map((result) => (
-            <GetSubject key={result.id} result={result} />
-        ))}
-      </>
+    <>
+      <h1>Subjects</h1>
+      <p>count: {subjects ? subjects.count : null}</p>
+      <p>next: {subjects ? subjects.next : null}</p>
+      <p>previous: {subjects ? subjects.previous : null}</p>
+      {results.map((result) => (
+        <GetSubject key={result.id} result={result} />
+      ))}
+    </>
   );
 };
 
 const GetSubject = ({ result: subject }) => {
   return (
-      <>
+    <>
+      <div>
+        <h2>Subject List</h2>
         <div>
-          <h2>Subject List</h2>
-          <div>
-            <p>Name: {subject.name}</p>
-            <p>Subejct ID: {subject.id}</p>
-            <img src={subject.imageSource} alt={subject.name} />
-            <p>Question Count: {subject.questionCount}</p>
-            <DeleteSubjectButton subjectId={subject.id} />
-            <PostQuesionsForm subjectId={subject.id} />
-            <GetQuestions subjectId={subject.id} />
-            <hr />
-          </div>
+          <p>Name: {subject.name}</p>
+          <p>Subejct ID: {subject.id}</p>
+          <img src={subject.imageSource} alt={subject.name} />
+          <p>Question Count: {subject.questionCount}</p>
+          <DeleteSubjectButton subjectId={subject.id} />
+          <PostQuesionsForm subjectId={subject.id} />
+          <GetQuestions subjectId={subject.id} />
+          <hr />
         </div>
-      </>
+      </div>
+    </>
   );
 };
 
@@ -90,14 +90,14 @@ const DeleteSubjectButton = ({ subjectId }) => {
   };
 
   return (
-      <div>
-        <button onClick={handleDelete} disabled={loading}>
-          Delete Subject
-        </button>
-        {loading && <p>Loading...</p>}
-        {error && <p>Error: {error.message}</p>}
-        {deleteData && <p>Data Deleted: {JSON.stringify(deleteData)}</p>}
-      </div>
+    <div>
+      <button onClick={handleDelete} disabled={loading}>
+        Delete Subject
+      </button>
+      {loading && <p>Loading...</p>}
+      {error && <p>Error: {error.message}</p>}
+      {deleteData && <p>Data Deleted: {JSON.stringify(deleteData)}</p>}
+    </div>
   );
 };
 
@@ -109,16 +109,16 @@ const GetQuestions = ({ subjectId }) => {
   } = useGetSubjectQuestions({ subjectId });
 
   return (
-      <div>
-        {loading && <p>Loading...</p>}
-        {error && <p>Error: {error.message}</p>}
-        {getquestionsData && (
-            <div>
-              <h3>Question Data</h3>
-              <p>{JSON.stringify(getquestionsData)}</p>
-            </div>
-        )}
-      </div>
+    <div>
+      {loading && <p>Loading...</p>}
+      {error && <p>Error: {error.message}</p>}
+      {getquestionsData && (
+        <div>
+          <h3>Question Data</h3>
+          <p>{JSON.stringify(getquestionsData)}</p>
+        </div>
+      )}
+    </div>
   );
 };
 
@@ -126,7 +126,7 @@ const PostQuesionsForm = ({ subjectId }) => {
   const [content, setContent] = useState("");
 
   const { loading, error, postData, postSubjectQuestions } =
-      usePostSubjectQustions();
+    usePostSubjectQustions();
 
   const handleQuestionSumbit = async () => {
     const questionData = {
@@ -140,30 +140,30 @@ const PostQuesionsForm = ({ subjectId }) => {
   };
 
   return (
-      <div>
-        <h3>PostQuesionsInput</h3>
-        <label>Question Content: </label>
-        <input
-            type="text"
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-        />
-        <br />
-        <button onClick={handleQuestionSumbit} disabled={loading}>
-          Submit Question
-        </button>
-        {loading && <p>Loading...</p>}
-        {error && <p>Error: {error.message}</p>}
-        {postData && <p>Data Posted: {JSON.stringify(postData)}</p>}
-      </div>
+    <div>
+      <h3>PostQuesionsInput</h3>
+      <label>Question Content: </label>
+      <input
+        type="text"
+        value={content}
+        onChange={(e) => setContent(e.target.value)}
+      />
+      <br />
+      <button onClick={handleQuestionSumbit} disabled={loading}>
+        Submit Question
+      </button>
+      {loading && <p>Loading...</p>}
+      {error && <p>Error: {error.message}</p>}
+      {postData && <p>Data Posted: {JSON.stringify(postData)}</p>}
+    </div>
   );
 };
 
 export const TestPage = () => {
   return (
-      <>
-        <PostSubjects />
-        <GetSubjects />
-      </>
+    <>
+      <PostSubjects />
+      <GetSubjects />
+    </>
   );
 };
