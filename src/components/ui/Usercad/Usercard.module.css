@@ -1,168 +1,155 @@
-//usercard.module.css
-
-:local {
-    /* Define local scope styles here */
+.usercardLink {
+  text-decoration: none;
+}
+.usercard {
+  display: flex;
+  width: 220px;
+  height: 187px;
+  padding: 20px;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-radius: 16px;
+  border: 1px solid var(--grayscale-40, #818181);
+  background: var(--grayscale-10, #fff);
 }
 
-.usercard{
+.profileInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  align-self: stretch;
+}
+.profileImage {
+  display: flex;
+  width: 60px;
+  height: 60px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+.profileName {
+  align-self: stretch;
+  color: var(--Grayscale-60, #000);
+  font-feature-settings: "clig" off, "liga" off;
+  font-family: Actor;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 25px; /* 125% */
+}
+.messageInfo {
+  display: flex;
+  height: 22px;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+  align-self: stretch;
+}
+.messageInfo {
+  color: var(--grayscale-40, #818181);
+  font-feature-settings: "clig" off, "liga" off;
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 22px; /* 137.5% */
+}
+.messageIcon {
+  width: 18px;
+  height: 18px;
+}
+.messageLabel {
+  color: var(--grayscale-40, #818181);
+  font-feature-settings: "clig" off, "liga" off;
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 22px; /* 137.5% */
+  width: 100%;
+}
+.messageCount {
+  color: var(--grayscale-40, #818181);
+  font-feature-settings: "clig" off, "liga" off;
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 22px; /* 137.5% */
+}
+
+@media screen and (max-width: 220px) {
+  .usercard {
     display: flex;
     width: 220px;
     height: 187px;
-    padding: 20px;
+    padding: 16px;
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
     flex-shrink: 0;
-    border-radius: 16px;
-    border: 1px solid var(--grayscale-40, #818181);
-    background: var(--grayscale-10, #FFF);
-
-
-}
-
-.profileInfo{
+  }
+  .profileInfo {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 12px;
     align-self: stretch;
-}
-.profileImage{
-    display: flex;
-    width: 60px;
-    height: 60px;
-    justify-content: center;
-    align-items: center;
-}
-.profileName{
+  }
+
+  .profileName {
     align-self: stretch;
-    color: var(--Grayscale-60, #000);
-    font-feature-settings: 'clig' off, 'liga' off;
+    color: var(--grayscale-60, #000);
+    font-feature-settings: "clig" off, "liga" off;
     font-family: Actor;
-    font-size: 20px;
+    font-size: 18px;
     font-style: normal;
     font-weight: 400;
-    line-height: 25px; /* 125% */
-}
-.messageInfo{
+    line-height: 24px; /* 133.333% */
+  }
+
+  .profileImage {
+    display: flex;
+    width: 48px;
+    height: 48px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .messageInfo {
     display: flex;
     height: 22px;
     justify-content: space-between;
     align-items: center;
     flex-shrink: 0;
     align-self: stretch;
-}
-.messageInfo{
+  }
 
+  .messageIcon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .messageLabel {
     color: var(--grayscale-40, #818181);
-    font-feature-settings: 'clig' off, 'liga' off;
+    font-feature-settings: "clig" off, "liga" off;
     font-family: Pretendard;
-    font-size: 16px;
+    font-size: 14px;
     font-style: normal;
     font-weight: 400;
-    line-height: 22px; /* 137.5% */
+    line-height: 18px; /* 128.571% */
+  }
 
-
-}
-.messageIcon{
-    width: 18px;
-    height: 18px;
-}
-.messageLabel{
+  .messageCount {
     color: var(--grayscale-40, #818181);
-    font-feature-settings: 'clig' off, 'liga' off;
+    font-feature-settings: "clig" off, "liga" off;
     font-family: Pretendard;
-    font-size: 16px;
+    font-size: 14px;
     font-style: normal;
     font-weight: 400;
-    line-height: 22px; /* 137.5% */
-    width: 100%;
+    line-height: 18px; /* 128.571% */
+  }
 }
-.messageCount{
-    color: var(--grayscale-40, #818181);
-    font-feature-settings: 'clig' off, 'liga' off;
-    font-family: Pretendard;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 22px; /* 137.5% */
-
-}
-
-@media screen and (max-width: 220px){
-
-    .usercard{
-        display: flex;
-        width: 220px;
-        height: 187px;
-        padding: 16px;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: flex-start;
-        flex-shrink: 0;
-    }
-    .profileInfo{
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 12px;
-        align-self: stretch;
-    }
-
-    .profileName{
-        align-self: stretch;
-        color: var(--grayscale-60, #000);
-        font-feature-settings: 'clig' off, 'liga' off;
-        font-family: Actor;
-        font-size: 18px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 24px; /* 133.333% */
-    }
-
-    .profileImage{
-        display: flex;
-        width: 48px;
-        height: 48px;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .messageInfo{
-        display: flex;
-        height: 22px;
-        justify-content: space-between;
-        align-items: center;
-        flex-shrink: 0;
-        align-self: stretch;
-    }
-
-    .messageIcon{
-        width: 16px;
-        height: 16px;
-    }
-
-    .messageLabel{
-        color: var(--grayscale-40, #818181);
-        font-feature-settings: 'clig' off, 'liga' off;
-        font-family: Pretendard;
-        font-size: 14px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 18px; /* 128.571% */
-    }
-
-    .messageCount{
-        color: var(--grayscale-40, #818181);
-        font-feature-settings: 'clig' off, 'liga' off;
-        font-family: Pretendard;
-        font-size: 14px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 18px; /* 128.571% */
-    }
-
-
-}
-
-

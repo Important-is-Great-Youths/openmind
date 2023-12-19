@@ -1,1 +1,3 @@
-export * from "./ButtonShare";
+import ButtonShare from "./ButtonShare";
+
+export default ButtonShare;

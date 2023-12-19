@@ -21,9 +21,16 @@ export default function FeedCardAnswer({ text, style }) {
             <span className={cx("userName")}>{name}</span>
             <span className={cx("userCreateDate")}>2주전</span>
           </div>
-          <div className={cx("userAnswerdetail")} style={style}>
-            {text}
-          </div>
+          {showAnswer ? (
+            <form className={cx("inputArea")} onSubmit={handleAnswerSubmit}>
+              <InputTextarea text={"질문을 입력해주세요"} value={inputText} onChange={handleInputChange} />
+              <ButtonBox text={"답변완료"} qnaWidth="qnaWidth" qnaInactivate={inputText ? "" : "qnaInactivate"} />
+            </form>
+          ) : (
+            <div className={cx("userAnswerDetail")} style={style}>
+              {inputText}
+            </div>
+          )}
         </div>
       </div>
     </div>

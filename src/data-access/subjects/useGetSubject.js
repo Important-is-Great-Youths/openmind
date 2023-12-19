@@ -1,14 +1,38 @@
 import { axiosInstance } from "../../util/axiosInstance";
-import { useAsync } from "../../util/useAsync";
+import { useState, useEffect } from "react";
 
 // subjectId를 받아 답변자의 id, name, imageSource, questionCount, createdAt를 가져오는 Hook
 
 export const useGetSubject = (subjectId) => {
-  const getSubject = () => axiosInstance.get(`subjects/${subjectId}/`);
-  const { loading, error, data } = useAsync(getSubject);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [data, setData] = useState(null);
 
-  return { loading, error, data };
+  const getSubject = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+
+      const response = await axiosInstance.get(`subjects/${subjectId}/`);
+      setData(response.data);
+    } catch (error) {
+      setError(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await getSubject();
+    };
+
+    fetchData();
+  }, [subjectId]);
+
+  return { loading, error, data, getSubject };
 };
+
 
 // 이하 사용 예시
 
