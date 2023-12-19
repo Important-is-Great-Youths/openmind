@@ -16,8 +16,8 @@ export const useGetSubjects = (customLimit = 8, customOffset = 0) => {
       const response = await axiosInstance.get("subjects/", {
         params: {
           limit: customLimit, // 전달 받은 customLimit 사용
-          offset: customOffset,
-        },
+          offset: customOffset
+        }
       });
       setData(response.data);
     } catch (error) {
