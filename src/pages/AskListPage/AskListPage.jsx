@@ -94,9 +94,9 @@ export const AskListPage = () => {
         </div>
         <footer className={cx("pagenation")}>
           <Pagenation
-            totalCount={totalCount}
-            limit={limit}
-            onPageChange={handlePageChange}
+          // totalCount={totalCount}
+          // limit={limit}
+          // onPageChange={handlePageChange}
           />
         </footer>
       </div>

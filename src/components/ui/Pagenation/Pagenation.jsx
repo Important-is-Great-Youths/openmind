@@ -33,7 +33,7 @@ const Pagenation = ({ totalCount, limit }) => {
 
     fetchData();
   }, []);
-  console.log([...data].count);
+  // console.log([...data].count);
 
   // // 데이터 로그 확인
   // useEffect(() => {
