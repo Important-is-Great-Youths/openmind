@@ -19,7 +19,7 @@ export const AskListPage = () => {
   const [sortBy, setSortBy] = useState("최신순");
   const [currentPageData, setCurrentPageData] = useState(null);
   const [totalCount, setTotalCount] = useState(0);
-  const [limit, setLimit] = useState(8);
+  const [limit, setLimit] = useState(6);
   const [windowSize, setWindowSize] = useState({
     width: undefined,
     height: undefined
@@ -31,7 +31,7 @@ export const AskListPage = () => {
         setLoading(true);
         setError(null);
 
-        const response = await axiosInstance.get("/subjects/");
+        const response = await axiosInstance.get(`/subjects/?limit=${limit}`);
         setData(response.data.results);
         setCurrentPageData(response.data.results); // 초기 데이터 설정
         setTotalCount(response.data.count);
@@ -43,7 +43,7 @@ export const AskListPage = () => {
     };
 
     fetchData();
-  }, []);
+  }, [limit]);
 
   // 데이터 로그 확인
   // useEffect(() => {
