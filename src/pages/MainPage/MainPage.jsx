@@ -4,7 +4,7 @@ import ButtonBox from "../../components/ui/ButtonBox/ButtonBox";
 import InputField from "../../components/ui/InputField/InputField";
 import { Link, useNavigate } from "react-router-dom";
 import { usePostSubjects } from "../../data-access/subjects/usePostSubjects";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const cx = classNames.bind(styles);
 
@@ -20,25 +20,35 @@ export const MainPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await postSubjects(name);
+    try {
+      await postSubjects(name);
+    } catch (error) {
+      console.error("Error posting data:", error);
+    }
+  };
+
+  useEffect(() => {
     if (postData && postData.id) {
       const { id } = postData;
-      navigate(`/post/${id}`);
+      navigate(`/post/${id}/answer`);
     } else {
       console.error("Invalid postData:", postData);
     }
-  };
+  }, [postData]);
 
   return (
     <>
       <div className={cx("wrap")}>
-        <Link
-          to="/list"
-          className={cx("question")}
-          style={{ textDecoration: "none" }}
-        >
-          <ButtonBox text={"질문하러 가기"} qnaBtn="answerBtn" />
-        </Link>
+        <div className={cx("buttonWrap")}>
+          <Link
+            to="/list"
+            className={cx("question")}
+            style={{ textDecoration: "none" }}
+          >
+            <ButtonBox text={"질문하러 가기"} qnaBtn="answerBtn" />
+          </Link>
+        </div>
+
         <div className={cx("wrapInner")}>
           <div className={cx("imgBox")}>
             <img src="assets/main-logo.png" alt="오픈마인드 로고" />
