@@ -140,9 +140,6 @@ export const AskListPage = () => {
           </Link>
           <ButtonBox text={"답변하러 가기"} qnaBtn="answerBtn" />
         </div>
-        <div>
-          <Reaction />
-        </div>
         <div className={cx("listWrap")}>
           <div className={cx("choiceHeader")}>
             <h1>누구에게 질문할까요?</h1>

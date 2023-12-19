@@ -15,7 +15,7 @@ function Main() {
           <Route path="list">
             <Route index element={<AskListPage />} />
           </Route>
-          <Route path="post">
+          <Route path="post/:id">
             <Route index element={<AskFeedPage />} />
             <Route path="answer" element={<AnswerPage />} />
           </Route>
