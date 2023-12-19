@@ -13,9 +13,10 @@ const [askFeed, setAskFeed] = useState(false); 숨기고 싶은 경우
 const [askFeed, setAskFeed] = useState(true); 보이고 싶은 경우
 <FeedCard askFeed={askFeed} />
 */
+const cx = classNames.bind(styles);
 
-export default function FeedCard({ askFeed }) {
-  const cx = classNames.bind(styles);
+export default function FeedCard({ askFeed, data }) {
+  const { content, answer, createdAt } = data;
   const [toggle, setToggle] = useState(false);
   const [answerText, setAnswerText] = useState("");
   const [invisible, setInvisible] = useState(true);
@@ -76,7 +77,7 @@ export default function FeedCard({ askFeed }) {
               </div>
             )}
           </div>
-          <FeedCardQuestion />
+          <FeedCardQuestion text={content} date={createdAt} />
           <FeedCardAnswer answerText={answerText} style={answerStyle} />
           <i className={cx("feedBar")}></i>
           <div>

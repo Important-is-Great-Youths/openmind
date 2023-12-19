@@ -35,7 +35,7 @@
   height: auto;
 }
 
-.inputName {
+.form {
   width: 336px;
   padding: 32px;
   box-sizing: content-box;
@@ -70,7 +70,7 @@
   .imgBox {
     max-width: 248px;
   }
-  .inputName {
+  .form {
     max-width: 305px;
     box-sizing: border-box;
   }
