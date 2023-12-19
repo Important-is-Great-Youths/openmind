@@ -1,0 +1,33 @@
+.buttondiv {
+  display: inline-flex;
+  align-items: center;
+  border: none;
+  gap: 6px;
+  color: var(--grayscale-40, #818181);
+  background-color: #ffffff;
+  outline: 0;
+}
+.img {
+  width: 16px;
+  height: 16px;
+  color: var(--grayscale-40);
+  fill: var(--grayscale-40, #818181);
+}
+/* .buttondiv:hover {
+  background: #f9f9f9;
+  color: var(--grayscale-60);
+} */
+
+.buttondiv.up {
+  color: var(--blue-50, #1877f2);
+}
+.buttondiv.up .img {
+  fill: var(--blue-50, #1877f2);
+}
+
+.buttondiv.down {
+  color: var(--grayscale-60);
+}
+.buttondiv.down .img {
+  fill: var(--grayscale-60);
+}
