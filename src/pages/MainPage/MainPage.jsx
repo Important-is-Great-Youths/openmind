@@ -2,11 +2,32 @@ import styles from "./MainPage.module.css";
 import classNames from "classnames/bind";
 import ButtonBox from "../../components/ui/ButtonBox/ButtonBox";
 import InputField from "../../components/ui/InputField/InputField";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { usePostSubjects } from "../../data-access/subjects/usePostSubjects";
+import { useState } from "react";
 
+const cx = classNames.bind(styles);
 
 export const MainPage = () => {
-  const cx = classNames.bind(styles);
+  const [name, setName] = useState("");
+  const { postData, postSubjects } = usePostSubjects();
+
+  const navigate = useNavigate();
+
+  const handleInputChange = (value) => {
+    setName(value);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await postSubjects(name);
+    if (postData && postData.id) {
+      const { id } = postData;
+      navigate(`/post/${id}`);
+    } else {
+      console.error("Invalid postData:", postData);
+    }
+  };
 
   return (
     <>
@@ -22,10 +43,13 @@ export const MainPage = () => {
           <div className={cx("imgBox")}>
             <img src="assets/main-logo.png" alt="오픈마인드 로고" />
           </div>
-          <div className={cx("inputName")}>
-            <InputField className={cx("inputField")} />
-            <ButtonBox text={"질문받기"} qnaWidth="qnaWidth" />
-          </div>
+          <form className={cx("form")} onSubmit={handleSubmit}>
+            <InputField
+              className={cx("inputField")}
+              onInputChange={handleInputChange}
+            />
+            <ButtonBox text={"질문받기"} qnaWidth="qnaWidth" type="submit" />
+          </form>
         </div>
       </div>
     </>
