@@ -1,41 +1,53 @@
-import React from "react";
-import { useGetQuestion } from "../../data-access/questions/useGetQuestion";
+import React, { useState } from "react";
+import { useGetSubjects } from "../../data-access/subjects/useGetSubjects";
+import useSearchSubject from "../../util/useSearchSubject";
 
-const GetQuestion = ({ questionId }) => {
-  const { loading, error, data } = useGetQuestion(questionId);
+const SearchSubjectForm = () => {
+  const { data: subjectsData } = useGetSubjects(99);
+  const { count, next, previous, results } = subjectsData || {};
+  const subjects = subjectsData ? { count, next, previous, results } : null;
 
-  if (loading) {
-    return <p>Loading...</p>;
-  }
+  const [name, setName] = useState("");
 
-  if (error) {
-    return <p>Error: {error.message}</p>;
-  }
+  const subjectId = useSearchSubject(name);
 
-  if (!data) {
-    return null; // 데이터가 없는 경우 아무것도 렌더링하지 않음
-  }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(subjectId);
+    alert(subjectId);
+  };
 
-  const { id, subjectId, content, like, dislike, createdAt, answer } = data;
+  const handleNameChange = (e) => {
+    setName(e.target.value);
+  };
 
   return (
-    <div>
-      <h2>Question ID: {id}</h2>
-      <p>Subject ID: {subjectId}</p>
-      <p>Content: {content}</p>
-      <p>Like: {like}</p>
-      <p>Dislike: {dislike}</p>
-      <p>Created At: {createdAt}</p>
-      {/* 이하 데이터 활용 예시 */}
-      {answer && (
-        <div>
-          <h3>Answer</h3>
-          <p>Answer ID: {answer.id}</p>
-          <p>Answer Content: {answer.content}</p>
-          {/* 추가적인 데이터 표시 */}
-        </div>
-      )}
-    </div>
+    <>
+      <form onSubmit={handleSubmit}>
+        <p>count: {subjects ? subjects.count : null}</p>
+        <label htmlFor="nameInput">
+          Name:
+          <input
+            id="nameInput"
+            type="text"
+            value={name}
+            onChange={handleNameChange}
+          />
+        </label>
+        <button type="submit">Submit</button>
+      </form>
+      <div>
+        {subjects && subjects.results.length > 0 && (
+          <ul>
+            {subjects.results.map((subject) => (
+              <li key={subject.id}>
+                ID: {subject.id}, Name: {subject.name}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </>
   );
 };
 
@@ -43,7 +55,7 @@ export const TestPage = () => {
   return (
     <>
       <h1>테스트 페이지</h1>
-      <GetQuestion questionId={2600} />
+      <SearchSubjectForm />
     </>
   );
 };
