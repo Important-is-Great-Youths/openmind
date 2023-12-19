@@ -1,65 +1,40 @@
-// Pagenation.jsx
-
+// // Pagenation.jsx
 import React from "react";
 import styles from "./Pagenation.module.css";
 import { axiosInstance } from "../../../util/axiosInstance";
 import { useState, useEffect } from "react";
-const Pagenation = ({ totalCount, limit }) => {
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [count, setCount] = useState(null);
-  const [next, setNext] = useState(null);
-  const [prev, setPrev] = useState(null);
-  const totalPage = Math.ceil(totalCount / limit);
-  const currentPage = 1;
-  const pageCount = 5;
 
+const Pagenation = ({ totalCount, limit, onPageChange }) => {
+  const totalPage = Math.ceil(totalCount / limit);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [offset, setOffset] = useState(0);
   useEffect(() => {
     const fetchData = async () => {
       try {
-        setLoading(true);
-        setError(null);
+        const response = await axiosInstance.get(
+          `/subjects/?limit=${limit}&offset=${offset}`
+        );
 
-        const response = await axiosInstance.get("/subjects/");
-        setCount(response.data.count);
-        setNext(response.data.next);
-        setPrev(response.data.previous);
+        // https://openmind-api.vercel.app/2-3/subjects/?offset=32
+        // 데이터를 가져온 후, 상위 컴포넌트에 현재 페이지를 전달합니다.
+        onPageChange(response.data.results, currentPage, limit);
       } catch (error) {
-        setError(error);
-      } finally {
-        setLoading(false);
+        console.error("오류가 발생했습니다.");
       }
     };
 
     fetchData();
-  }, []);
-  console.log([...data].count);
-
-  // // 데이터 로그 확인
-  // useEffect(() => {
-  //   if (data) {
-  //     console.log(data);
-  //   }
-  // }, [data]);
-
-  let pageGroup = Math.ceil(currentPage / pageCount);
-  let lastNumber = pageGroup * pageCount;
-  if (lastNumber > totalPage) {
-    lastNumber = totalPage;
-  }
-  let firstNumber = lastNumber - (pageCount - 1);
-
-  // const next = lastNumber + 1;
-  // const prev = firstNumber - 1;
-
+  }, [offset, currentPage]);
+  // currentPage, onPageChange,
   const buttons = [];
-  for (let i = firstNumber; i <= lastNumber; i++) {
+  for (let i = 1; i <= totalPage; i++) {
     buttons.push(
       <button
         key={i}
         className={`${styles.pageItem} ${
           i === currentPage ? styles.currentPage : ""
         }`}
+        onClick={() => setCurrentPage(i)}
       >
         {i}
       </button>
@@ -71,7 +46,10 @@ const Pagenation = ({ totalCount, limit }) => {
       <button
         className={`${styles.pageItem} ${styles.prePage}`}
         disabled={currentPage === 1}
-        onClick={() => console.log("Go to Previous Page")}
+        onClick={() => {
+          setCurrentPage(currentPage - 1);
+          setOffset(offset - limit);
+        }}
       >
         &lt;
       </button>
@@ -79,7 +57,10 @@ const Pagenation = ({ totalCount, limit }) => {
       <button
         className={`${styles.pageItem} ${styles.nextPage}`}
         disabled={currentPage === totalPage}
-        onClick={() => console.log("Go to Next Page")}
+        onClick={() => {
+          setCurrentPage(currentPage + 1);
+          setOffset(offset + limit); // 다음 페이지로 이동할 때 offset 증가
+        }}
       >
         &gt;
       </button>
