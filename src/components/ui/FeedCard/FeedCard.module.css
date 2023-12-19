@@ -5,6 +5,7 @@
 }
 
 .feedCard {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 32px;
@@ -55,3 +56,8 @@
   background: #f9f9f9;
 }
 
+.editButton{
+  position: absolute;
+  bottom: 1.37rem;
+  right: 2rem;
+}

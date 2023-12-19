@@ -5,6 +5,7 @@ import FeedCardQuestion from "../FeedCardQuestion/FeedCardQuestion";
 import { ReactComponent as More } from "../../../icon/icon-more.svg";
 import { useState, useEffect } from "react";
 import Badge from "../Badge/Badge";
+import EditButton from "../EditButton/EditButton";
 /* 
 more 버튼을 숨기고 싶은 경우,
 부모 컴포넌트에 다음 코드를 추가해주세요
@@ -89,9 +90,12 @@ export default function FeedCard({ askFeed, data }) {
           <FeedCardQuestion text={content} date={createdAt} />
           <FeedCardAnswer answerText={answerText} style={answerStyle} />
           <i className={cx("feedBar")}></i>
-          <div>
+          <div className={cx("")}>
             <span>좋아요 </span>
             <span>싫어요</span>
+          </div>
+          <div className={cx("editButton")}>
+            <EditButton />
           </div>
         </div>
       </li>
