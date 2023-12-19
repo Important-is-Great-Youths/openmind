@@ -58,6 +58,7 @@
   }
 }
 @media screen and (max-width: 798px) {
+  /*small tablet*/
   .nav {
     flex-direction: column;
     justify-content: center;
@@ -75,6 +76,9 @@
     font-size: 24px;
   }
   .list {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    /* flex-wrap: wrap; */
     gap: 16px;
   }
 }
