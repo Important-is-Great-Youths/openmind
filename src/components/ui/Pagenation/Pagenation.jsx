@@ -26,6 +26,7 @@ const Pagenation = ({ totalCount, limit, onPageChange }) => {
     fetchData();
   }, [offset, currentPage]);
   // currentPage, onPageChange,
+
   const buttons = [];
   for (let i = 1; i <= totalPage; i++) {
     buttons.push(

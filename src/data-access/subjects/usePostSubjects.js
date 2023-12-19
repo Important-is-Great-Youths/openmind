@@ -11,9 +11,8 @@ export const usePostSubjects = () => {
   const postSubjects = async (name) => {
     try {
       setLoading(true);
-      const response = axiosInstance.post("subjects/", {
-        name,
-        TEAM,
+      const response = await axiosInstance.post("subjects/", {
+        "name": name
       });
       setPostData(response.data);
     } catch (error) {
