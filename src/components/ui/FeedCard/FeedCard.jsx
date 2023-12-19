@@ -12,9 +12,10 @@ more 버튼을 숨기고 싶은 경우,
 const [askFeed, setAskFeed] = useState(false);
 <FeedCard askFeed={askFeed} />
 */
+const cx = classNames.bind(styles);
 
-export default function FeedCard({ askFeed }) {
-  const cx = classNames.bind(styles);
+export default function FeedCard({ askFeed, data }) {
+  const { content, answer, createdAt } = data;
   const [toggle, setToggle] = useState(false);
   const [answerText, setAnswerText] = useState("");
 
@@ -62,7 +63,7 @@ export default function FeedCard({ askFeed }) {
           </div>
         )}
       </div>
-      <FeedCardQuestion />
+      <FeedCardQuestion text={content} date={createdAt} />
       <FeedCardAnswer text={answerText} style={answerStyle} />
       <i className={cx("feedBar")}></i>
       <div>

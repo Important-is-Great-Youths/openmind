@@ -2,9 +2,14 @@ import styles from "./PostHeader.module.css";
 import classNames from "classnames/bind";
 import ButtonShare from "../../ui/ButtonShare/ButtonShare";
 import { Link } from "react-router-dom";
+import { useGetSubject } from "../../../data-access/subjects/useGetSubject";
 
-export default function PostHeader() {
-  const cx = classNames.bind(styles);
+const cx = classNames.bind(styles);
+
+export default function PostHeader({ id }) {
+  const { data } = useGetSubject(id);
+  const { imageSource, name } = data || {};
+
   return (
     <>
       <div className={cx("header")}>
@@ -12,16 +17,16 @@ export default function PostHeader() {
         <Link to="../">
           <img
             className={cx("logo")}
-            src="assets/main-logo.png"
-            alt="OpenmindLogo"
+            src="/assets/main-logo.png"
+            alt="오픈마인드 로고"
           />
         </Link>
         <img
           className={cx("profile-photo")}
-          src="/assets/temp-profile.png"
-          alt="ProfileImg"
+          src={imageSource}
+          alt="프로필 이미지"
         />
-        <h2 className={cx("username")}>아초는고양이</h2>
+        <h2 className={cx("username")}>{name}</h2>
         <ButtonShare />
       </div>
     </>

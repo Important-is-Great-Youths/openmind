@@ -10,13 +10,30 @@ width 100% : qnaWidth="qnaWidth"
 비활성상태 : qnaInactivate = "qnaInactivate" 
 */
 
-export default function ButtonBox({ text, qnaBtn, qnaWidth, qnaInactivate }) {
+export default function ButtonBox({
+  text,
+  qnaBtn,
+  qnaWidth,
+  qnaInactivate,
+  onClick,
+  onClose,
+}) {
   const cx = classNames.bind(styles);
   const cssQnaBtn = qnaBtn;
 
+  const handleButtonClick = () => {
+    onClick && onClick();
+    onClose && onClose();
+  };
+
   return (
     <>
-      <button className={cx("qnaBtn", cssQnaBtn, qnaWidth, qnaInactivate, { noArrow: !cssQnaBtn })}>
+      <button
+        className={cx("qnaBtn", cssQnaBtn, qnaWidth, qnaInactivate, {
+          noArrow: !cssQnaBtn,
+        })}
+        onClick={handleButtonClick}
+      >
         <span>{text}</span>
         {cssQnaBtn && <ArrowNext className={cx("arrowNext")} />}
       </button>
