@@ -19,11 +19,13 @@
   margin-bottom: 100px;
 }
 
-.question {
+.buttonWrap {
   display: flex;
   justify-content: end;
   padding: 45px 130px 0;
-  position: relative;
+}
+
+.question {
   z-index: 100;
 }
 
