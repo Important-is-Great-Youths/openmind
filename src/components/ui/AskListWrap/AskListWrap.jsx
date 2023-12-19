@@ -26,7 +26,7 @@ const AskListWrap = ({ children, title }) => {
           {title}
         </span>
       </p>
-      {children}
+      <div className={cx("childrenWrap")}>{children}</div>
     </div>
   );
 };
