@@ -11,7 +11,6 @@ import { getSubjectsQuestion } from "../../data-access/subjects/getSubjectsQuest
 const LIMIT = 5;
 
 export const AnswerPage = () => {
-  console.log("answer page");
   const { id } = useParams();
   const [isAskFeedPageVisible, setIsAskFeedPageVisible] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -22,6 +21,7 @@ export const AnswerPage = () => {
   const [questionData, setQuestionData] = useState({
     data: [],
   });
+  const [askFeed, setAskFeed] = useState(true);
 
   const handleFeedCardSection = async (id, limit, offset) => {
     setIsLoading(true);
@@ -37,6 +37,7 @@ export const AnswerPage = () => {
     } finally {
       offset.current += limit;
       setIsLoading(false);
+      console.log(questionData); // 나중에 지울 예정
     }
   };
 
@@ -64,7 +65,9 @@ export const AnswerPage = () => {
         {questionData.data && questionData.data.length > 0 ? (
           <AskListWrap title={`${total}개의 질문이 있습니다`}>
             {questionData.data.map((results) => {
-              return <FeedCard askFeed key={results.id} data={results} />;
+              return (
+                <FeedCard askFeed={askFeed} key={results.id} data={results} />
+              );
             })}
           </AskListWrap>
         ) : (

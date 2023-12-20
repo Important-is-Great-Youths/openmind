@@ -21,6 +21,8 @@ export default function FeedCard({ askFeed, data }) {
   const [toggle, setToggle] = useState(false);
   const [answerText, setAnswerText] = useState("");
   const [invisible, setInvisible] = useState(true);
+  const [answerEdit, setAnswerEdit] = useState(false);
+  const [answerId, setAnswerId] = useState(answer ? answer.id : null);
 
   const delAndRejectionHandler = (event) => {
     event.stopPropagation();
@@ -44,6 +46,11 @@ export default function FeedCard({ askFeed, data }) {
       document.removeEventListener("click", unShowHandler);
     };
   }, []);
+
+  const displayAnswerHandler = () => {
+    setAnswerEdit((prevState) => !prevState);
+    answer && console.log(answer.content);
+  };
 
   const answerStyle = {
     color: answerText === "답변거절" ? "#B93333" : "inherit",
@@ -88,13 +95,18 @@ export default function FeedCard({ askFeed, data }) {
             )}
           </div>
           <FeedCardQuestion text={content} date={createdAt} />
-          <FeedCardAnswer answerText={answerText} style={answerStyle} />
-          <i className={cx("feedBar")}></i>
+
+          <FeedCardAnswer
+            answerId={answerId}
+            style={answerStyle}
+            edit={answerEdit}
+          />
+          <i className={cx("feedBar")} />
           <div className={cx("")}>
             <span>좋아요 </span>
             <span>싫어요</span>
           </div>
-          <div className={cx("editButton")}>
+          <div className={cx("editButton")} onClick={displayAnswerHandler}>
             <EditButton />
           </div>
         </div>
