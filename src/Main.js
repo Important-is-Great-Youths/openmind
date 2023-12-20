@@ -5,6 +5,7 @@ import { TestPage } from "./pages/TestPage";
 import { AskFeedPage } from "./pages/AskFeedPage";
 import { AskListPage } from "./pages/AskListPage";
 import { AnswerPage } from "./pages/AnswerPage";
+import { SecretPage } from "./pages/SecretPage/SecretPage";
 
 function Main() {
   return (
@@ -15,12 +16,15 @@ function Main() {
           <Route path="list">
             <Route index element={<AskListPage />} />
           </Route>
-          <Route path="post/:id">
-            <Route index element={<AskFeedPage />} />
-            <Route path="answer" element={<AnswerPage />} />
+          <Route path="post">
+            <Route path=":id" element={<AskFeedPage />} />
+            <Route path=":id/answer" element={<AnswerPage />} />
           </Route>
           <Route path="test">
             <Route index element={<TestPage />} />
+          </Route>
+          <Route path="secret">
+            <Route index element={<SecretPage />} />
           </Route>
           {/* 정의되지 않은 경로 접속시 MainPage로 이동 */}
           <Route path="*" element={<MainPage />} />
