@@ -11,42 +11,23 @@ export default function Reaction({ questionId }) {
   const { data: questionData } = useGetQuestion(questionId);
   const { like: questionLike, dislike: questionDislike } = questionData || {};
   const { postQuestionReaction } = usePostQuestionReaction(questionId);
-
-  const initialCountLike = parseInt(localStorage.getItem("like")) || 0;
-  const initialCountHate = parseInt(localStorage.getItem("hate")) || 0;
-  const [like, setLike] = useState(initialCountLike);
-  const [hate, setHate] = useState(initialCountHate);
   const [up, setUp] = useState(false);
   const [down, setDown] = useState(false);
 
-  const handleLikeClick = () => {
-    if (up) {
-      setLike(like - 1);
-    } else {
-      setLike(like + 1);
-    }
+  const handleLikeClick = async () => {
     setUp(!up);
-    console.log(questionLike); // 나중에 삭제 예정
-    postQuestionReaction("like");
+    try {
+      await postQuestionReaction("like");
+    } catch (error) {
+      console.error("like Error", error);
+    }
   };
 
   const handleHateClick = () => {
-    if (down) {
-      setHate(hate - 1);
-    } else {
-      setHate(hate + 1);
-    }
     setDown(!down);
-    console.log(questionDislike); // 나중에 삭제 예정
+    postQuestionReaction("dislike");
   };
 
-  useEffect(() => {
-    localStorage.setItem("like", like.toString());
-  }, [like]);
-
-  useEffect(() => {
-    localStorage.setItem("hate", hate.toString());
-  }, [hate]);
 
   return (
     <div className={cx("reactionDiv")}>

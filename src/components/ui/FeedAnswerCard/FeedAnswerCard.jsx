@@ -50,8 +50,6 @@ export default function FeedAnswerCard({ askFeed, data }) {
 
   const displayAnswerHandler = () => {
     setAnswerEdit((prevState) => !prevState);
-    answer && console.log(answer.content);
-    console.log(questionId); // 나중에 삭제 예정
   };
 
   const answerStyle = {
