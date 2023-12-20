@@ -5,12 +5,15 @@ import InputField from "../../components/ui/InputField/InputField";
 import { Link, useNavigate } from "react-router-dom";
 import { usePostSubjects } from "../../data-access/subjects/usePostSubjects";
 import { useEffect, useState } from "react";
+import { useSearchSubject } from "../../util/useSearchSubject";
 
 const cx = classNames.bind(styles);
 
 export const MainPage = () => {
   const [name, setName] = useState("");
+  const [searchResult, setSearchResult] = useState(null);
   const { postData, postSubjects } = usePostSubjects();
+  const { searchSubject } = useSearchSubject();
 
   const navigate = useNavigate();
 
@@ -20,8 +23,15 @@ export const MainPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
-      await postSubjects(name);
+      const result = await searchSubject(name);
+      setSearchResult(result);
+      alert(result);
+
+      if (result === -1) {
+        await postSubjects(name);
+      }
     } catch (error) {
       console.error("Error posting data:", error);
     }
@@ -32,9 +42,14 @@ export const MainPage = () => {
       const { id } = postData;
       navigate(`/post/${id}/answer`);
     } else {
-      console.error("Invalid postData:", postData);
+      if (searchResult !== -1 && postData) {
+        const id = searchResult;
+        navigate(`/post/${id}/answer`);
+      } else {
+        console.error("Invalid postData:", postData);
+      }
     }
-  }, [postData]);
+  }, [searchResult, postData]);
 
   return (
     <>
