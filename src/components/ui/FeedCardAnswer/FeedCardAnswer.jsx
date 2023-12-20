@@ -32,7 +32,11 @@ export default function FeedCardAnswer({ answerId, style, edit }) {
           <span className={cx("userCreateDate")}>2주전</span>
         </div>
         <div className={cx("userAnswerdetail")} style={style}>
-          {edit ? <FeedCardAnswerEdit /> : <p>{answerContent}</p>}
+          {edit ? (
+            <FeedCardAnswerEdit>{answerContent}</FeedCardAnswerEdit>
+          ) : (
+            <p>{answerContent}</p>
+          )}
         </div>
       </div>
     </div>
