@@ -26,15 +26,13 @@ export default function FeedCardAnswer({ answerId, style, edit }) {
       <div className={cx("imgBox")}>
         <img src={imageSource} alt="프로필" />
       </div>
-      <div>
-        <div className={cx("userAnswer")}>
-          <div className={cx("userProfile")}>
-            <span className={cx("userName")}>{name}</span>
-            <span className={cx("userCreateDate")}>2주전</span>
-          </div>
-          <div className={cx("userAnswerdetail")} style={style}>
-            {edit ? <FeedCardAnswerEdit /> : <p>{answerContent}</p>}
-          </div>
+      <div className={cx("userAnswer")}>
+        <div className={cx("userProfile")}>
+          <span className={cx("userName")}>{name}</span>
+          <span className={cx("userCreateDate")}>2주전</span>
+        </div>
+        <div className={cx("userAnswerdetail")} style={style}>
+          {edit ? <FeedCardAnswerEdit /> : <p>{answerContent}</p>}
         </div>
       </div>
     </div>
