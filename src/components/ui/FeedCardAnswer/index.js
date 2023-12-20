@@ -1,3 +1,3 @@
-import FeedCardAnswer from "./FeedCardAnswer";
+import AnswerInput from "./FeedCardAnswer";
 
-export default FeedCardAnswer;
+export default AnswerInput;

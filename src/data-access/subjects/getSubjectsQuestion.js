@@ -1,6 +1,6 @@
-export async function getSubjectsQuestion(id, limit = 2, offset = "") {
+export async function getSubjectsQuestion(id, limit = 99, offset = "") {
   const subjectId = id;
-  const query = `?limit=${5}`;
+  const query = `?limit=${limit}`;
   const response = await fetch(
     `https://openmind-api.vercel.app/2-3/subjects/${subjectId}/questions/${query}`
   );

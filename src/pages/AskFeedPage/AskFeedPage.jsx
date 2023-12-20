@@ -9,7 +9,6 @@ import ButtonFloating from "../../components/ui/ButtonFloating/ButtonFloating";
 import { getSubjectsQuestion } from "../../data-access/subjects/getSubjectsQuestion";
 import styles from "./AskFeedPage.module.css";
 import classNames from "classnames/bind";
-
 const cx = classNames.bind(styles);
 
 const LIMIT = 5;
@@ -23,7 +22,7 @@ export const AskFeedPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [total, setTotal] = useState(null);
   const [questionData, setQuestionData] = useState({
-    data: [],
+    data: []
   });
 
   const handleFeedCardSection = async (id, limit, offset) => {
@@ -32,7 +31,7 @@ export const AskFeedPage = () => {
       const result = await getSubjectsQuestion(id, limit, offset.current);
       const { count, results: questionData } = result;
       setQuestionData((prevData) => ({
-        data: [...questionData],
+        data: [...questionData]
       }));
       setTotal(count);
     } catch (err) {
