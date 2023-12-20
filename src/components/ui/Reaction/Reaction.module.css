@@ -1,3 +1,8 @@
+.reactionDiv{
+  display: flex;
+  align-items: flex-start;
+  gap: 32px;
+}
 .buttondiv {
   display: inline-flex;
   align-items: center;

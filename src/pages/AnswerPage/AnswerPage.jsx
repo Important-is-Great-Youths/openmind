@@ -5,7 +5,6 @@ import Modal from "../../components/ui/Modal/Modal";
 import { useLocation, useParams } from "react-router";
 import AskEmptyPage from "../AskEmptyPage/AskEmptyPage";
 import { useEffect, useRef, useState } from "react";
-import ButtonFloating from "../../components/ui/ButtonFloating/ButtonFloating";
 import { getSubjectsQuestion } from "../../data-access/subjects/getSubjectsQuestion";
 
 const LIMIT = 5;
@@ -73,9 +72,6 @@ export const AnswerPage = () => {
         ) : (
           <AskEmptyPage />
         )}
-        <div>
-          <ButtonFloating text={"질문 작성하기"} onClick={handleButtonClick} />
-        </div>
         {isModalOpen && (
           <Modal
             onClose={handleCloseModal}

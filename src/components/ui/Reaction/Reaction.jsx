@@ -40,7 +40,7 @@ export default function Reaction() {
   }, [hate]);
 
   return (
-    <>
+    <div className={cx("reactionDiv")}>
       <button className={cx("buttondiv", { up })} onClick={handleLikeClick}>
         <Thumbup className={cx("img")} />
         좋아요 {like}
@@ -49,6 +49,6 @@ export default function Reaction() {
         <Thumbdown className={cx("img")} />
         싫어요 {hate}
       </button>
-    </>
+    </div>
   );
 }
