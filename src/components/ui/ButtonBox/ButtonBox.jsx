@@ -21,8 +21,8 @@ export default function ButtonBox({
   const cx = classNames.bind(styles);
   const cssQnaBtn = qnaBtn;
 
-  const handleButtonClick = () => {
-    onClick && onClick();
+  const handleButtonClick = async () => {
+    onClick && await onClick();
     onClose && onClose();
   };
 
