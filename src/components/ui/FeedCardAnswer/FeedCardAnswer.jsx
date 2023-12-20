@@ -31,6 +31,9 @@ export default function FeedCardAnswer({ text, style }) {
               {inputText}
             </div>
           )} */}
+          <div className={cx("userAnswerdetail")} style={style}>
+            {text}
+          </div>
         </div>
       </div>
     </div>

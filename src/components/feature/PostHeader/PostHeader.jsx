@@ -14,7 +14,7 @@ export default function PostHeader({ id }) {
     <>
       <div className={cx("header")}>
         <div className={cx("header-img")} />
-        <Link to="../">
+        <Link to="/">
           <img
             className={cx("logo")}
             src="/assets/main-logo.png"

@@ -12,7 +12,7 @@ const cx = classNames.bind(styles);
 
 function Usercard({ data }) {
   return (
-    <Link to="/post/1261" className={cx("usercardLink")}>
+    <Link to={`/post/${data.id}`} className={cx("usercardLink")}>
       <div className={cx("usercard")}>
         <div className={cx("profileInfo")}>
           <img
