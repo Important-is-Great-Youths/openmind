@@ -96,12 +96,14 @@ export default function FeedAnswerCard({ askFeed, data }) {
             )}
           </div>
           <FeedCardQuestion text={content} date={createdAt} />
+          {answer && (
+            <FeedCardAnswer
+              answerId={answerId}
+              style={answerStyle}
+              edit={answerEdit}
+            />
+          )}
 
-          <FeedCardAnswer
-            answerId={answerId}
-            style={answerStyle}
-            edit={answerEdit}
-          />
           <i className={cx("feedBar")} />
           <Reaction />
           <div className={cx("editButton")} onClick={displayAnswerHandler}>
