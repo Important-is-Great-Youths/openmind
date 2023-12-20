@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { getSubjectsQuestion } from "../../data-access/subjects/getSubjectsQuestion";
 import FeedAnswerCard from "../../components/ui/FeedAnswerCard/FeedAnswerCard";
 
-const LIMIT = 5;
+const LIMIT = 99;
 
 export const AnswerPage = () => {
   const { id } = useParams();
