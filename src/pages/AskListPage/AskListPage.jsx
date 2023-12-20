@@ -8,7 +8,7 @@ import { useState, useEffect, useCallback } from "react";
 // import { useGetSubjects } from "../../data-access/subjects/useGetSubjects";
 import { axiosInstance } from "../../util/axiosInstance";
 import Pagenation from "../../components/ui/Pagenation/Pagenation";
-import Reaction from "../../components/ui/Reaction/Reaction";
+import LoadingIcon from "../../components/ui/LoadingIcon/LoadingIcon";
 
 const cx = classNames.bind(styles);
 
@@ -19,7 +19,7 @@ export const AskListPage = () => {
   const [sortBy, setSortBy] = useState("최신순");
   const [currentPageData, setCurrentPageData] = useState(null);
   const [totalCount, setTotalCount] = useState(0);
-  const [limit, setLimit] = useState(6);
+  const [limit, setLimit] = useState(8);
   const [windowSize, setWindowSize] = useState({
     width: undefined,
     height: undefined
@@ -44,13 +44,6 @@ export const AskListPage = () => {
 
     fetchData();
   }, [limit]);
-
-  // 데이터 로그 확인
-  // useEffect(() => {
-  //   if (data) {
-  //     console.log(data);
-  //   }
-  // }, [data]);
 
   // 추가: 정렬 기준이 변경될 때마다 데이터 정렬
   useEffect(() => {
@@ -132,6 +125,7 @@ export const AskListPage = () => {
   return (
     <div className={cx("wrap")}>
       <div className={cx("wrapInner")}>
+        {loading && <LoadingIcon />}
         <div className={cx("nav")}>
           <Link to="/">
             <div className={cx("imgWrap")}>
@@ -147,7 +141,6 @@ export const AskListPage = () => {
             <Dropdown onSortChange={handleSortChange} />
           </div>
           <ul className={cx("list")}>
-            {/* {loading && <p>Loading...</p>} -> 같이 렌더링되어가지고 usercard가 밑으로 튀어서 주석*/}
             {error && <p>Error: {error.message}</p>}
             {currentPageData &&
               currentPageData.map((user) => (
