@@ -3,18 +3,21 @@ import classNames from "classnames/bind";
 import React, { useState, useEffect } from "react";
 import { ReactComponent as Thumbup } from "../../../icon/icon-thumbs-up.svg";
 import { ReactComponent as Thumbdown } from "../../../icon/icon-thumbs-down.svg";
+import { useGetQuestion } from "../../../data-access/questions/useGetQuestion";
+import usePostQuestionReaction from "../../../data-access/questions/usePostQuestionReaction";
 
-export default function Reaction(questionId) {
+export default function Reaction({ questionId }) {
   const cx = classNames.bind(stylesheet);
+  const { data: questionData } = useGetQuestion(questionId);
+  const { like: questionLike, dislike: questionDislike } = questionData || {};
+  const { postQuestionReaction } = usePostQuestionReaction(questionId);
+
   const initialCountLike = parseInt(localStorage.getItem("like")) || 0;
   const initialCountHate = parseInt(localStorage.getItem("hate")) || 0;
   const [like, setLike] = useState(initialCountLike);
   const [hate, setHate] = useState(initialCountHate);
   const [up, setUp] = useState(false);
   const [down, setDown] = useState(false);
-
-  //getQuestion에서 like, dislike 값 가져오기
-  //postQuestion으로 like 또는 dislike 전달하기
 
   const handleLikeClick = () => {
     if (up) {
@@ -23,6 +26,8 @@ export default function Reaction(questionId) {
       setLike(like + 1);
     }
     setUp(!up);
+    console.log(questionLike); // 나중에 삭제 예정
+    postQuestionReaction("like");
   };
 
   const handleHateClick = () => {
@@ -32,6 +37,7 @@ export default function Reaction(questionId) {
       setHate(hate + 1);
     }
     setDown(!down);
+    console.log(questionDislike); // 나중에 삭제 예정
   };
 
   useEffect(() => {
@@ -46,11 +52,11 @@ export default function Reaction(questionId) {
     <div className={cx("reactionDiv")}>
       <button className={cx("buttondiv", { up })} onClick={handleLikeClick}>
         <Thumbup className={cx("img")} />
-        좋아요 {like}
+        좋아요 {questionLike}
       </button>
       <button className={cx("buttondiv", { down })} onClick={handleHateClick}>
         <Thumbdown className={cx("img")} />
-        싫어요 {hate}
+        싫어요 {questionDislike}
       </button>
     </div>
   );

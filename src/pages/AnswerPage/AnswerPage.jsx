@@ -34,8 +34,8 @@ export const AnswerPage = () => {
     } finally {
       offset.current += limit;
       setIsLoading(false);
-      console.log(questionData); // 나중에 지울 예정
     }
+    console.log(questionData); // 나중에 지울 예정
   };
 
   useEffect(() => {

@@ -18,12 +18,12 @@ const [askFeed, setAskFeed] = useState(true); 보이고 싶은 경우
 const cx = classNames.bind(styles);
 
 export default function FeedAnswerCard({ askFeed, data }) {
-  const { content, answer, createdAt } = data;
+  const { id: questionId, content, answer, createdAt } = data;
   const [toggle, setToggle] = useState(false);
   const [answerText, setAnswerText] = useState("");
   const [invisible, setInvisible] = useState(true);
   const [answerEdit, setAnswerEdit] = useState(false);
-  const [answerId, setAnswerId] = useState(answer ? answer.id : null);
+  const answerId = answer ? answer.id : null;
 
   const delAndRejectionHandler = (event) => {
     event.stopPropagation();
@@ -51,6 +51,7 @@ export default function FeedAnswerCard({ askFeed, data }) {
   const displayAnswerHandler = () => {
     setAnswerEdit((prevState) => !prevState);
     answer && console.log(answer.content);
+    console.log(questionId); // 나중에 삭제 예정
   };
 
   const answerStyle = {
@@ -105,7 +106,7 @@ export default function FeedAnswerCard({ askFeed, data }) {
           )}
 
           <i className={cx("feedBar")} />
-          <Reaction />
+          <Reaction questionId={questionId} />
           <div className={cx("editButton")} onClick={displayAnswerHandler}>
             <EditButton />
           </div>
