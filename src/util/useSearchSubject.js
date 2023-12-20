@@ -1,7 +1,7 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useMemo } from "react";
 import { useGetSubjects } from "../data-access/subjects/useGetSubjects";
 
-const useSearchSubject = (name) => {
+export const useSearchSubject = () => {
   const { data: subjectsData, loading, error } = useGetSubjects(99);
 
   const subjects = useMemo(() => {
@@ -12,24 +12,26 @@ const useSearchSubject = (name) => {
 
   const [nameArray, setNameArray] = useState([]);
 
-  useEffect(() => {
+  const searchSubject = (name) => {
     if (!loading && !error && subjects && subjects.results) {
       const newArray = subjects.results.map((subject) => subject.name);
       setNameArray(newArray);
     }
-  }, [loading, error, subjects]);
 
-  const nameIndex = nameArray.indexOf(name);
-  if (nameIndex !== -1) {
-    // 존재하는 이름이면
-    return subjects?.results[nameIndex].id;
-  } else {
-    // 존재하지 않는 이름이면
-    return -1;
-  }
+    const nameIndex = nameArray.indexOf(name);
+
+    if (nameIndex !== -1) {
+      // 존재하는 이름이면
+      return subjects?.results[nameIndex].id;
+    } else {
+      // 존재하지 않는 이름이면
+      return -1;
+    }
+  };
+  return { searchSubject };
 };
 
-export default useSearchSubject;
+// export default useSearchSubject;
 
 // 예시 코드
 // const SearchSubjectForm = () => {
