@@ -5,8 +5,6 @@ import FeedCardQuestion from "../FeedCardQuestion/FeedCardQuestion";
 import { ReactComponent as More } from "../../../icon/icon-more.svg";
 import { useState, useEffect } from "react";
 import Badge from "../Badge/Badge";
-import EditButton from "../EditButton/EditButton";
-import Reaction from "../Reaction/Reaction";
 /* 
 more 버튼을 숨기고 싶은 경우,
 부모 컴포넌트에 다음 코드를 추가해주세요
@@ -22,8 +20,6 @@ export default function FeedCard({ askFeed, data }) {
   const [toggle, setToggle] = useState(false);
   const [answerText, setAnswerText] = useState("");
   const [invisible, setInvisible] = useState(true);
-  const [answerEdit, setAnswerEdit] = useState(false);
-  const [answerId, setAnswerId] = useState(answer ? answer.id : null);
 
   const delAndRejectionHandler = (event) => {
     event.stopPropagation();
@@ -48,11 +44,6 @@ export default function FeedCard({ askFeed, data }) {
     };
   }, []);
 
-  const displayAnswerHandler = () => {
-    setAnswerEdit((prevState) => !prevState);
-    answer && console.log(answer.content);
-  };
-
   const answerStyle = {
     color: answerText === "답변거절" ? "#B93333" : "inherit",
   };
@@ -69,7 +60,7 @@ export default function FeedCard({ askFeed, data }) {
       <li className={cx("cardWrap")}>
         <div className={cx("feedCard")}>
           <div className={cx("feedTop")}>
-            <Badge Completed={true} />
+            <Badge />
             {askFeed && (
               <div className={cx("delAndRejectionToggle")}>
                 <More
@@ -96,16 +87,11 @@ export default function FeedCard({ askFeed, data }) {
             )}
           </div>
           <FeedCardQuestion text={content} date={createdAt} />
-
-          <FeedCardAnswer
-            answerId={answerId}
-            style={answerStyle}
-            edit={answerEdit}
-          />
-          <i className={cx("feedBar")} />
-          <Reaction />
-          <div className={cx("editButton")} onClick={displayAnswerHandler}>
-            <EditButton />
+          <FeedCardAnswer answerText={answerText} style={answerStyle} />
+          <i className={cx("feedBar")}></i>
+          <div>
+            <span>좋아요 </span>
+            <span>싫어요</span>
           </div>
         </div>
       </li>

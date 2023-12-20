@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import { ReactComponent as Thumbup } from "../../../icon/icon-thumbs-up.svg";
 import { ReactComponent as Thumbdown } from "../../../icon/icon-thumbs-down.svg";
 
-export default function Reaction() {
+export default function Reaction(questionId) {
   const cx = classNames.bind(stylesheet);
   const initialCountLike = parseInt(localStorage.getItem("like")) || 0;
   const initialCountHate = parseInt(localStorage.getItem("hate")) || 0;
@@ -12,6 +12,9 @@ export default function Reaction() {
   const [hate, setHate] = useState(initialCountHate);
   const [up, setUp] = useState(false);
   const [down, setDown] = useState(false);
+
+  //getQuestion에서 like, dislike 값 가져오기
+  //postQuestion으로 like 또는 dislike 전달하기
 
   const handleLikeClick = () => {
     if (up) {

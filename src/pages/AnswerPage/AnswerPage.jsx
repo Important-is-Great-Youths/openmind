@@ -1,18 +1,16 @@
 import BasePostLayout from "../../layout/BasePostLayout";
 import AskListWrap from "../../components/ui/AskListWrap/AskListWrap";
-import FeedCard from "../../components/ui/FeedCard/FeedCard";
-import Modal from "../../components/ui/Modal/Modal";
 import { useLocation, useParams } from "react-router";
 import AskEmptyPage from "../AskEmptyPage/AskEmptyPage";
 import { useEffect, useRef, useState } from "react";
 import { getSubjectsQuestion } from "../../data-access/subjects/getSubjectsQuestion";
+import FeedAnswerCard from "../../components/ui/FeedAnswerCard/FeedAnswerCard";
 
 const LIMIT = 5;
 
 export const AnswerPage = () => {
   const { id } = useParams();
   const [isAskFeedPageVisible, setIsAskFeedPageVisible] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const location = useLocation();
   const offset = useRef(0);
   const [isLoading, setIsLoading] = useState(false);
@@ -42,17 +40,8 @@ export const AnswerPage = () => {
 
   useEffect(() => {
     handleFeedCardSection(id, LIMIT, offset);
-  }, [location, isModalOpen]);
+  }, [location]);
 
-  const handleButtonClick = async () => {
-    setIsModalOpen(true);
-    setIsAskFeedPageVisible(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-    setIsAskFeedPageVisible(false);
-  };
   return (
     <>
       <BasePostLayout
@@ -65,20 +54,16 @@ export const AnswerPage = () => {
           <AskListWrap title={`${total}개의 질문이 있습니다`}>
             {questionData.data.map((results) => {
               return (
-                <FeedCard askFeed={askFeed} key={results.id} data={results} />
+                <FeedAnswerCard
+                  askFeed={askFeed}
+                  key={results.id}
+                  data={results}
+                />
               );
             })}
           </AskListWrap>
         ) : (
           <AskEmptyPage />
-        )}
-        {isModalOpen && (
-          <Modal
-            onClose={handleCloseModal}
-            setQuestionData={setQuestionData}
-            questionData={questionData}
-            setTotal={setTotal}
-          />
         )}
       </BasePostLayout>
     </>
