@@ -63,11 +63,20 @@ export default function FeedCard({ askFeed, data }) {
             <Badge />
             {askFeed && (
               <div className={cx("delAndRejectionToggle")}>
-                <More className={cx("moreBtn")} onClick={delAndRejectionHandler} />
+                <More
+                  className={cx("moreBtn")}
+                  onClick={delAndRejectionHandler}
+                />
                 {toggle && (
-                  <div className={cx("delAndRejection")} style={delAndRejectionStyle}>
+                  <div
+                    className={cx("delAndRejection")}
+                    style={delAndRejectionStyle}
+                  >
                     {invisible && (
-                      <div className={cx("rejection")} onClick={rejectionBtnHandler}>
+                      <div
+                        className={cx("rejection")}
+                        onClick={rejectionBtnHandler}
+                      >
                         답변거절
                       </div>
                     )}

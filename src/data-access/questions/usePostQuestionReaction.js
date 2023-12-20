@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { axiosInstance } from "../util/axiosInstance";
+import { axiosInstance } from "../../util/axiosInstance";
 
-const usePostQuestionReaction = () => {
+const usePostQuestionReaction = (questionId) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [reactionData, setReactionData] = useState(null);
 
-  const postQuestionReaction = async (questionId, reactionType) => {
+  const postQuestionReaction = async (reactionType) => {
     try {
       setLoading(true);
       setError(null);

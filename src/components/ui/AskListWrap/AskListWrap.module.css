@@ -6,6 +6,7 @@
   border-radius: 16px;
   background: var(--brown-10);
 }
+
 .titleWrap {
   display: flex;
   gap: 8px;
@@ -15,5 +16,11 @@
 }
 .icon {
   fill: var(--brown-40);
+}
+
+.childrenWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
