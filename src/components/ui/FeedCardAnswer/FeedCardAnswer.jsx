@@ -33,7 +33,9 @@ export default function FeedCardAnswer({ answerId, style, edit }) {
         </div>
         <div className={cx("userAnswerdetail")} style={style}>
           {edit ? (
-            <FeedCardAnswerEdit>{answerContent}</FeedCardAnswerEdit>
+            <FeedCardAnswerEdit answerId={answer.id}>
+              {answerContent}
+            </FeedCardAnswerEdit>
           ) : (
             <p>{answerContent}</p>
           )}

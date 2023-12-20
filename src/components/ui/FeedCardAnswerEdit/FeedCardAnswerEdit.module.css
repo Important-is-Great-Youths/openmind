@@ -1,3 +1,36 @@
+.feedCardAnswer {
+  display: flex;
+  gap: 12px;
+}
+.imgBox{
+  width: 48px;
+}
+.userAnswer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  align-self: stretch;
+  width: 100%;
+}
+.userProfile {
+  display: flex;
+  align-items: center;
+  margin-bottom: 4px;
+}
+.userName {
+  margin-right: 8px;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.userCreateDate {
+  color: var(--grayscale-40, #818181);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 18px;
+}
+
 .answerEdit{
   display: flex;
   flex-direction: column;
