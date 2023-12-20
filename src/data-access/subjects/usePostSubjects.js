@@ -6,8 +6,6 @@ export const usePostSubjects = () => {
   const [error, setError] = useState(null);
   const [postData, setPostData] = useState(null);
 
-  const TEAM = "2-3";
-
   const postSubjects = async (name) => {
     try {
       setLoading(true);

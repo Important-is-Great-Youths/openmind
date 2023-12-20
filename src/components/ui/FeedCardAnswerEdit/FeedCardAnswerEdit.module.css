@@ -8,6 +8,7 @@
 }
 
 .answerInput{
+  height: 186px;
   width: 100%;
   display: flex;
   padding: 16px;
@@ -16,6 +17,18 @@
   gap: 10px;
   align-self: stretch;
   border-radius: 8px;
+  border: none;
   background: var(--grayscale-20, #F9F9F9);
   text-align: justify;
+  color: var(--Grayscale-60, #000);
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 22px;
+  resize: none;
+}
+.answerInput:focus{
+  border: 1px solid var(--brown-40, #542F1A);
 }
