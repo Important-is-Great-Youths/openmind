@@ -96,14 +96,18 @@ export default function FeedAnswerCard({ askFeed, data }) {
             )}
           </div>
           <FeedCardQuestion text={content} date={createdAt} />
-          {answer && (
-            <FeedCardAnswer
-              answerId={answerId}
-              style={answerStyle}
-              edit={answerEdit}
-            />
+
+          {answerEdit ? (
+            <FeedCardAnswerEdit>answerEdit</FeedCardAnswerEdit>
+          ) : (
+            answer && (
+              <FeedCardAnswer
+                answerId={answerId}
+                style={answerStyle}
+                edit={answerEdit}
+              />
+            )
           )}
-          {answerEdit && <FeedCardAnswerEdit>answerEdit</FeedCardAnswerEdit>}
 
           <i className={cx("feedBar")} />
           <Reaction questionId={questionId} />
