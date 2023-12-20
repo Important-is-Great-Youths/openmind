@@ -41,6 +41,7 @@
   grid-template-rows: repeat(2, 1fr);
   /* flex-wrap: wrap; */
   gap: 20px;
+  padding: 0 32px;
 }
 
 .pagenation {
@@ -57,7 +58,7 @@
     padding: 45px 50px;
   }
 }
-@media screen and (max-width: 798px) {
+@media screen and (max-width: 909px) {
   /*small tablet*/
   .nav {
     flex-direction: column;
@@ -82,7 +83,7 @@
     gap: 16px;
   }
 }
-@media screen and (max-width: 375px) {
+@media screen and (max-width: 500px) {
   /*mobile*/
   .nav {
     gap: 42px;
@@ -91,11 +92,10 @@
     font-size: 24px;
   }
   .list {
-    display: grid;
+    padding: 0 24px;
     grid-template-rows: repeat(3, 1fr);
     grid-template-columns: repeat(2, 1fr);
     place-content: center;
     margin: 0 24px;
-    gap: 16px;
   }
 }
