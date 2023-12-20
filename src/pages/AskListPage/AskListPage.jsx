@@ -9,14 +9,12 @@ import { useState, useEffect, useCallback } from "react";
 import { axiosInstance } from "../../util/axiosInstance";
 import Pagenation from "../../components/ui/Pagenation/Pagenation";
 import LoadingIcon from "../../components/ui/LoadingIcon/LoadingIcon";
-
 const cx = classNames.bind(styles);
 
 export const AskListPage = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [data, setData] = useState(null);
-  const [sortBy, setSortBy] = useState("최신순");
   const [currentPageData, setCurrentPageData] = useState(null);
   const [totalCount, setTotalCount] = useState(0);
   const [limit, setLimit] = useState(8);
@@ -46,23 +44,25 @@ export const AskListPage = () => {
   }, [limit]);
 
   // 추가: 정렬 기준이 변경될 때마다 데이터 정렬
-  useEffect(() => {
-    if (data && sortBy === "이름순") {
+  const orderBy = (option) => {
+    if (data && option === "이름순") {
       let copy = [...data];
       copy.sort((a, b) =>
         a.name.toUpperCase() < b.name.toUpperCase() ? -1 : 1
       );
-      setCurrentPageData(copy);
-    } else if (data && sortBy === "최신순") {
+      return copy;
+    } else if (data && option === "최신순") {
       let dateCopy = [...data];
       dateCopy.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-      setCurrentPageData(dateCopy);
+      return dateCopy;
     }
-  }, [data, sortBy]);
+  };
 
   // 추가: 정렬 기준 변경 함수
   const handleSortChange = (option) => {
-    setSortBy(option);
+    orderBy(option);
+    setCurrentPageData(orderBy(option));
+    // setSortBy(option);
   };
 
   // 추가: 페이지 변경 함수
