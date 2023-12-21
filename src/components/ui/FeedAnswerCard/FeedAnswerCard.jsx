@@ -52,9 +52,9 @@ export default function FeedAnswerCard({
   };
 
   const deleteAsk = async () => {
-    await deleteQuestion(data.id);
+    await deleteQuestion(questionId);
     setIsDelete(true);
-    setIsDeleteId(data.id);
+    setIsDeleteId(questionId);
   };
 
   useEffect(() => {

@@ -37,10 +37,6 @@ export default function FeedCardAnswerEdit({ answerId, questionId }) {
   };
 
   const handleOnClick = () => {
-    console.log(editText);
-    console.log(answerId);
-    console.log(answerContent);
-    console.log(isEmpty);
     if (answer) {
       patchAnswerContent(answerId, editText);
     } else {

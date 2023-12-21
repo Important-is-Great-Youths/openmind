@@ -4,8 +4,13 @@ import { useLocation, useParams } from "react-router";
 import AskEmptyPage from "../AskEmptyPage/AskEmptyPage";
 import { useEffect, useRef, useState } from "react";
 import { getSubjectsQuestion } from "../../data-access/subjects/getSubjectsQuestion";
+import { useDeleteQuestion } from "../../data-access/questions/useDeleteQuestion";
 import FeedAnswerCard from "../../components/ui/FeedAnswerCard/FeedAnswerCard";
+import ButtonFloating from "../../components/ui/ButtonFloating/ButtonFloating";
+import styles from "./AnswerPage.module.css";
+import classNames from "classnames/bind";
 
+const cx = classNames.bind(styles);
 const LIMIT = 100;
 
 export const AnswerPage = () => {
@@ -22,6 +27,8 @@ export const AnswerPage = () => {
   const [isDelete, setIsDelete] = useState(false);
   const [isDeleteId, setIsDeleteId] = useState("");
 
+  const { deleteQuestion } = useDeleteQuestion();
+
   const handleFeedCardSection = async (id, limit, offset) => {
     setIsLoading(true);
     try {
@@ -37,7 +44,13 @@ export const AnswerPage = () => {
       offset.current += limit;
       setIsLoading(false);
     }
-    console.log(questionData); // 나중에 지울 예정
+  };
+
+  const handleDeleteAll = () => {
+    console.log("삭제하기");
+    questionData.data.map((results) => {
+      deleteQuestion(results.id);
+    });
   };
 
   useEffect(() => {
@@ -52,6 +65,16 @@ export const AnswerPage = () => {
         setIsAskFeedPageVisible={setIsAskFeedPageVisible}
         id={id}
       >
+        <div className={cx("deleteDiv")}>
+          <div className={cx("deleteButton")}>
+            <ButtonFloating
+              text={"삭제하기"}
+              small="small"
+              onClick={handleDeleteAll}
+            />
+          </div>
+        </div>
+
         {questionData.data && questionData.data.length > 0 ? (
           <AskListWrap title={`${total}개의 질문이 있습니다`}>
             {questionData.data.map((results) => {
