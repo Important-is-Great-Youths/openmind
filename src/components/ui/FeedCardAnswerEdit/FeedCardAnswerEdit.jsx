@@ -1,49 +1,56 @@
-import { useParams } from "react-router";
-import { useGetSubject } from "../../../data-access/subjects/useGetSubject";
 import styles from "./FeedCardAnswerEdit.module.css";
 import classNames from "classnames/bind";
 import ButtonBox from "../ButtonBox/ButtonBox";
-import { useState } from "react";
-import { useGetAnswer } from "../../../data-access/answers/useGetAnswer";
-// import usePatchAnswer from "../../../data-access/answers/usePatchAnswer";
 import { getElapsedTime } from "../../../util/getElapsedTime";
+
+import { useState, useEffect } from "react";
+import { useParams } from "react-router";
+import { useGetSubject } from "../../../data-access/subjects/useGetSubject";
+import { useGetAnswer } from "../../../data-access/answers/useGetAnswer";
+import usePatchAnswer from "../../../data-access/answers/usePatchAnswer";
+import usePostQuestionAnswers from "../../../data-access/questions/usePostQuestionAnswer";
 
 const cx = classNames.bind(styles);
 
-export default function FeedCardAnswerEdit({ answerId }) {
+export default function FeedCardAnswerEdit({ answerId, questionId }) {
   // 사용자 명 가져오기
   const { id: subejctId } = useParams();
   const { data: subjectData } = useGetSubject(subejctId);
   const { name } = subjectData || {};
   // answer 있으면 가져오기
   const { data: answerData } = useGetAnswer(answerId || "");
-  const { id, questionId, content, isRejected, createdAt } = answerData || {};
-  const answer = answerData
-    ? { id, questionId, content, isRejected, createdAt }
-    : null;
+  const { id, content, isRejected, createdAt } = answerData || {};
+  const answer = answerData ? { id, content, isRejected, createdAt } : null;
 
   const answerContent = answer ? answer.content : "";
-
-  // const { patchAnswerContent } = usePatchAnswer();
+  // answer 있으면 patch로 수정
+  const { patchAnswerContent } = usePatchAnswer();
   const [editText, setEditText] = useState(answerContent); // useState로 초기 상태 설정
-  const [isEmpty, setIsEmpty] = useState(answerContent ? false : true);
+  const [isEmpty, setIsEmpty] = useState(editText ? false : true);
+  // answer 없으면 post로 삽입
+  const { postQuestionAnswer } = usePostQuestionAnswers(); // questionId, content
 
   const handleOnChange = (e) => {
     const textValue = e.target.value;
     setEditText(textValue);
-    setIsEmpty(!textValue.trim());
+    setIsEmpty(!editText.trim());
   };
 
   const handleOnClick = () => {
     console.log(editText);
     console.log(answerId);
     console.log(answerContent);
+    console.log(isEmpty);
     if (answer) {
-      // patchAnswerContent(answerId, editText);
+      patchAnswerContent(answerId, editText);
     } else {
-      // usePostQuestionAnswers.js 사용
+      postQuestionAnswer(questionId, editText);
     }
   };
+
+  useEffect(() => {
+    setEditText(answerContent);
+  }, [answerContent]);
 
   return (
     <div className={cx("feedCardAnswer")}>

@@ -18,6 +18,7 @@ const [askFeed, setAskFeed] = useState(false); 숨기고 싶은 경우
 const [askFeed, setAskFeed] = useState(true); 보이고 싶은 경우
 <FeedCard askFeed={askFeed} />
 */
+
 const cx = classNames.bind(styles);
 
 export default function FeedAnswerCard({
@@ -33,6 +34,7 @@ export default function FeedAnswerCard({
   const [answerEdit, setAnswerEdit] = useState(false);
   const { deleteQuestion } = useDeleteQuestion();
   const answerId = answer ? answer.id : null;
+  const answerIsRejected = answer ? answer.isRejected : null;
 
   const delAndRejectionHandler = (event) => {
     event.stopPropagation();
@@ -83,8 +85,7 @@ export default function FeedAnswerCard({
       <li className={cx("cardWrap")}>
         <div className={cx("feedCard")}>
           <div className={cx("feedTop")}>
-            {/* answer 유무로 Completed 값 결정 */}
-            <Badge Completed={true} />
+            <Badge Completed={answer ? true : false} />
             {askFeed && (
               <div className={cx("delAndRejectionToggle")}>
                 <More
@@ -113,9 +114,9 @@ export default function FeedAnswerCard({
             )}
           </div>
           <FeedCardQuestion text={content} date={createdAt} />
-
+          {answerIsRejected && <p className={cx("rejectedText")}>답변 거절</p>}
           {answerEdit ? (
-            <FeedCardAnswerEdit answerId={answerId} />
+            <FeedCardAnswerEdit answerId={answerId} questionId={questionId} />
           ) : (
             answer && (
               <FeedCardAnswer
@@ -125,7 +126,6 @@ export default function FeedAnswerCard({
               />
             )
           )}
-
           <i className={cx("feedBar")} />
           <Reaction questionId={questionId} />
           <div className={cx("editButton")} onClick={displayAnswerHandler}>

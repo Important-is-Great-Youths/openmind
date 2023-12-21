@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { axiosInstance } from "../util/axiosInstance";
+import { axiosInstance } from "../../util/axiosInstance";
 
 const usePostQuestionAnswer = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [answerData, setAnswerData] = useState(null);
   const TEAM = "2-3";
-  const postQuestionAnswer = async (questionId, content, isRejected) => {
+  const postQuestionAnswer = async (questionId, content) => {
     try {
       setLoading(true);
       setError(null);
@@ -16,7 +16,7 @@ const usePostQuestionAnswer = () => {
         {
           questionId,
           content,
-          isRejected,
+          isRejected: false,
           team: TEAM,
         }
       );

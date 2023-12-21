@@ -57,6 +57,16 @@
   background: #f9f9f9;
 }
 
+.rejectedText{
+  color: var(--red, #b93333);
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 22px;
+}
+
 .editButton{
   position: absolute;
   bottom: 1.37rem;
