@@ -9,9 +9,10 @@ import ButtonFloating from "../../components/ui/ButtonFloating/ButtonFloating";
 import { getSubjectsQuestion } from "../../data-access/subjects/getSubjectsQuestion";
 import styles from "./AskFeedPage.module.css";
 import classNames from "classnames/bind";
+
 const cx = classNames.bind(styles);
 
-const LIMIT = 5;
+const LIMIT = 99;
 
 export const AskFeedPage = () => {
   const { id } = useParams();
@@ -19,26 +20,23 @@ export const AskFeedPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const location = useLocation();
   const offset = useRef(0);
-  const [isLoading, setIsLoading] = useState(false);
   const [total, setTotal] = useState(null);
   const [questionData, setQuestionData] = useState({
-    data: []
+    data: [],
   });
 
   const handleFeedCardSection = async (id, limit, offset) => {
-    setIsLoading(true);
     try {
       const result = await getSubjectsQuestion(id, limit, offset.current);
       const { count, results: questionData } = result;
-      setQuestionData((prevData) => ({
-        data: [...questionData]
-      }));
+      setQuestionData({
+        data: [...questionData],
+      });
       setTotal(count);
     } catch (err) {
       console.log(err);
     } finally {
       offset.current += limit;
-      setIsLoading(false);
     }
   };
 
