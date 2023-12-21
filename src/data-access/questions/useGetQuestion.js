@@ -32,7 +32,7 @@ export const useGetQuestion = (questionId) => {
   return { loading, error, data, getSubject: getQuestion };
 };
 
-// 이하 예시 코드
+// 이하 예시
 
 // const GetQuestion = ({ questionId }) => {
 //   const { loading, error, data } = useGetQuestion(questionId);
