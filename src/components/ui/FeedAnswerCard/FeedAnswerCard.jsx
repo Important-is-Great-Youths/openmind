@@ -8,6 +8,7 @@ import Badge from "../Badge/Badge";
 import EditButton from "../EditButton/EditButton";
 import Reaction from "../Reaction/Reaction";
 import FeedCardAnswerEdit from "../FeedCardAnswerEdit/FeedCardAnswerEdit";
+
 /* 
 more 버튼을 숨기고 싶은 경우,
 부모 컴포넌트에 다음 코드를 추가해주세요
@@ -16,6 +17,7 @@ const [askFeed, setAskFeed] = useState(false); 숨기고 싶은 경우
 const [askFeed, setAskFeed] = useState(true); 보이고 싶은 경우
 <FeedCard askFeed={askFeed} />
 */
+
 const cx = classNames.bind(styles);
 
 export default function FeedAnswerCard({ askFeed, data }) {
@@ -69,8 +71,7 @@ export default function FeedAnswerCard({ askFeed, data }) {
       <li className={cx("cardWrap")}>
         <div className={cx("feedCard")}>
           <div className={cx("feedTop")}>
-            {/* answer 유무로 Completed 값 결정 */}
-            <Badge Completed={true} />
+            <Badge Completed={answer ? true : false} />
             {askFeed && (
               <div className={cx("delAndRejectionToggle")}>
                 <More
