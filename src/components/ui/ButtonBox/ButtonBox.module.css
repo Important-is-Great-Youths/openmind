@@ -34,6 +34,10 @@
   border: 1px solid var(--brown-30, #c7bbb5);
   background: var(--brown-10, #f5f1ee);
 }
+.qnaInactivate:hover {
+  border: 2px solid var(--brown-40, #542f1a);
+  background: var(--brown-40, #542f1a);
+}
 
 .arrowNext {
   width: 18px;
@@ -70,7 +74,7 @@
 }
 
 .qnaInactivate:hover {
-  border: 2px solid var(--brown-30, #c7bbb5);
+  /* border: 2px solid var(--brown-30, #c7bbb5); */
 }
 .qnaBtn.answerBtn.qnaInactivate:hover {
   border: 1px solid var(--brown-30, #c7bbb5);
