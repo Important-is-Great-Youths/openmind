@@ -65,7 +65,7 @@ export const AskFeedPage = () => {
         {questionData.data && questionData.data.length > 0 ? (
           <AskListWrap title={`${total}개의 질문이 있습니다`}>
             {questionData.data.map((results) => {
-              return <FeedCard askFeed key={results.id} data={results} />;
+              return <FeedCard key={results.id} data={results} />;
             })}
           </AskListWrap>
         ) : (
