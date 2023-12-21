@@ -7,11 +7,14 @@ import ButtonBox from "../ButtonBox/ButtonBox";
 import { useState } from "react";
 import { useParams } from "react-router";
 import { postSubjectsQuestion } from "../../../data-access/subjects/postSubjectsQuestion";
+import { useGetSubject } from "../../../data-access/subjects/useGetSubject";
 
 const cx = classNames.bind(styles);
 
 const Modal = ({ onClose, setQuestionData, questionData, setTotal }) => {
   const { id } = useParams();
+  const { data: subjectData } = useGetSubject(id);
+  const { imageSource, name } = subjectData || {};
   const [textareaText, setTextareaText] = useState("");
 
   const handleButtonClick = async (e) => {
@@ -53,12 +56,8 @@ const Modal = ({ onClose, setQuestionData, questionData, setTotal }) => {
         </div>
         <div className={cx("userInfoWrap")}>
           <span className={cx("body-2-regular")}>To.</span>
-          <img
-            className={cx("userImage")}
-            src="assets/temp-profile.png"
-            alt="프로필"
-          />
-          <span className={cx("body-3-regular")}>아초는 고양이</span>
+          <img className={cx("userImage")} src={imageSource} alt="프로필" />
+          <span className={cx("body-3-regular")}>{name}</span>
         </div>
         <div className={cx("formWrap")}>
           <InputTextarea onChange={handleInputChange} value={textareaText} />
