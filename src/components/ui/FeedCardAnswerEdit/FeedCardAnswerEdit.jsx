@@ -3,7 +3,7 @@ import { useGetSubject } from "../../../data-access/subjects/useGetSubject";
 import styles from "./FeedCardAnswerEdit.module.css";
 import classNames from "classnames/bind";
 import ButtonBox from "../ButtonBox/ButtonBox";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useGetAnswer } from "../../../data-access/answers/useGetAnswer";
 // import usePatchAnswer from "../../../data-access/answers/usePatchAnswer";
 import { getElapsedTime } from "../../../util/getElapsedTime";
@@ -26,24 +26,29 @@ export default function FeedCardAnswerEdit({ answerId }) {
 
   // const { patchAnswerContent } = usePatchAnswer();
   const [editText, setEditText] = useState(answerContent); // useState로 초기 상태 설정
-  const [isEmpty, setIsEmpty] = useState(answerContent ? false : true);
+  const [isEmpty, setIsEmpty] = useState(editText ? false : true);
 
   const handleOnChange = (e) => {
     const textValue = e.target.value;
     setEditText(textValue);
-    setIsEmpty(!textValue.trim());
+    setIsEmpty(!editText.trim());
   };
 
   const handleOnClick = () => {
     console.log(editText);
     console.log(answerId);
     console.log(answerContent);
+    console.log(isEmpty);
     if (answer) {
       // patchAnswerContent(answerId, editText);
     } else {
       // usePostQuestionAnswers.js 사용
     }
   };
+
+  useEffect(() => {
+    setEditText(answerContent);
+  }, [answerContent]);
 
   return (
     <div className={cx("feedCardAnswer")}>
