@@ -14,6 +14,9 @@ export default function ButtonShare() {
     try {
       await navigator.clipboard.writeText("https://www.codeit.kr");
       setShowToast(true);
+      setTimeout(() => {
+        setShowToast(false);
+      }, 1000);
     } catch (err) {
       console.log(err);
     }
@@ -34,8 +37,8 @@ export default function ButtonShare() {
           description: "IGY openmind",
           imageUrl: "이미지 url",
           link: {
-            mobileWebUrl: "https://www.naver.com",
-            webUrl: "https://www.naver.com",
+            mobileWebUrl: "https://www.codeit.kr",
+            webUrl: "https://www.codeit.kr",
           },
         },
       });
@@ -43,7 +46,7 @@ export default function ButtonShare() {
   };
 
   const shareToFacebook = () => {
-    const sharedLink = encodeURIComponent("https://www.naver.com");
+    const sharedLink = encodeURIComponent("https://www.codeit.kr");
     window.open(`http://www.facebook.com/sharer/sharer.php?u=${sharedLink}`);
   };
 
@@ -68,7 +71,11 @@ export default function ButtonShare() {
           <IconFacebook width="18" height="18" fill="#fff" />
         </div>
       </div>
-      <div className={cx("toastLocation")}>{showToast && <Toast />}</div>
+      {showToast && (
+        <div className={cx("toastLocation")}>
+          <Toast />
+        </div>
+      )}
     </div>
   );
 }
