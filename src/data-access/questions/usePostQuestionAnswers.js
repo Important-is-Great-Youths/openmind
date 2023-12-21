@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { axiosInstance } from "../util/axiosInstance";
+import { axiosInstance } from "../../util/axiosInstance";
 
 const usePostQuestionAnswer = () => {
   const [loading, setLoading] = useState(false);

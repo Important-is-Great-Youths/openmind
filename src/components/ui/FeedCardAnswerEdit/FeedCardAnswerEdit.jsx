@@ -1,12 +1,14 @@
-import { useParams } from "react-router";
-import { useGetSubject } from "../../../data-access/subjects/useGetSubject";
 import styles from "./FeedCardAnswerEdit.module.css";
 import classNames from "classnames/bind";
 import ButtonBox from "../ButtonBox/ButtonBox";
-import { useState, useEffect } from "react";
-import { useGetAnswer } from "../../../data-access/answers/useGetAnswer";
-// import usePatchAnswer from "../../../data-access/answers/usePatchAnswer";
 import { getElapsedTime } from "../../../util/getElapsedTime";
+
+import { useState, useEffect } from "react";
+import { useParams } from "react-router";
+import { useGetSubject } from "../../../data-access/subjects/useGetSubject";
+import { useGetAnswer } from "../../../data-access/answers/useGetAnswer";
+import usePatchAnswer from "../../../data-access/answers/usePatchAnswer";
+import usePostQuestionAnswers from "../../../data-access/questions/usePostQuestionAnswers";
 
 const cx = classNames.bind(styles);
 
@@ -23,10 +25,11 @@ export default function FeedCardAnswerEdit({ answerId }) {
     : null;
 
   const answerContent = answer ? answer.content : "";
-
-  // const { patchAnswerContent } = usePatchAnswer();
+  // answer 있으면 patch로 수정
+  const { patchAnswerContent } = usePatchAnswer();
   const [editText, setEditText] = useState(answerContent); // useState로 초기 상태 설정
   const [isEmpty, setIsEmpty] = useState(editText ? false : true);
+  // answer 없으면 post로 삽입
 
   const handleOnChange = (e) => {
     const textValue = e.target.value;
@@ -40,7 +43,7 @@ export default function FeedCardAnswerEdit({ answerId }) {
     console.log(answerContent);
     console.log(isEmpty);
     if (answer) {
-      // patchAnswerContent(answerId, editText);
+      patchAnswerContent(answerId, editText);
     } else {
       // usePostQuestionAnswers.js 사용
     }

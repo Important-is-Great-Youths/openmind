@@ -27,6 +27,7 @@ export default function FeedAnswerCard({ askFeed, data }) {
   const [invisible, setInvisible] = useState(true);
   const [answerEdit, setAnswerEdit] = useState(false);
   const answerId = answer ? answer.id : null;
+  const answerIsRejected = answer ? answer.isRejected : null;
 
   const delAndRejectionHandler = (event) => {
     event.stopPropagation();
@@ -98,7 +99,7 @@ export default function FeedAnswerCard({ askFeed, data }) {
             )}
           </div>
           <FeedCardQuestion text={content} date={createdAt} />
-
+          {answerIsRejected && <p className={cx("rejectedText")}>답변 거절</p>}
           {answerEdit ? (
             <FeedCardAnswerEdit answerId={answerId} />
           ) : (
@@ -110,7 +111,6 @@ export default function FeedAnswerCard({ askFeed, data }) {
               />
             )
           )}
-
           <i className={cx("feedBar")} />
           <Reaction questionId={questionId} />
           <div className={cx("editButton")} onClick={displayAnswerHandler}>
