@@ -5,6 +5,7 @@ import FeedCardQuestion from "../FeedCardQuestion/FeedCardQuestion";
 import { ReactComponent as More } from "../../../icon/icon-more.svg";
 import { useState, useEffect } from "react";
 import Badge from "../Badge/Badge";
+import Reaction from "../Reaction/Reaction";
 /* 
 more 버튼을 숨기고 싶은 경우,
 부모 컴포넌트에 다음 코드를 추가해주세요
@@ -16,10 +17,11 @@ const [askFeed, setAskFeed] = useState(true); 보이고 싶은 경우
 const cx = classNames.bind(styles);
 
 export default function FeedCard({ askFeed, data }) {
-  const { content, answer, createdAt } = data;
+  const { id: questionId, content, answer, createdAt } = data;
   const [toggle, setToggle] = useState(false);
   const [answerText, setAnswerText] = useState("");
   const [invisible, setInvisible] = useState(true);
+  const answerId = answer ? answer.id : null;
 
   const delAndRejectionHandler = (event) => {
     event.stopPropagation();
@@ -87,12 +89,13 @@ export default function FeedCard({ askFeed, data }) {
             )}
           </div>
           <FeedCardQuestion text={content} date={createdAt} />
-          <FeedCardAnswer answerText={answerText} style={answerStyle} />
+          <FeedCardAnswer
+            answerId={answerId}
+            answerText={answerText}
+            style={answerStyle}
+          />
           <i className={cx("feedBar")}></i>
-          <div>
-            <span>좋아요 </span>
-            <span>싫어요</span>
-          </div>
+          <Reaction questionId={questionId} />
         </div>
       </li>
     </ul>
