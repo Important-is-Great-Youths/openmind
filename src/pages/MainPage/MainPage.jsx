@@ -4,18 +4,18 @@ import ButtonBox from "../../components/ui/ButtonBox/ButtonBox";
 import InputField from "../../components/ui/InputField/InputField";
 import { Link, useNavigate } from "react-router-dom";
 import { usePostSubjects } from "../../data-access/subjects/usePostSubjects";
-import { useEffect, useState } from "react";
 import { useSearchSubject } from "../../util/useSearchSubject";
+import { useEffect, useState } from "react";
 
 const cx = classNames.bind(styles);
 
 export const MainPage = () => {
+  const navigate = useNavigate();
   const [name, setName] = useState("");
-  const [searchResult, setSearchResult] = useState(null);
   const { postData, postSubjects } = usePostSubjects();
   const { searchSubject } = useSearchSubject();
 
-  const navigate = useNavigate();
+  const searchSubjectResult = searchSubject(name);
 
   const handleInputChange = (value) => {
     setName(value);
@@ -23,17 +23,14 @@ export const MainPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    try {
-      const result = await searchSubject(name);
-      setSearchResult(result);
-      alert(result);
-
-      if (result === -1) {
+    if (searchSubjectResult === -1) {
+      try {
         await postSubjects(name);
+      } catch (error) {
+        console.error("Error posting data:", error);
       }
-    } catch (error) {
-      console.error("Error posting data:", error);
+    } else {
+      navigate(`/post/${searchSubjectResult}/answer`);
     }
   };
 
@@ -42,14 +39,9 @@ export const MainPage = () => {
       const { id } = postData;
       navigate(`/post/${id}/answer`);
     } else {
-      if (searchResult !== -1 && postData) {
-        const id = searchResult;
-        navigate(`/post/${id}/answer`);
-      } else {
-        console.error("Invalid postData:", postData);
-      }
+      console.error("Invalid postData:", postData);
     }
-  }, [searchResult, postData]);
+  }, [postData]);
 
   return (
     <>

@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { useGetSubjects } from "../data-access/subjects/useGetSubjects";
 
 export const useSearchSubject = () => {
@@ -12,12 +12,14 @@ export const useSearchSubject = () => {
 
   const [nameArray, setNameArray] = useState([]);
 
-  const searchSubject = (name) => {
+  useEffect(() => {
     if (!loading && !error && subjects && subjects.results) {
       const newArray = subjects.results.map((subject) => subject.name);
       setNameArray(newArray);
     }
+  }, [loading, error, subjects]);
 
+  const searchSubject = (name) => {
     const nameIndex = nameArray.indexOf(name);
 
     if (nameIndex !== -1) {

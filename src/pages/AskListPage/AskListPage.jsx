@@ -20,7 +20,7 @@ export const AskListPage = () => {
   const [limit, setLimit] = useState(8);
   const [windowSize, setWindowSize] = useState({
     width: undefined,
-    height: undefined
+    height: undefined,
   });
 
   useEffect(() => {
@@ -101,7 +101,7 @@ export const AskListPage = () => {
       const handleResize = () => {
         setWindowSize({
           width: window.innerWidth,
-          height: window.innerHeight
+          height: window.innerHeight,
         });
       };
 
@@ -132,7 +132,9 @@ export const AskListPage = () => {
               <img src="assets/main-logo.png" alt="로고" />
             </div>
           </Link>
-          <ButtonBox text={"답변하러 가기"} qnaBtn="answerBtn" />
+          <Link to="/">
+            <ButtonBox text={"답변하러 가기"} qnaBtn="answerBtn" />
+          </Link>
         </div>
         <div className={cx("listWrap")}>
           <div className={cx("choiceHeader")}>
