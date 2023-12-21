@@ -40,6 +40,7 @@
 .delete {
   font-size: 14px;
   padding: 6px 16px;
+  cursor: pointer;
 }
 .delete {
   color: var(--red);
