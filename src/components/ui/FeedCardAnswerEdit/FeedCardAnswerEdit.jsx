@@ -4,18 +4,29 @@ import styles from "./FeedCardAnswerEdit.module.css";
 import classNames from "classnames/bind";
 import ButtonBox from "../ButtonBox/ButtonBox";
 import { useState } from "react";
-import usePatchAnswer from "../../../data-access/answers/usePatchAnswer";
+import { useGetAnswer } from "../../../data-access/answers/useGetAnswer";
+// import usePatchAnswer from "../../../data-access/answers/usePatchAnswer";
+import { getElapsedTime } from "../../../util/getElapsedTime";
 
 const cx = classNames.bind(styles);
 
-export default function FeedCardAnswerEdit({ children, answerId }) {
+export default function FeedCardAnswerEdit({ answerId }) {
+  // 사용자 명 가져오기
   const { id: subejctId } = useParams();
   const { data: subjectData } = useGetSubject(subejctId);
   const { name } = subjectData || {};
+  // answer 있으면 가져오기
+  const { data: answerData } = useGetAnswer(answerId || "");
+  const { id, questionId, content, isRejected, createdAt } = answerData || {};
+  const answer = answerData
+    ? { id, questionId, content, isRejected, createdAt }
+    : null;
 
-  const { patchAnswerContent } = usePatchAnswer();
-  const [editText, setEditText] = useState(children); // useState로 초기 상태 설정
-  const [isEmpty, setIsEmpty] = useState(children ? false : true);
+  const answerContent = answer ? answer.content : "";
+
+  // const { patchAnswerContent } = usePatchAnswer();
+  const [editText, setEditText] = useState(answerContent); // useState로 초기 상태 설정
+  const [isEmpty, setIsEmpty] = useState(answerContent ? false : true);
 
   const handleOnChange = (e) => {
     const textValue = e.target.value;
@@ -26,7 +37,12 @@ export default function FeedCardAnswerEdit({ children, answerId }) {
   const handleOnClick = () => {
     console.log(editText);
     console.log(answerId);
-    // patchAnswerContent(editText);
+    console.log(answerContent);
+    if (answer) {
+      // patchAnswerContent(answerId, editText);
+    } else {
+      // usePostQuestionAnswers.js 사용
+    }
   };
 
   return (
@@ -35,7 +51,9 @@ export default function FeedCardAnswerEdit({ children, answerId }) {
       <div className={cx("userAnswer")}>
         <div className={cx("userProfile")}>
           <span className={cx("userName")}>{name}</span>
-          <span className={cx("userCreateDate")}>2주전</span>
+          <span className={cx("userCreateDate")}>
+            {answer && getElapsedTime(answer.createdAt)}
+          </span>
         </div>
         <div className={cx("answerEdit")}>
           <textarea

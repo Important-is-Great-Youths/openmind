@@ -69,6 +69,7 @@ export default function FeedAnswerCard({ askFeed, data }) {
       <li className={cx("cardWrap")}>
         <div className={cx("feedCard")}>
           <div className={cx("feedTop")}>
+            {/* answer 유무로 Completed 값 결정 */}
             <Badge Completed={true} />
             {askFeed && (
               <div className={cx("delAndRejectionToggle")}>
@@ -98,7 +99,7 @@ export default function FeedAnswerCard({ askFeed, data }) {
           <FeedCardQuestion text={content} date={createdAt} />
 
           {answerEdit ? (
-            <FeedCardAnswerEdit>answerEdit</FeedCardAnswerEdit>
+            <FeedCardAnswerEdit answerId={answerId} />
           ) : (
             answer && (
               <FeedCardAnswer
