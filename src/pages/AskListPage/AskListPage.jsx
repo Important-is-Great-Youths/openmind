@@ -4,11 +4,11 @@ import Dropdown from "../../components/ui/Dropdown/Dropdown";
 import styles from "./AskListPage.module.css";
 import classNames from "classnames/bind";
 import Usercard from "../../components/ui/Usercard/Usercard";
-import { useState, useEffect, useCallback } from "react";
-// import { useGetSubjects } from "../../data-access/subjects/useGetSubjects";
+import { useState, useEffect } from "react";
 import { axiosInstance } from "../../util/axiosInstance";
 import Pagenation from "../../components/ui/Pagenation/Pagenation";
 import LoadingIcon from "../../components/ui/LoadingIcon/LoadingIcon";
+
 const cx = classNames.bind(styles);
 
 export const AskListPage = () => {
@@ -16,111 +16,71 @@ export const AskListPage = () => {
   const [error, setError] = useState(null);
   const [data, setData] = useState(null);
   const [currentPageData, setCurrentPageData] = useState(null);
-  const [totalCount, setTotalCount] = useState(0);
   const [limit, setLimit] = useState(8);
-  const [windowSize, setWindowSize] = useState({
-    width: undefined,
-    height: undefined,
-  });
+  const [offset, setOffset] = useState(0);
+  const [sortBy, setSortBy] = useState(null);
+  const [windowSize, setWindowSize] = useState(window.innerWidth);
+  const [hasResized, setHasResized] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
         setError(null);
-
-        const response = await axiosInstance.get(`/subjects/?limit=${limit}`);
-        setData(response.data.results);
+        const response = await axiosInstance.get(
+          `/subjects/?limit=${limit}&offset=${offset}&sort=${sortBy}`
+        );
+        setData(response.data);
         setCurrentPageData(response.data.results); // 초기 데이터 설정
-        setTotalCount(response.data.count);
       } catch (error) {
         setError(error);
       } finally {
         setLoading(false);
       }
     };
-
     fetchData();
-  }, [limit]);
+  }, [limit, sortBy, windowSize, offset]);
 
-  // 추가: 정렬 기준이 변경될 때마다 데이터 정렬
-  const orderBy = (option) => {
-    if (data && option === "이름순") {
-      let copy = [...data];
-      copy.sort((a, b) =>
-        a.name.toUpperCase() < b.name.toUpperCase() ? -1 : 1
-      );
-      return copy;
-    } else if (data && option === "최신순") {
-      let dateCopy = [...data];
-      dateCopy.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-      return dateCopy;
+  // 화면 크기가 변경될 때 limit 변경 함수
+  const handleResize = () => {
+    const currentWidth = window.innerWidth;
+
+    // 이전에 저장된 너비
+    const prevWidth = windowSize;
+
+    // 기준값 (예: 910)
+    const breakpoint = 910;
+
+    // 너비가 기준값을 넘어서거나 미만으로 변경되었을 때만 setWindowSize 호출
+    if (
+      !hasResized &&
+      ((prevWidth > breakpoint && currentWidth <= breakpoint) ||
+        (prevWidth <= breakpoint && currentWidth > breakpoint))
+    ) {
+      setWindowSize(currentWidth);
+      setHasResized(true);
+      if (prevWidth > breakpoint && currentWidth <= breakpoint) {
+        setLimit(6);
+      } else {
+        setLimit(8);
+      }
+    } else {
+      setHasResized(false);
     }
   };
+
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [hasResized]);
 
   // 추가: 정렬 기준 변경 함수
   const handleSortChange = (option) => {
-    orderBy(option);
-    setCurrentPageData(orderBy(option));
-    // setSortBy(option);
+    setSortBy(option);
   };
-
-  // 추가: 페이지 변경 함수
-  const handlePageChange = async (newPageData, newPage, limit) => {
-    setCurrentPageData(newPageData);
-
-    try {
-      setLoading(true);
-      setError(null);
-
-      // 추가: 페이지 변경에 따라 API 호출
-      const response = await axiosInstance.get(
-        `/subjects/?limit=${limit}&offset=${(newPage - 1) * limit}`
-      );
-      setData(response.data.results);
-      setTotalCount(response.data.count);
-    } catch (error) {
-      setError(error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // 추가: 화면 크기 변화에 따라 limit 값 동적으로 설정
-  const handleLimitChange = useCallback(() => {
-    if (!windowSize.width) return;
-    if (windowSize.width >= 910) {
-      setLimit(8);
-    } else {
-      setLimit(6);
-    }
-  }, [windowSize.width]);
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const handleResize = () => {
-        setWindowSize({
-          width: window.innerWidth,
-          height: window.innerHeight,
-        });
-      };
-
-      window.addEventListener("resize", handleResize);
-
-      handleResize();
-
-      return () => window.removeEventListener("resize", handleResize);
-    } else {
-      return () =>
-        window.removeEventListener("resize", () => {
-          return null;
-        });
-    }
-  }, []);
-
-  useEffect(() => {
-    handleLimitChange();
-  }, [handleLimitChange, windowSize.width]);
 
   return (
     <div className={cx("wrap")}>
@@ -129,12 +89,10 @@ export const AskListPage = () => {
         <div className={cx("nav")}>
           <Link to="/">
             <div className={cx("imgWrap")}>
-              <img src="assets/main-logo.png" alt="로고" />
+              <img src="assets/main-logo.png" alt="오픈마인드 로고" />
             </div>
           </Link>
-          <Link to="/">
-            <ButtonBox text={"답변하러 가기"} qnaBtn="answerBtn" />
-          </Link>
+          <ButtonBox text={"답변하러 가기"} qnaBtn="answerBtn" />
         </div>
         <div className={cx("listWrap")}>
           <div className={cx("choiceHeader")}>
@@ -154,9 +112,10 @@ export const AskListPage = () => {
         </div>
         <footer className={cx("pagenation")}>
           <Pagenation
-            totalCount={totalCount} // 총 아이템 수
+            data={data}
             limit={limit} // 페이지당 아이템 수
-            onPageChange={handlePageChange} // 페이지 변경 시 호출되는 함수
+            setOffset={setOffset}
+            offset={offset}
           />
         </footer>
       </div>
