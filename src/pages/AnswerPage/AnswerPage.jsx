@@ -41,7 +41,10 @@ export const AnswerPage = () => {
       offset.current += limit;
       setIsLoading(false);
     }
-    console.log(questionData); // 나중에 지울 예정
+  };
+
+  const handleDeleteAll = () => {
+    console.log("삭제하기");
   };
 
   useEffect(() => {
@@ -58,7 +61,11 @@ export const AnswerPage = () => {
       >
         <div className={cx("deleteDiv")}>
           <div className={cx("deleteButton")}>
-            <ButtonFloating text={"삭제하기"} small="small" />
+            <ButtonFloating
+              text={"삭제하기"}
+              small="small"
+              onClick={handleDeleteAll}
+            />
           </div>
         </div>
 
