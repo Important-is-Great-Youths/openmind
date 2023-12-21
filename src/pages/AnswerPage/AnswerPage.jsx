@@ -4,6 +4,7 @@ import { useLocation, useParams } from "react-router";
 import AskEmptyPage from "../AskEmptyPage/AskEmptyPage";
 import { useEffect, useRef, useState } from "react";
 import { getSubjectsQuestion } from "../../data-access/subjects/getSubjectsQuestion";
+import { useDeleteQuestion } from "../../data-access/questions/useDeleteQuestion";
 import FeedAnswerCard from "../../components/ui/FeedAnswerCard/FeedAnswerCard";
 import ButtonFloating from "../../components/ui/ButtonFloating/ButtonFloating";
 import styles from "./AnswerPage.module.css";
@@ -26,6 +27,8 @@ export const AnswerPage = () => {
   const [isDelete, setIsDelete] = useState(false);
   const [isDeleteId, setIsDeleteId] = useState("");
 
+  const { deleteQuestion } = useDeleteQuestion();
+
   const handleFeedCardSection = async (id, limit, offset) => {
     setIsLoading(true);
     try {
@@ -45,6 +48,9 @@ export const AnswerPage = () => {
 
   const handleDeleteAll = () => {
     console.log("삭제하기");
+    questionData.data.map((results) => {
+      deleteQuestion(results.id);
+    });
   };
 
   useEffect(() => {
