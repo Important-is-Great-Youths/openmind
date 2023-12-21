@@ -50,6 +50,7 @@
 }
 .userImage {
   width: 28px;
+  border-radius: 50%;
 }
 .formWrap {
   display: flex;
