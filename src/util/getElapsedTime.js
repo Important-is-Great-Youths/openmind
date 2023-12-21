@@ -11,31 +11,31 @@ export const getElapsedTime = (createdAt) => {
   const elapsedTime = now - createdAtDate;
 
   if (year * 2 <= elapsedTime) {
-    return `${Math.floor(elapsedTime / year)} years ago`;
+    return `${Math.floor(elapsedTime / year)}년 전`;
   }
   if (year <= elapsedTime) {
-    return `1 year ago`;
+    return `1년 전`;
   }
   if (month * 2 <= elapsedTime) {
-    return `${Math.floor(elapsedTime / month)} months ago`;
+    return `${Math.floor(elapsedTime / month)}개월 전`;
   }
   if (month <= elapsedTime) {
-    return `1 month ago`;
+    return `1개월 전`;
   }
   if (day * 2 <= elapsedTime) {
-    return `${Math.floor(elapsedTime / day)} days ago`;
+    return `${Math.floor(elapsedTime / day)}일 전`;
   }
   if (day <= elapsedTime) {
-    return `1 day ago`;
+    return `1일 전`;
   }
   if (hour * 2 <= elapsedTime) {
-    return `${Math.floor(elapsedTime / hour)} hours ago`;
+    return `${Math.floor(elapsedTime / hour)}시간 전`;
   }
   if (hour <= elapsedTime) {
-    return `1 hour ago`;
+    return `1시간 전`;
   }
   if (minute * 2 <= elapsedTime) {
-    return `${Math.floor(elapsedTime / minute)} minutes ago`;
+    return `${Math.floor(elapsedTime / minute)}분 전`;
   }
-  return `1 minute ago`;
+  return `1분 전`;
 };

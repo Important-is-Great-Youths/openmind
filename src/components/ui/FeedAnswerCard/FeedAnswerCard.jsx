@@ -8,6 +8,7 @@ import Badge from "../Badge/Badge";
 import EditButton from "../EditButton/EditButton";
 import Reaction from "../Reaction/Reaction";
 import FeedCardAnswerEdit from "../FeedCardAnswerEdit/FeedCardAnswerEdit";
+import { useDeleteQuestion } from "../../../data-access/questions/useDeleteQuestion";
 
 /* 
 more 버튼을 숨기고 싶은 경우,
@@ -20,12 +21,18 @@ const [askFeed, setAskFeed] = useState(true); 보이고 싶은 경우
 
 const cx = classNames.bind(styles);
 
-export default function FeedAnswerCard({ askFeed, data }) {
+export default function FeedAnswerCard({
+  askFeed,
+  data,
+  setIsDelete,
+  setIsDeleteId,
+}) {
   const { id: questionId, content, answer, createdAt } = data;
   const [toggle, setToggle] = useState(false);
   const [answerText, setAnswerText] = useState("");
   const [invisible, setInvisible] = useState(true);
   const [answerEdit, setAnswerEdit] = useState(false);
+  const { deleteQuestion } = useDeleteQuestion();
   const answerId = answer ? answer.id : null;
   const answerIsRejected = answer ? answer.isRejected : null;
 
@@ -42,6 +49,12 @@ export default function FeedAnswerCard({ askFeed, data }) {
     setToggle(false);
     setAnswerText("답변거절");
     setInvisible(false);
+  };
+
+  const deleteAsk = async () => {
+    await deleteQuestion(data.id);
+    setIsDelete(true);
+    setIsDeleteId(data.id);
   };
 
   useEffect(() => {
@@ -92,7 +105,9 @@ export default function FeedAnswerCard({ askFeed, data }) {
                         답변거절
                       </div>
                     )}
-                    <div className={cx("delete")}>질문삭제</div>
+                    <div className={cx("delete")} onClick={deleteAsk}>
+                      질문삭제
+                    </div>
                   </div>
                 )}
               </div>
