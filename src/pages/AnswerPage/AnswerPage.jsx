@@ -19,6 +19,8 @@ export const AnswerPage = () => {
     data: [],
   });
   const [askFeed, setAskFeed] = useState(true);
+  const [isDelete, setIsDelete] = useState(false);
+  const [isDeleteId, setIsDeleteId] = useState("");
 
   const handleFeedCardSection = async (id, limit, offset) => {
     setIsLoading(true);
@@ -40,7 +42,7 @@ export const AnswerPage = () => {
 
   useEffect(() => {
     handleFeedCardSection(id, LIMIT, offset);
-  }, [location]);
+  }, [location, isDelete, isDeleteId, isAskFeedPageVisible]);
 
   return (
     <>
@@ -58,6 +60,9 @@ export const AnswerPage = () => {
                   askFeed={askFeed}
                   key={results.id}
                   data={results}
+                  isDelete={isDelete} // isDelete 상태 전달
+                  setIsDelete={setIsDelete} // isDelete 상태 변경 함수 전달
+                  setIsDeleteId={setIsDeleteId}
                 />
               );
             })}

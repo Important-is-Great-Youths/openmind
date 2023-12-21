@@ -8,6 +8,7 @@
   border-radius: 8px;
   border: 1px solid var(--grayscale-30, #CFCFCF);
   background: var(--grayscale-10, #FFF);
+  cursor: pointer;
 
   /* 1pt */
   box-shadow: 0px 4px 4px 0px rgba(140, 140, 140, 0.25);
