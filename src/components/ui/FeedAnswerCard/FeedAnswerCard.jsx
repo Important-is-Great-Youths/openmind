@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import Badge from "../Badge/Badge";
 import EditButton from "../EditButton/EditButton";
 import Reaction from "../Reaction/Reaction";
+import FeedCardAnswerEdit from "../FeedCardAnswerEdit/FeedCardAnswerEdit";
 /* 
 more 버튼을 숨기고 싶은 경우,
 부모 컴포넌트에 다음 코드를 추가해주세요
@@ -68,6 +69,7 @@ export default function FeedAnswerCard({ askFeed, data }) {
       <li className={cx("cardWrap")}>
         <div className={cx("feedCard")}>
           <div className={cx("feedTop")}>
+            {/* answer 유무로 Completed 값 결정 */}
             <Badge Completed={true} />
             {askFeed && (
               <div className={cx("delAndRejectionToggle")}>
@@ -95,12 +97,17 @@ export default function FeedAnswerCard({ askFeed, data }) {
             )}
           </div>
           <FeedCardQuestion text={content} date={createdAt} />
-          {answer && (
-            <FeedCardAnswer
-              answerId={answerId}
-              style={answerStyle}
-              edit={answerEdit}
-            />
+
+          {answerEdit ? (
+            <FeedCardAnswerEdit answerId={answerId} />
+          ) : (
+            answer && (
+              <FeedCardAnswer
+                answerId={answerId}
+                style={answerStyle}
+                edit={answerEdit}
+              />
+            )
           )}
 
           <i className={cx("feedBar")} />

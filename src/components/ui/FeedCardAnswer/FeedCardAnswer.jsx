@@ -2,8 +2,8 @@ import { useParams } from "react-router";
 import styles from "./FeedCardAnswer.module.css";
 import classNames from "classnames/bind";
 import { useGetSubject } from "../../../data-access/subjects/useGetSubject";
-import FeedCardAnswerEdit from "../FeedCardAnswerEdit/FeedCardAnswerEdit";
 import { useGetAnswer } from "../../../data-access/answers/useGetAnswer";
+import { getElapsedTime } from "../../../util/getElapsedTime";
 
 const cx = classNames.bind(styles);
 
@@ -19,7 +19,7 @@ export default function FeedCardAnswer({ answerId, style, edit }) {
     ? { id, questionId, content, isRejected, createdAt }
     : null;
 
-  const answerContent = answer ? answer.content : "no answer";
+  const answerContent = answer ? answer.content : "";
 
   return (
     <div className={cx("feedCardAnswer")}>
@@ -29,14 +29,12 @@ export default function FeedCardAnswer({ answerId, style, edit }) {
       <div className={cx("userAnswer")}>
         <div className={cx("userProfile")}>
           <span className={cx("userName")}>{name}</span>
-          <span className={cx("userCreateDate")}>2주전</span>
+          <span className={cx("userCreateDate")}>
+            {answer && getElapsedTime(answer.createdAt)}
+          </span>
         </div>
         <div className={cx("userAnswerdetail")} style={style}>
-          {edit ? (
-            <FeedCardAnswerEdit>{answerContent}</FeedCardAnswerEdit>
-          ) : (
-            <p>{answerContent}</p>
-          )}
+          {!edit ? <p>{answerContent}</p> : null}
         </div>
       </div>
     </div>
