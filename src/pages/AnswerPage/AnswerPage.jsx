@@ -5,7 +5,11 @@ import AskEmptyPage from "../AskEmptyPage/AskEmptyPage";
 import { useEffect, useRef, useState } from "react";
 import { getSubjectsQuestion } from "../../data-access/subjects/getSubjectsQuestion";
 import FeedAnswerCard from "../../components/ui/FeedAnswerCard/FeedAnswerCard";
+import ButtonFloating from "../../components/ui/ButtonFloating/ButtonFloating";
+import styles from "./AnswerPage.module.css";
+import classNames from "classnames/bind";
 
+const cx = classNames.bind(styles);
 const LIMIT = 100;
 
 export const AnswerPage = () => {
@@ -52,6 +56,12 @@ export const AnswerPage = () => {
         setIsAskFeedPageVisible={setIsAskFeedPageVisible}
         id={id}
       >
+        <div className={cx("deleteDiv")}>
+          <div className={cx("deleteButton")}>
+            <ButtonFloating text={"삭제하기"} small="small" />
+          </div>
+        </div>
+
         {questionData.data && questionData.data.length > 0 ? (
           <AskListWrap title={`${total}개의 질문이 있습니다`}>
             {questionData.data.map((results) => {
