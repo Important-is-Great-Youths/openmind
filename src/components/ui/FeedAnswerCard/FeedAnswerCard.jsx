@@ -101,7 +101,7 @@ export default function FeedAnswerCard({ askFeed, data }) {
           <FeedCardQuestion text={content} date={createdAt} />
           {answerIsRejected && <p className={cx("rejectedText")}>답변 거절</p>}
           {answerEdit ? (
-            <FeedCardAnswerEdit answerId={answerId} />
+            <FeedCardAnswerEdit answerId={answerId} questionId={questionId} />
           ) : (
             answer && (
               <FeedCardAnswer
