@@ -6,16 +6,19 @@ import Toast from "../Toast/Toast";
 import { useEffect, useState } from "react";
 import classNames from "classnames/bind";
 
-export default function ButtonShare() {
+const cx = classNames.bind(styles);
+
+export default function ButtonShare({ zIndex }) {
   const [showToast, setShowToast] = useState(false);
-  const cx = classNames.bind(styles);
 
   const shareToOpenMind = async (text) => {
     try {
       await navigator.clipboard.writeText("https://www.codeit.kr");
       setShowToast(true);
+      zIndex(true);
       setTimeout(() => {
         setShowToast(false);
+        zIndex(false);
       }, 1000);
     } catch (err) {
       console.log(err);
