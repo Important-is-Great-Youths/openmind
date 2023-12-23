@@ -47,7 +47,6 @@ export const AnswerPage = () => {
   };
 
   const handleDeleteAll = () => {
-    console.log("삭제하기");
     questionData.data.map((results) => {
       deleteQuestion(results.id);
     });

@@ -39,7 +39,7 @@ export const AskListPage = () => {
       }
     };
     fetchData();
-  }, [limit, sortBy, windowSize, offset]);
+  }, [limit, sortBy, offset]);
 
   // 화면 크기가 변경될 때 limit 변경 함수
   const handleResize = () => {
@@ -92,7 +92,9 @@ export const AskListPage = () => {
               <img src="assets/main-logo.png" alt="오픈마인드 로고" />
             </div>
           </Link>
-          <ButtonBox text={"답변하러 가기"} qnaBtn="answerBtn" />
+          <Link to="/">
+            <ButtonBox text={"답변하러 가기"} qnaBtn="answerBtn" />
+          </Link>
         </div>
         <div className={cx("listWrap")}>
           <div className={cx("choiceHeader")}>
