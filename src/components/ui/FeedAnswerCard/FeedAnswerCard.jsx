@@ -116,7 +116,11 @@ export default function FeedAnswerCard({
           <FeedCardQuestion text={content} date={createdAt} />
           {answerIsRejected && <p className={cx("rejectedText")}>답변 거절</p>}
           {answerEdit ? (
-            <FeedCardAnswerEdit answerId={answerId} questionId={questionId} />
+            <FeedCardAnswerEdit
+              answerId={answerId}
+              questionId={questionId}
+              propFunction={displayAnswerHandler}
+            />
           ) : (
             answer && (
               <FeedCardAnswer
