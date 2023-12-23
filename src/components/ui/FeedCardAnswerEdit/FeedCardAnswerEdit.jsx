@@ -12,7 +12,11 @@ import usePostQuestionAnswers from "../../../data-access/questions/usePostQuesti
 
 const cx = classNames.bind(styles);
 
-export default function FeedCardAnswerEdit({ answerId, questionId }) {
+export default function FeedCardAnswerEdit({
+  answerId,
+  questionId,
+  propFunction,
+}) {
   // 사용자 명 가져오기
   const { id: subejctId } = useParams();
   const { data: subjectData } = useGetSubject(subejctId);
@@ -42,6 +46,7 @@ export default function FeedCardAnswerEdit({ answerId, questionId }) {
     } else {
       postQuestionAnswer(questionId, editText);
     }
+    propFunction();
   };
 
   useEffect(() => {
