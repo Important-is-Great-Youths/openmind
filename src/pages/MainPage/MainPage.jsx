@@ -14,6 +14,7 @@ export const MainPage = () => {
   const [name, setName] = useState("");
   const { postData, postSubjects } = usePostSubjects();
   const { searchSubject } = useSearchSubject();
+  const [alert, setAlert] = useState(false);
 
   const searchSubjectResult = searchSubject(name);
 
@@ -23,14 +24,21 @@ export const MainPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (searchSubjectResult === -1) {
-      try {
-        await postSubjects(name);
-      } catch (error) {
-        console.error("Error posting data:", error);
-      }
+    if (name === "") {
+      setAlert(true);
+      setTimeout(() => {
+        setAlert(false);
+      }, 3000);
     } else {
-      navigate(`/post/${searchSubjectResult}/answer`);
+      if (searchSubjectResult === -1) {
+        try {
+          await postSubjects(name);
+        } catch (error) {
+          console.error("Error posting data:", error);
+        }
+      } else {
+        navigate(`/post/${searchSubjectResult}/answer`);
+      }
     }
   };
 
@@ -55,7 +63,6 @@ export const MainPage = () => {
             <ButtonBox text={"질문하러 가기"} qnaBtn="answerBtn" />
           </Link>
         </div>
-
         <div className={cx("wrapInner")}>
           <div className={cx("imgBox")}>
             <img src="assets/main-logo.png" alt="오픈마인드 로고" />
@@ -64,6 +71,7 @@ export const MainPage = () => {
             <InputField
               className={cx("inputField")}
               onInputChange={handleInputChange}
+              isAlert={alert}
             />
             <ButtonBox text={"질문받기"} qnaWidth="qnaWidth" type="submit" />
           </form>

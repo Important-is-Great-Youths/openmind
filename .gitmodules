@@ -1,0 +1,3 @@
+[submodule "openmind"]
+    path = openmind
+    url = https://github.com/Important-is-Great-Youths/openmind.git
