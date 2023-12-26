@@ -3,16 +3,18 @@ import classNames from "classnames/bind";
 import ButtonShare from "../../ui/ButtonShare/ButtonShare";
 import { Link } from "react-router-dom";
 import { useGetSubject } from "../../../data-access/subjects/useGetSubject";
+import { useState } from "react";
 
 const cx = classNames.bind(styles);
 
 export default function PostHeader({ id }) {
+  const [zIndex, setZIndex] = useState(false);
   const { data } = useGetSubject(id);
   const { imageSource, name } = data || {};
 
   return (
     <>
-      <div className={cx("header")}>
+      <div className={cx("header", { zIndex: zIndex })}>
         <div className={cx("header-img")} />
         <Link to="/">
           <img
@@ -27,7 +29,7 @@ export default function PostHeader({ id }) {
           alt="프로필 이미지"
         />
         <h2 className={cx("username")}>{name}</h2>
-        <ButtonShare />
+        <ButtonShare zIndex={setZIndex} />
       </div>
     </>
   );
