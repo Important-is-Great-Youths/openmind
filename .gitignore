@@ -5,6 +5,7 @@
 /.pnp
 .pnp.js
 /openmind
+.gitmodules
 
 # testing
 /coverage
