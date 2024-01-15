@@ -1,14 +1,15 @@
 // Usercard.jsx
 import { Link } from "react-router-dom";
 import React from "react";
-import styles from "./Usercard.module.css";
+import styles from "./Usercard.module.scss";
 import { ReactComponent as IconMessage } from "../../../icon/icon-messages.svg";
 // import { useGetSubjects } from "../../data-access/subjects/useGetSubjects";
-import { useState, useEffect } from "react";
 // import { axiosInstance } from "../../util/axiosInstance";
 import classNames from "classnames/bind";
 
 const cx = classNames.bind(styles);
+
+// interface Data{}
 
 function Usercard({ data }) {
   return (
