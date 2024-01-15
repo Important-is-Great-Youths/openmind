@@ -1,6 +1,6 @@
 # Openmind
 
-프로젝트 소개
+프로젝트 소개 (typescript화 중)
 
 ## Members
 
