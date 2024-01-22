@@ -1,3 +1,4 @@
+import React from "react";
 import BasePostLayout from "../../layout/BasePostLayout";
 import AskListWrap from "../../components/ui/AskListWrap/AskListWrap";
 import FeedCard from "../../components/ui/FeedCard/FeedCard";

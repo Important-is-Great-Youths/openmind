@@ -1,4 +1,5 @@
-import styles from "./FeedCardAnswerEdit.module.css";
+import React from "react";
+import styles from "./FeedCardAnswerEdit.module.scss";
 import classNames from "classnames/bind";
 import ButtonBox from "../ButtonBox/ButtonBox";
 import { getElapsedTime } from "../../../util/getElapsedTime";

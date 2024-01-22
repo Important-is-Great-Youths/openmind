@@ -1,4 +1,4 @@
-import stylesheet from "./Reaction.module.css";
+import stylesheet from "./Reaction.module.scss";
 import classNames from "classnames/bind";
 import React, { useState, useEffect } from "react";
 import { ReactComponent as Thumbup } from "../../../icon/icon-thumbs-up.svg";
@@ -6,12 +6,17 @@ import { ReactComponent as Thumbdown } from "../../../icon/icon-thumbs-down.svg"
 import { useGetQuestion } from "../../../data-access/questions/useGetQuestion";
 // import usePostQuestionReaction from "../../../data-access/questions/usePostQuestionReaction";
 
-export default function Reaction({ questionId }) {
+interface ReactionProps {
+  questionId: number;
+  like?: number;
+  dislike?: number;
+}
+export default function Reaction({ questionId }: ReactionProps) {
   const cx = classNames.bind(stylesheet);
-  
+
   const { data: questionData } = useGetQuestion(questionId);
   const { like: questionLike, dislike: questionDislike } = questionData || {};
-  // const { postQuestionReaction } = usePostQuestionReaction(questionId);
+  const { postQuestionReaction } = usePostQuestionReaction(questionId);
 
   const initialCountLike = parseInt(localStorage.getItem("like")) || 0;
   const initialCountHate = parseInt(localStorage.getItem("hate")) || 0;
