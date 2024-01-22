@@ -9,9 +9,16 @@ import classNames from "classnames/bind";
 
 const cx = classNames.bind(styles);
 
-// interface Data{}
+interface UsercardProps {
+  data: {
+    id: string;
+    imageSource: string;
+    name: string;
+    questionCount: number;
+  };
+}
 
-function Usercard({ data }) {
+const Usercard: React.FC<UsercardProps> = ({ data }) => {
   return (
     <Link to={`/post/${data.id}`} className={cx("usercardLink")}>
       <div className={cx("usercard")}>
@@ -31,6 +38,6 @@ function Usercard({ data }) {
       </div>
     </Link>
   );
-}
+};
 
 export default Usercard;
