@@ -1,4 +1,5 @@
-import styles from "./PostHeader.module.css";
+import React from "react";
+import styles from "./PostHeader.module.scss";
 import classNames from "classnames/bind";
 import ButtonShare from "../../ui/ButtonShare/ButtonShare";
 import { Link } from "react-router-dom";
@@ -7,11 +8,17 @@ import { useState } from "react";
 
 const cx = classNames.bind(styles);
 
-export default function PostHeader({ id }) {
+interface PostHeaderProps {
+  id: number;
+}
+
+export default function PostHeader({ id }: PostHeaderProps) {
   const [zIndex, setZIndex] = useState(false);
   const { data } = useGetSubject(id);
-  const { imageSource, name } = data || {};
-
+  const { imageSource, name }: { imageSource: string; name: string } = data || {
+    imageSource: "",
+    name: "",
+  };
   return (
     <>
       <div className={cx("header", { zIndex: zIndex })}>

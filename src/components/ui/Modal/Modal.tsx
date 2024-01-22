@@ -1,4 +1,5 @@
-import styles from "./Modal.module.css";
+import React from "react";
+import styles from "./Modal.module.scss";
 import classNames from "classnames/bind";
 import { ReactComponent as IconMessages } from "../../../icon/icon-messages.svg";
 import { ReactComponent as IconClose } from "../../../icon/icon-close.svg";
@@ -11,18 +12,31 @@ import { useGetSubject } from "../../../data-access/subjects/useGetSubject";
 
 const cx = classNames.bind(styles);
 
-const Modal = ({ onClose, setQuestionData, questionData, setTotal }) => {
+interface ModalProps {
+  onClose?: any;
+  setQuestionData: React.Dispatch<React.SetStateAction<any>>;
+  questionData: { data: any[] };
+  setTotal: React.Dispatch<React.SetStateAction<number>>;
+}
+
+const Modal = ({
+  onClose,
+  setQuestionData,
+  questionData,
+  setTotal,
+}: ModalProps) => {
   const { id } = useParams();
   const { data: subjectData } = useGetSubject(id);
-  const { imageSource, name } = subjectData || {};
+  const { imageSource, name }: { imageSource?: string; name?: string } =
+    subjectData || {};
   const [textareaText, setTextareaText] = useState("");
 
-  const handleButtonClick = async (e) => {
+  const handleButtonClick = async () => {
     try {
       const formData = JSON.stringify({ content: `${textareaText}` });
       const response = await postSubjectsQuestion(id, formData);
       if (questionData.data.length) {
-        setQuestionData((prevData) => {
+        setQuestionData((prevData: { data: any[] }) => {
           const { data: prevArray } = prevData;
           return { data: [response, ...prevArray] };
         });
@@ -37,7 +51,7 @@ const Modal = ({ onClose, setQuestionData, questionData, setTotal }) => {
     }
   };
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const inputValue = e.target.value;
     setTextareaText(inputValue);
   };

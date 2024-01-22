@@ -1,4 +1,5 @@
-import styles from "./FeedAnswerCard.module.css";
+import React from "react";
+import styles from "./FeedAnswerCard.module.scss";
 import classNames from "classnames/bind";
 import FeedCardAnswer from "../FeedCardAnswer/FeedCardAnswer";
 import FeedCardQuestion from "../FeedCardQuestion/FeedCardQuestion";
@@ -21,12 +22,27 @@ const [askFeed, setAskFeed] = useState(true); 보이고 싶은 경우
 
 const cx = classNames.bind(styles);
 
+interface FeedAnswerCardProps {
+  askFeed: boolean;
+  data: {
+    id: number;
+    content: string;
+    answer: {
+      id: number;
+      isRejected: boolean;
+    };
+    createdAt: Date;
+  };
+  setIsDelete: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsDeleteId: React.Dispatch<React.SetStateAction<number>>;
+}
+
 export default function FeedAnswerCard({
   askFeed,
   data,
   setIsDelete,
   setIsDeleteId,
-}) {
+}: FeedAnswerCardProps) {
   const { id: questionId, content, answer, createdAt } = data;
   const [toggle, setToggle] = useState(false);
   const [answerText, setAnswerText] = useState("");
@@ -36,7 +52,7 @@ export default function FeedAnswerCard({
   const answerId = answer ? answer.id : null;
   const answerIsRejected = answer ? answer.isRejected : null;
 
-  const delAndRejectionHandler = (event) => {
+  const delAndRejectionHandler = (event: React.MouseEvent<MouseEvent>) => {
     event.stopPropagation();
     setToggle(!toggle);
   };

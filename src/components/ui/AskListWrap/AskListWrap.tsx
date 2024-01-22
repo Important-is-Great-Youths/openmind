@@ -1,18 +1,23 @@
-import React from "react";
-import styles from "./AskListWrap.module.css";
+import React, { ReactNode } from "react";
+import styles from "./AskListWrap.module.scss";
 import classNames from "classnames/bind";
 import { ReactComponent as IconMessages } from "../../../icon/icon-messages.svg";
 
 const cx = classNames.bind(styles);
 
-const AskListWrap = ({ children, title }) => {
+interface AskListProps {
+  children: ReactNode;
+  title: string;
+}
+
+const AskListWrap = ({ children, title }: AskListProps) => {
   const hasChildren = React.Children.count(children) === 0;
 
-  const askListWrapHeight = {
-    height: hasChildren && "330px",
-    background:
-      hasChildren &&
-      'var(--brown-10) url("/assets/empty-state.png") no-repeat center 100px/150px',
+  const askListWrapHeight: React.CSSProperties = {
+    height: hasChildren ? "330px" : undefined,
+    background: hasChildren
+      ? 'var(--brown-10) url("/assets/empty-state.png") no-repeat center 100px/150px'
+      : undefined,
   };
 
   return (

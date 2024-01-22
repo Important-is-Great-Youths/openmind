@@ -1,4 +1,4 @@
-import stylesheet from "./Toast.module.css";
+import stylesheet from "./Toast.module.scss";
 import React, { useState, useEffect } from "react";
 import classNames from "classnames/bind";
 

@@ -1,4 +1,5 @@
-import styles from "./InputField.module.css";
+import React from "react";
+import styles from "./InputField.module.scss";
 import classNames from "classnames/bind";
 import { ReactComponent as IconPerson } from "../../../icon/icon-person.svg";
 import { useState } from "react";
