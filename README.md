@@ -25,6 +25,8 @@
 - [x] API 적용
 - [ ] 추가 기능 추가
 
+- [ ] (New!) 타입스크립트로 Refactoring!
+
 ## Project Rules
 ### Commit Message
 > **[유형] : 작업 내용**
