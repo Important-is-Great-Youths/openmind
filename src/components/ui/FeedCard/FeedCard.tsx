@@ -1,4 +1,5 @@
-import styles from "./FeedCard.module.css";
+import React from "react";
+import styles from "./FeedCard.module.scss";
 import classNames from "classnames/bind";
 import FeedCardAnswer from "../FeedCardAnswer/FeedCardAnswer";
 import FeedCardQuestion from "../FeedCardQuestion/FeedCardQuestion";
@@ -16,14 +17,28 @@ const [askFeed, setAskFeed] = useState(true); 보이고 싶은 경우
 */
 const cx = classNames.bind(styles);
 
-export default function FeedCard({ askFeed, data }) {
+interface FeedCardProps {
+  askFeed: boolean;
+  data: {
+    id: number;
+    content: string;
+    answer: {
+      id: number;
+    };
+    createdAt: Date;
+  };
+}
+
+export default function FeedCard({ askFeed, data }: FeedCardProps) {
   const { id: questionId, content, answer, createdAt } = data;
   const [toggle, setToggle] = useState(false);
   const [answerText, setAnswerText] = useState("");
   const [invisible, setInvisible] = useState(true);
   const answerId = answer ? answer.id : null;
 
-  const delAndRejectionHandler = (event) => {
+  const delAndRejectionHandler = (
+    event: React.MouseEvent<SVGElement, MouseEvent>
+  ) => {
     event.stopPropagation();
     setToggle(!toggle);
   };

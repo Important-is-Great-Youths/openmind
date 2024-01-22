@@ -1,14 +1,25 @@
-import stylesheet from "./InputTextarea.module.css";
+import React, { ChangeEvent } from "react";
+import stylesheet from "./InputTextarea.module.scss";
 import classNames from "classnames/bind";
 
 const cx = classNames.bind(stylesheet);
 
-export default function InputTextarea({ text, value, onChange }) {
+interface InputTextareaProps {
+  text?: string;
+  value: string;
+  onChange: (event: ChangeEvent<HTMLTextAreaElement>) => void;
+}
+
+const InputTextarea: React.FC<InputTextareaProps> = ({
+  text,
+  value,
+  onChange,
+}) => {
   return (
     <form className={cx("inputarea")}>
       <textarea
-        cols="70"
-        rows="7"
+        cols={70}
+        rows={7}
         className={cx("input")}
         placeholder={text}
         value={value}
@@ -16,4 +27,6 @@ export default function InputTextarea({ text, value, onChange }) {
       />
     </form>
   );
-}
+};
+
+export default InputTextarea;
