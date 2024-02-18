@@ -1,17 +1,23 @@
-import styles from "./ButtonShare.module.css";
+import styles from "./ButtonShare.module.scss";
 import { ReactComponent as IconLink } from "../../../icon/icon-link.svg";
 import { ReactComponent as IconKakaotalk } from "../../../icon/icon-kakaotalk.svg";
 import { ReactComponent as IconFacebook } from "../../../icon/icon-facebook.svg";
 import Toast from "../Toast/Toast";
 import { useEffect, useState } from "react";
 import classNames from "classnames/bind";
+import React from "react";
 
 const cx = classNames.bind(styles);
+declare global {
+  interface Window {
+    Kakao: any;
+  }
+}
 
-export default function ButtonShare({ zIndex }) {
+export default function ButtonShare({ zIndex }: any) {
   const [showToast, setShowToast] = useState(false);
 
-  const shareToOpenMind = async (text) => {
+  const shareToOpenMind = async (text: any) => {
     try {
       await navigator.clipboard.writeText("https://www.codeit.kr");
       setShowToast(true);
@@ -53,7 +59,7 @@ export default function ButtonShare({ zIndex }) {
     window.open(`http://www.facebook.com/sharer/sharer.php?u=${sharedLink}`);
   };
 
-  useEffect(() => {
+  useEffect((): any => {
     const script = document.createElement("script");
     script.src = "https://developers.kakao.com/sdk/js/kakao.js";
     script.async = true;

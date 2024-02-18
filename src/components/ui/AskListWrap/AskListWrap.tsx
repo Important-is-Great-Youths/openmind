@@ -6,7 +6,7 @@ import { ReactComponent as IconMessages } from "../../../icon/icon-messages.svg"
 const cx = classNames.bind(styles);
 
 interface AskListProps {
-  children: ReactNode;
+  children?: ReactNode;
   title: string;
 }
 

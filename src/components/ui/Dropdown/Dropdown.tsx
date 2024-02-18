@@ -1,60 +1,15 @@
 import React, { useState, useRef, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import styles from "./Dropdown.module.scss";
 import classNames from "classnames/bind";
 import { ReactComponent as IconArrowDown } from "../../../icon/icon-arrow-down.svg";
-import { axiosInstance } from "../../../util/axiosInstance";
 
 const cx = classNames.bind(styles);
 
-function Dropdown({ onSortChange }) {
-  // 노란줄은 사용이 안되는건가봐요 그럼 다 주석해볼까요?
-  // 여기에 있는 state가 AskListPage에 다 있거든요? 그래서 여기에 있는건 필요없나봐요
-  // const [loading, setLoading] = useState(false);
-  // const [error, setError] = useState(null);
-  // const [data, setData] = useState(null);
+function Dropdown({ onSortChange }: any) {
   const [isOpen, setIsOpen] = useState(false);
-  // const [limit, setLimit] = useState(6);
-  // const [offset, setOffset] = useState(0);
-  const dropdownRef = useRef(null);
-  // const navigate = useNavigate();
-  // const [sortTime, setSortTime] = useState("time");
-  // const [sortName, setSortName] = useState("");
-  // const [currentPageData, setCurrentPageData] = useState(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
   const [selectedOption, setSelectedOption] = useState("최신순");
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        // setLoading(true);
-        // setError(null);
-        // const response = await axiosInstance.get(
-        //   // `/subjects/?limit=${limit}&offset=${offset}&sort=name`
-        //   `/subjects/?limit=6&offset=0&sort=name`
-        // );
-        // setData(response.data.results);
-      } catch (error) {
-        // setError(error);
-      } finally {
-        // setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  // useEffect(() => {
-  //   if (data && sortName === "name") {
-  //     let copy = [...data];
-  //     copy.sort((a, b) =>
-  //       a.name.toUpperCase() < b.name.toUpperCase() ? -1 : 1
-  //     );
-  //     setCurrentPageData(copy);
-  //   } else if (data && sortTime === "time") {
-  //     let dateCopy = [...data];
-  //     dateCopy.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-  //     setCurrentPageData(dateCopy);
-  //   }
-  // }, [data, sortName]);
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -62,19 +17,18 @@ function Dropdown({ onSortChange }) {
 
   const handleItemClick = (option: string) => {
     setSelectedOption(option === "name" ? "이름순" : "최신순");
-    // setSelectedOption("이름순");
-    // navigate(
-    //   option === "name"
-    //     ? `/list/${Math.floor(offset / limit) + 1}/name`
-    //     : `/list/${Math.floor(offset / limit) + 1}/time`
-    // );
+
     setIsOpen(false);
-    // setSortName(option);
+
     onSortChange(option);
   };
 
-  const handleClickOutside = (e: React.MouseEvent<MouseEvent>) => {
-    if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+  const handleClickOutside: any = (e: React.MouseEvent<MouseEvent>) => {
+    if (
+      dropdownRef.current &&
+      e.target instanceof Node &&
+      !dropdownRef.current.contains(e.target)
+    ) {
       setIsOpen(false);
     }
   };

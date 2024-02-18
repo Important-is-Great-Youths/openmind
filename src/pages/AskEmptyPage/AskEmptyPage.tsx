@@ -1,3 +1,4 @@
+import React from "react";
 import AskListWrap from "../../components/ui/AskListWrap/AskListWrap";
 
 const AskEmptyPage = () => {

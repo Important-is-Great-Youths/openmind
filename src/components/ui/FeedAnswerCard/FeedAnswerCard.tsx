@@ -49,7 +49,7 @@ export default function FeedAnswerCard({
   const [invisible, setInvisible] = useState(true);
   const [answerEdit, setAnswerEdit] = useState(false);
   const { deleteQuestion } = useDeleteQuestion();
-  const answerId = answer ? answer.id : null;
+  const answerId = answer && answer.id;
   const answerIsRejected = answer ? answer.isRejected : null;
 
   const delAndRejectionHandler = (event: React.MouseEvent<MouseEvent>) => {

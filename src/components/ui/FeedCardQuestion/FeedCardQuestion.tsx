@@ -1,10 +1,19 @@
+import React from "react";
 import { getElapsedTime } from "../../../util/getElapsedTime";
-import styles from "./FeedCardQuestion.module.css";
+import styles from "./FeedCardQuestion.module.scss";
 import classNames from "classnames/bind";
 
 const cx = classNames.bind(styles);
 
-export default function FeedCardQuestion({ text, date }) {
+interface FeedCardQuestionProps {
+  text: string;
+  date: Date;
+}
+
+export default function FeedCardQuestion({
+  text,
+  date,
+}: FeedCardQuestionProps) {
   return (
     <div>
       <div className={cx("questionTag")}>

@@ -1,4 +1,5 @@
-import styles from "./EditButton.module.css";
+import React from "react";
+import styles from "./EditButton.module.scss";
 import classNames from "classnames/bind";
 import { ReactComponent as IconEdit } from "../../../icon/icon-edit.svg";
 import { useState } from "react";

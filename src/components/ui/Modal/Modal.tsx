@@ -26,7 +26,7 @@ const Modal = ({
   setTotal,
 }: ModalProps) => {
   const { id } = useParams();
-  const { data: subjectData } = useGetSubject(id);
+  const { data: subjectData } = useGetSubject(Number(id));
   const { imageSource, name }: { imageSource?: string; name?: string } =
     subjectData || {};
   const [textareaText, setTextareaText] = useState("");
@@ -34,7 +34,7 @@ const Modal = ({
   const handleButtonClick = async () => {
     try {
       const formData = JSON.stringify({ content: `${textareaText}` });
-      const response = await postSubjectsQuestion(id, formData);
+      const response = await postSubjectsQuestion(Number(id), formData);
       if (questionData.data.length) {
         setQuestionData((prevData: { data: any[] }) => {
           const { data: prevArray } = prevData;

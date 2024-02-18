@@ -8,7 +8,7 @@ import AskEmptyPage from "../AskEmptyPage/AskEmptyPage";
 import { useEffect, useRef, useState } from "react";
 import ButtonFloating from "../../components/ui/ButtonFloating/ButtonFloating";
 import { getSubjectsQuestion } from "../../data-access/subjects/getSubjectsQuestion";
-import styles from "./AskFeedPage.module.css";
+import styles from "./AskFeedPage.module.scss";
 import classNames from "classnames/bind";
 
 const cx = classNames.bind(styles);
@@ -26,9 +26,13 @@ export const AskFeedPage = () => {
     data: [],
   });
 
-  const handleFeedCardSection = async (id, limit, offset) => {
+  const handleFeedCardSection = async (
+    id: number,
+    limit: number,
+    offset: number
+  ) => {
     try {
-      const result = await getSubjectsQuestion(id, limit, offset.current);
+      const result = await getSubjectsQuestion(id, limit, offset);
       const { count, results: questionData } = result;
       setQuestionData({
         data: [...questionData],
@@ -37,12 +41,12 @@ export const AskFeedPage = () => {
     } catch (err) {
       console.log(err);
     } finally {
-      offset.current += limit;
+      offset += limit;
     }
   };
 
   useEffect(() => {
-    handleFeedCardSection(id, LIMIT, offset);
+    handleFeedCardSection(Number(id), LIMIT, Number(offset));
   }, [location, isModalOpen]);
 
   const handleButtonClick = async () => {
@@ -57,16 +61,11 @@ export const AskFeedPage = () => {
 
   return (
     <div>
-      <BasePostLayout
-        isButton
-        isAskFeedPageVisible={isAskFeedPageVisible}
-        setIsAskFeedPageVisible={setIsAskFeedPageVisible}
-        id={id}
-      >
+      <BasePostLayout id={Number(id)}>
         {questionData.data && questionData.data.length > 0 ? (
           <AskListWrap title={`${total}개의 질문이 있습니다`}>
             {questionData.data.map((results) => {
-              return <FeedCard key={results.id} data={results} />;
+              return <FeedCard key={results.id} data={results} askFeed={false} />;
             })}
           </AskListWrap>
         ) : (

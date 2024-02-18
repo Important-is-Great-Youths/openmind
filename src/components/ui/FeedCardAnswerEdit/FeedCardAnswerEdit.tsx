@@ -13,18 +13,33 @@ import usePostQuestionAnswers from "../../../data-access/questions/usePostQuesti
 
 const cx = classNames.bind(styles);
 
+interface FeedCardAnswerEditProps {
+  answerId: number;
+  questionId: number;
+  propFunction: any;
+}
+
+interface AnswerData {
+  id: number;
+  questionId: number;
+  content: string;
+  isRejected: boolean;
+  createdAt: Date;
+}
+
 export default function FeedCardAnswerEdit({
   answerId,
   questionId,
   propFunction,
-}) {
+}: FeedCardAnswerEditProps) {
   // 사용자 명 가져오기
   const { id: subejctId } = useParams();
-  const { data: subjectData } = useGetSubject(subejctId);
-  const { name } = subjectData || {};
+  const { data: subjectData } = useGetSubject(Number(subejctId));
+  const { name }: any = subjectData || {};
   // answer 있으면 가져오기
-  const { data: answerData } = useGetAnswer(answerId || "");
-  const { id, content, isRejected, createdAt } = answerData || {};
+  const { data: answerData } = useGetAnswer(answerId || null);
+  const { id, content, isRejected, createdAt } =
+    answerData || ({} as AnswerData);
   const answer = answerData ? { id, content, isRejected, createdAt } : null;
 
   const answerContent = answer ? answer.content : "";
@@ -35,7 +50,7 @@ export default function FeedCardAnswerEdit({
   // answer 없으면 post로 삽입
   const { postQuestionAnswer } = usePostQuestionAnswers(); // questionId, content
 
-  const handleOnChange = (e) => {
+  const handleOnChange = (e: any) => {
     const textValue = e.target.value;
     setEditText(textValue);
     setIsEmpty(!editText.trim());
