@@ -1,6 +1,7 @@
 # Openmind
 
 프로젝트 소개 (typescript화 중)
+익명으로 질문 할 수 있는 질문 공유 서비스 
 
 ## Members
 
