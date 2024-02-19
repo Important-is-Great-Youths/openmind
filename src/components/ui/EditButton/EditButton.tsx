@@ -1,4 +1,5 @@
-import styles from "./EditButton.module.css";
+import React from "react";
+import styles from "./EditButton.module.scss";
 import classNames from "classnames/bind";
 import { ReactComponent as IconEdit } from "../../../icon/icon-edit.svg";
 import { useState } from "react";
@@ -6,7 +7,7 @@ import { useState } from "react";
 const cx = classNames.bind(styles);
 
 const EditButton = () => {
-  const [selected, setSelected] = useState(false);
+  const [selected, setSelected] = useState<boolean>(false);
 
   const buttonClassName = cx("button", { selected });
   const handleButtonSelected = () => {

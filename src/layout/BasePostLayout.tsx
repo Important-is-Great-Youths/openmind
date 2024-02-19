@@ -1,10 +1,16 @@
 import PostHeader from "../components/feature/PostHeader/PostHeader";
 import classNames from "classnames/bind";
-import styles from "./BasePostLayout.module.css";
+import styles from "./BasePostLayout.module.scss";
+import React, { ReactNode } from "react";
 
 const cx = classNames.bind(styles);
 
-const BasePostLayout = ({ children, id }) => {
+interface BasePostLayoutProps {
+  children: ReactNode;
+  id: number;
+}
+
+const BasePostLayout = ({ children, id }: BasePostLayoutProps) => {
   return (
     <>
       <PostHeader id={id} />

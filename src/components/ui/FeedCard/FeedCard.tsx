@@ -31,9 +31,9 @@ interface FeedCardProps {
 
 export default function FeedCard({ askFeed, data }: FeedCardProps) {
   const { id: questionId, content, answer, createdAt } = data;
-  const [toggle, setToggle] = useState(false);
-  const [answerText, setAnswerText] = useState("");
-  const [invisible, setInvisible] = useState(true);
+  const [toggle, setToggle] = useState<boolean>(false);
+  const [answerText, setAnswerText] = useState<string>("");
+  const [invisible, setInvisible] = useState<boolean>(true);
   const answerId = answer ? answer.id : null;
 
   const delAndRejectionHandler = (

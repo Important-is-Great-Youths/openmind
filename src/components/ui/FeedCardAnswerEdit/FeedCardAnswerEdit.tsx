@@ -19,6 +19,14 @@ interface FeedCardAnswerEditProps {
   propFunction: () => void;
 }
 
+interface AnswerData {
+  id: number;
+  questionId: number;
+  content: string;
+  isRejected: boolean;
+  createdAt: Date;
+}
+
 export default function FeedCardAnswerEdit({
   answerId,
   questionId,
@@ -26,22 +34,23 @@ export default function FeedCardAnswerEdit({
 }: FeedCardAnswerEditProps) {
   // 사용자 명 가져오기
   const { id: subejctId } = useParams();
-  const { data: subjectData } = useGetSubject(subejctId);
-  const { name } = subjectData;
+  const { data: subjectData } = useGetSubject(Number(subejctId));
+  const { name }: any = subjectData || {};
   // answer 있으면 가져오기
-  const { data: answerData } = useGetAnswer(answerId);
-  const { id, content, isRejected, createdAt } = answerData;
+  const { data: answerData } = useGetAnswer(answerId || null);
+  const { id, content, isRejected, createdAt } =
+    answerData || ({} as AnswerData);
   const answer = answerData ? { id, content, isRejected, createdAt } : null;
 
   const answerContent = answer ? answer.content : "";
   // answer 있으면 patch로 수정
   const { patchAnswerContent } = usePatchAnswer();
-  const [editText, setEditText] = useState(answerContent); // useState로 초기 상태 설정
-  const [isEmpty, setIsEmpty] = useState(editText ? false : true);
+  const [editText, setEditText] = useState<string>(answerContent); // useState로 초기 상태 설정
+  const [isEmpty, setIsEmpty] = useState<boolean>(editText ? false : true);
   // answer 없으면 post로 삽입
   const { postQuestionAnswer } = usePostQuestionAnswers(); // questionId, content
 
-  const handleOnChange = (e) => {
+  const handleOnChange = (e: any) => {
     const textValue = e.target.value;
     setEditText(textValue);
     setIsEmpty(!editText.trim());

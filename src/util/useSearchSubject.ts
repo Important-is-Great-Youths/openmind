@@ -19,7 +19,7 @@ export const useSearchSubject = () => {
     }
   }, [loading, error, subjects]);
 
-  const searchSubject = (name) => {
+  const searchSubject = (name: string) => {
     const nameIndex = nameArray.indexOf(name);
 
     if (nameIndex !== -1) {

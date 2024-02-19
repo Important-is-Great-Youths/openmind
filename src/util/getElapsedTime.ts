@@ -1,4 +1,4 @@
-export const getElapsedTime = (createdAt) => {
+export const getElapsedTime = (createdAt: Date) => {
   const second = 1000;
   const minute = second * 60;
   const hour = minute * 60;
@@ -8,7 +8,7 @@ export const getElapsedTime = (createdAt) => {
 
   const now = new Date();
   const createdAtDate = new Date(createdAt);
-  const elapsedTime = now - createdAtDate;
+  const elapsedTime = Number(now) - Number(createdAtDate);
 
   if (year * 2 <= elapsedTime) {
     return `${Math.floor(elapsedTime / year)}년 전`;

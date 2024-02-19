@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useEffectOnce } from "./useEffectOnce";
 
-export const useAsync = (asyncFunction) => {
+export const useAsync = (asyncFunction: any) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [data, setData] = useState(null);

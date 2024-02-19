@@ -9,13 +9,14 @@ import { useState } from "react";
 import { useParams } from "react-router";
 import { postSubjectsQuestion } from "../../../data-access/subjects/postSubjectsQuestion";
 import { useGetSubject } from "../../../data-access/subjects/useGetSubject";
+import { subjectQuestions } from "../../../../types/SubjectTypes";
 
 const cx = classNames.bind(styles);
 
 interface ModalProps {
-  onClose?: any;
+  onClose?: () => void;
   setQuestionData: React.Dispatch<React.SetStateAction<any>>;
-  questionData: { data: any[] };
+  questionData: { data: subjectQuestions[] };
   setTotal: React.Dispatch<React.SetStateAction<number>>;
 }
 
@@ -26,15 +27,15 @@ const Modal = ({
   setTotal,
 }: ModalProps) => {
   const { id } = useParams();
-  const { data: subjectData } = useGetSubject(id);
+  const { data: subjectData } = useGetSubject(Number(id));
   const { imageSource, name }: { imageSource?: string; name?: string } =
     subjectData || {};
-  const [textareaText, setTextareaText] = useState("");
+  const [textareaText, setTextareaText] = useState<string>("");
 
   const handleButtonClick = async () => {
     try {
       const formData = JSON.stringify({ content: `${textareaText}` });
-      const response = await postSubjectsQuestion(id, formData);
+      const response = await postSubjectsQuestion(Number(id), formData);
       if (questionData.data.length) {
         setQuestionData((prevData: { data: any[] }) => {
           const { data: prevArray } = prevData;

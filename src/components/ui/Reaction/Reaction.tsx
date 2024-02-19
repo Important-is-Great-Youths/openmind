@@ -4,27 +4,27 @@ import React, { useState, useEffect } from "react";
 import { ReactComponent as Thumbup } from "../../../icon/icon-thumbs-up.svg";
 import { ReactComponent as Thumbdown } from "../../../icon/icon-thumbs-down.svg";
 import { useGetQuestion } from "../../../data-access/questions/useGetQuestion";
-// import usePostQuestionReaction from "../../../data-access/questions/usePostQuestionReaction";
 
 interface ReactionProps {
   questionId: number;
   like?: number;
   dislike?: number;
 }
+
 export default function Reaction({ questionId }: ReactionProps) {
   const cx = classNames.bind(stylesheet);
 
   const { data: questionData } = useGetQuestion(questionId);
-  const { like: questionLike, dislike: questionDislike } = questionData || {};
-  // const { postQuestionReaction } = usePostQuestionReaction(questionId);
+  const { like: questionLike, dislike: questionDislike } =
+    questionData || ({} as ReactionProps);
 
   const initialCountLike = parseInt(localStorage.getItem("like")) || 0;
   const initialCountHate = parseInt(localStorage.getItem("hate")) || 0;
 
-  const [like, setLike] = useState(initialCountLike);
-  const [hate, setHate] = useState(initialCountHate);
-  const [up, setUp] = useState(false);
-  const [down, setDown] = useState(false);
+  const [like, setLike] = useState<number>(initialCountLike);
+  const [hate, setHate] = useState<number>(initialCountHate);
+  const [up, setUp] = useState<boolean>(false);
+  const [down, setDown] = useState<boolean>(false);
 
   const handleLikeClick = async () => {
     if (up) {

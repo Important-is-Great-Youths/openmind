@@ -33,7 +33,6 @@ export const useGetSubject = (subjectId: number) => {
   return { loading, error, data, getSubject };
 };
 
-
 // 이하 사용 예시
 
 // const GetSubject = ({ subjectId }) => {

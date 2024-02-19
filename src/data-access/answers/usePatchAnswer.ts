@@ -6,7 +6,7 @@ const usePatchAnswer = () => {
   const [error, setError] = useState(null);
   const [patchData, setPatchData] = useState(null);
 
-  const patchAnswerContent = async (answerId: number, content: string) => {
+  const patchAnswerContent = async (answerId: number, content:string) => {
     try {
       setLoading(true);
       setError(null);
