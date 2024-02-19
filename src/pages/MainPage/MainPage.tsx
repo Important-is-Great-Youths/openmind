@@ -74,11 +74,9 @@ export const MainPage = () => {
             <img src="assets/main-logo.png" alt="오픈마인드 로고" />
           </div>
           <form className={cx("form")} onSubmit={handleSubmit}>
-            <InputField
-              className={cx("inputField")}
-              onInputChange={handleInputChange}
-              isAlert={alert}
-            />
+            <div className={cx("inputField")}>
+              <InputField onInputChange={handleInputChange} isAlert={alert} />
+            </div>
             <ButtonBox
               text={"질문받기"}
               qnaWidth="qnaWidth"

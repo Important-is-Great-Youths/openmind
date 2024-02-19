@@ -9,7 +9,6 @@ import { useState, useEffect } from "react";
 import { axiosInstance } from "../../util/axiosInstance";
 import Pagenation from "../../components/ui/Pagenation/Pagenation";
 import LoadingIcon from "../../components/ui/LoadingIcon/LoadingIcon";
-import React from "react";
 
 const cx = classNames.bind(styles);
 
