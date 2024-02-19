@@ -1,4 +1,4 @@
-import styles from "./MainPage.module.css";
+import styles from "./MainPage.module.scss";
 import classNames from "classnames/bind";
 import ButtonBox from "../../components/ui/ButtonBox/ButtonBox";
 import InputField from "../../components/ui/InputField/InputField";
@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { usePostSubjects } from "../../data-access/subjects/usePostSubjects";
 import { useSearchSubject } from "../../util/useSearchSubject";
 import { useEffect, useState } from "react";
+import React from "react";
 
 const cx = classNames.bind(styles);
 
@@ -18,11 +19,11 @@ export const MainPage = () => {
 
   const searchSubjectResult = searchSubject(name);
 
-  const handleInputChange = (value) => {
+  const handleInputChange = (value: string) => {
     setName(value);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     if (name === "") {
       setAlert(true);
@@ -60,7 +61,12 @@ export const MainPage = () => {
             className={cx("question")}
             style={{ textDecoration: "none" }}
           >
-            <ButtonBox text={"질문하러 가기"} qnaBtn="answerBtn" />
+            <ButtonBox
+              text={"질문하러 가기"}
+              qnaBtn="answerBtn"
+              qnaWidth={""}
+              qnaInactivate={""}
+            />
           </Link>
         </div>
         <div className={cx("wrapInner")}>
@@ -73,7 +79,11 @@ export const MainPage = () => {
               onInputChange={handleInputChange}
               isAlert={alert}
             />
-            <ButtonBox text={"질문받기"} qnaWidth="qnaWidth" type="submit" />
+            <ButtonBox
+              text={"질문받기"}
+              qnaWidth="qnaWidth"
+              qnaInactivate={""}
+            />
           </form>
         </div>
       </div>

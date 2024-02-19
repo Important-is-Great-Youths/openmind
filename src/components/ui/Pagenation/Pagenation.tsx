@@ -1,14 +1,22 @@
 // // Pagenation.jsx
 import React from "react";
-import styles from "./Pagenation.module.css";
+import styles from "./Pagenation.module.scss";
 import { useState } from "react";
+import { subjectListInfo } from "../../../../types/SubjectTypes";
 
-const Pagenation = ({ data, limit, setOffset, offset }) => {
+interface PagenationProps {
+  data: subjectListInfo;
+  limit: number;
+  setOffset: (value: number) => void;
+  offset: number;
+}
+
+const Pagenation = ({ data, limit, setOffset, offset }: PagenationProps) => {
   const { count } = data || {};
   const totalPage = Math.ceil(count / limit);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
-  const handleButtonClick = (i) => {
+  const handleButtonClick = (i: number) => {
     setCurrentPage(i);
     setOffset((i - 1) * limit);
   };

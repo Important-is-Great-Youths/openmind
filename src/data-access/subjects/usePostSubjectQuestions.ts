@@ -6,7 +6,10 @@ export const usePostSubjectQustions = () => {
   const [error, setError] = useState(null);
   const [postQuestionData, setPostQuestionData] = useState(null);
 
-  const postSubjectQuestions = async (subjectId, questionData) => {
+  const postSubjectQuestions = async (
+    subjectId: number,
+    questionData: string
+  ) => {
     setLoading(true);
     setError(null);
     setPostQuestionData(null);

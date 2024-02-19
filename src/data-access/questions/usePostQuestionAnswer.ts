@@ -6,7 +6,7 @@ const usePostQuestionAnswer = () => {
   const [error, setError] = useState(null);
   const [answerData, setAnswerData] = useState(null);
   const TEAM = "2-3";
-  const postQuestionAnswer = async (questionId, content) => {
+  const postQuestionAnswer = async (questionId:number, content:string) => {
     try {
       setLoading(true);
       setError(null);

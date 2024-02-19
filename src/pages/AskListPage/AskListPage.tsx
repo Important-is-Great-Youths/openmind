@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
 import ButtonBox from "../../components/ui/ButtonBox/ButtonBox";
 import Dropdown from "../../components/ui/Dropdown/Dropdown";
-import styles from "./AskListPage.module.css";
+import styles from "./AskListPage.module.scss";
 import classNames from "classnames/bind";
 import Usercard from "../../components/ui/Usercard/Usercard";
 import { useState, useEffect } from "react";
 import { axiosInstance } from "../../util/axiosInstance";
 import Pagenation from "../../components/ui/Pagenation/Pagenation";
 import LoadingIcon from "../../components/ui/LoadingIcon/LoadingIcon";
+import React from "react";
 
 const cx = classNames.bind(styles);
 
@@ -78,7 +79,7 @@ export const AskListPage = () => {
   }, [hasResized]);
 
   // 추가: 정렬 기준 변경 함수
-  const handleSortChange = (option) => {
+  const handleSortChange = (option: string) => {
     setSortBy(option);
   };
 
@@ -93,7 +94,12 @@ export const AskListPage = () => {
             </div>
           </Link>
           <Link to="/">
-            <ButtonBox text={"답변하러 가기"} qnaBtn="answerBtn" />
+            <ButtonBox
+              text="답변하러 가기"
+              qnaBtn="answerBtn"
+              qnaWidth=""
+              qnaInactivate=""
+            />
           </Link>
         </div>
         <div className={cx("listWrap")}>
@@ -105,7 +111,7 @@ export const AskListPage = () => {
           <ul className={cx("list")}>
             {error && <p>Error: {error.message}</p>}
             {currentPageData &&
-              currentPageData.map((user) => (
+              currentPageData.map((user: any) => (
                 <li className={cx("cards")} key={user.id}>
                   <Usercard data={user} />
                 </li>

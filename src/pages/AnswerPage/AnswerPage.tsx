@@ -7,8 +7,9 @@ import { getSubjectsQuestion } from "../../data-access/subjects/getSubjectsQuest
 import { useDeleteQuestion } from "../../data-access/questions/useDeleteQuestion";
 import FeedAnswerCard from "../../components/ui/FeedAnswerCard/FeedAnswerCard";
 import ButtonFloating from "../../components/ui/ButtonFloating/ButtonFloating";
-import styles from "./AnswerPage.module.css";
+import styles from "./AnswerPage.module.scss";
 import classNames from "classnames/bind";
+import React from "react";
 
 const cx = classNames.bind(styles);
 const LIMIT = 100;
@@ -25,14 +26,18 @@ export const AnswerPage = () => {
   });
   const [askFeed, setAskFeed] = useState(true);
   const [isDelete, setIsDelete] = useState(false);
-  const [isDeleteId, setIsDeleteId] = useState("");
+  const [isDeleteId, setIsDeleteId]: any = useState("");
 
   const { deleteQuestion } = useDeleteQuestion();
 
-  const handleFeedCardSection = async (id, limit, offset) => {
+  const handleFeedCardSection = async (
+    id: number,
+    limit: number,
+    offset: number
+  ) => {
     setIsLoading(true);
     try {
-      const result = await getSubjectsQuestion(id, limit, offset.current);
+      const result = await getSubjectsQuestion(id, limit, offset);
       const { count, results: questionData } = result;
       setQuestionData((prevData) => ({
         data: [...questionData],
@@ -41,7 +46,7 @@ export const AnswerPage = () => {
     } catch (err) {
       console.log(err);
     } finally {
-      offset.current += limit;
+      offset += limit;
       setIsLoading(false);
     }
   };
@@ -53,17 +58,12 @@ export const AnswerPage = () => {
   };
 
   useEffect(() => {
-    handleFeedCardSection(id, LIMIT, offset);
+    handleFeedCardSection(Number(id), LIMIT, Number(offset));
   }, [location, isDelete, isDeleteId, isAskFeedPageVisible]);
 
   return (
     <>
-      <BasePostLayout
-        isButton
-        isAskFeedPageVisible={isAskFeedPageVisible}
-        setIsAskFeedPageVisible={setIsAskFeedPageVisible}
-        id={id}
-      >
+      <BasePostLayout id={Number(id)}>
         <div className={cx("deleteDiv")}>
           <div className={cx("deleteButton")}>
             <ButtonFloating
@@ -82,7 +82,6 @@ export const AnswerPage = () => {
                   askFeed={askFeed}
                   key={results.id}
                   data={results}
-                  isDelete={isDelete} // isDelete 상태 전달
                   setIsDelete={setIsDelete} // isDelete 상태 변경 함수 전달
                   setIsDeleteId={setIsDeleteId}
                 />

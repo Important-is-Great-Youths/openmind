@@ -6,11 +6,11 @@ export const usePostSubjects = () => {
   const [error, setError] = useState(null);
   const [postData, setPostData] = useState(null);
 
-  const postSubjects = async (name) => {
+  const postSubjects = async (name: string) => {
     try {
       setLoading(true);
       const response = await axiosInstance.post("subjects/", {
-        "name": name
+        name: name,
       });
       setPostData(response.data);
     } catch (error) {

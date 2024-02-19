@@ -37,10 +37,10 @@ export default function FeedCardAnswer({
 }: FeedCardAnswerProps) {
   const { id: subejctId } = useParams<{ id: string }>();
 
-  const { data: subjectData } = useGetSubject(subejctId);
+  const { data: subjectData } = useGetSubject(Number(subejctId));
   const { imageSource, name } = subjectData || ({} as SubjectData);
 
-  const { data: answerData } = useGetAnswer(answerId.toString());
+  const { data: answerData } = useGetAnswer(answerId);
   const { id, questionId, content, isRejected, createdAt } =
     answerData || ({} as AnswerData);
 
