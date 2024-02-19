@@ -10,6 +10,7 @@ import EditButton from "../EditButton/EditButton";
 import Reaction from "../Reaction/Reaction";
 import FeedCardAnswerEdit from "../FeedCardAnswerEdit/FeedCardAnswerEdit";
 import { useDeleteQuestion } from "../../../data-access/questions/useDeleteQuestion";
+import { Value } from "sass";
 
 /* 
 more 버튼을 숨기고 싶은 경우,
@@ -33,15 +34,15 @@ interface FeedAnswerCardProps {
     };
     createdAt: Date;
   };
-  setIsDelete: React.Dispatch<React.SetStateAction<boolean>>;
-  setIsDeleteId: React.Dispatch<React.SetStateAction<number>>;
+  onSetIsDelete: (value: boolean) => void;
+  onSetIsDeleteId: (Value: number) => void;
 }
 
 export default function FeedAnswerCard({
   askFeed,
   data,
-  setIsDelete,
-  setIsDeleteId,
+  onSetIsDelete,
+  onSetIsDeleteId,
 }: FeedAnswerCardProps) {
   const { id: questionId, content, answer, createdAt } = data;
   const [toggle, setToggle] = useState<boolean>(false);
@@ -67,8 +68,8 @@ export default function FeedAnswerCard({
 
   const deleteAsk = async () => {
     await deleteQuestion(questionId);
-    setIsDelete(true);
-    setIsDeleteId(questionId);
+    onSetIsDelete(true);
+    onSetIsDeleteId(questionId);
   };
 
   useEffect(() => {

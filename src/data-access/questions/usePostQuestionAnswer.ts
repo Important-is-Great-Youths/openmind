@@ -2,7 +2,7 @@ import { useState } from "react";
 import { axiosInstance } from "../../util/axiosInstance";
 
 const usePostQuestionAnswer = () => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState(null);
   const [answerData, setAnswerData] = useState(null);
   const TEAM = "2-3";

@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 // subjectId를 받아 답변자의 id, name, imageSource, questionCount, createdAt를 가져오는 Hook
 
 export const useGetSubject = (subjectId: number) => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState(null);
   const [data, setData] = useState(null);
 

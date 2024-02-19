@@ -11,7 +11,7 @@ interface postQuestionDataType {
 
 export const usePostSubjectQustions = () => {
   const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<any>(null);
+  const [error, setError] = useState(null);
   const [postQuestionData, setPostQuestionData] =
     useState<postQuestionDataType>();
 

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { axiosInstance } from "../../util/axiosInstance";
 
 const usePatchAnswer = () => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState(null);
   const [patchData, setPatchData] = useState(null);
 

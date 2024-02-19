@@ -14,15 +14,15 @@ import React from "react";
 const cx = classNames.bind(styles);
 
 export const AskListPage = () => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState(null);
   const [data, setData] = useState(null);
   const [currentPageData, setCurrentPageData] = useState(null);
-  const [limit, setLimit] = useState(8);
-  const [offset, setOffset] = useState(0);
+  const [limit, setLimit] = useState<number>(8);
+  const [offset, setOffset] = useState<number>(0);
   const [sortBy, setSortBy] = useState(null);
   const [windowSize, setWindowSize] = useState(window.innerWidth);
-  const [hasResized, setHasResized] = useState(false);
+  const [hasResized, setHasResized] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchData = async () => {

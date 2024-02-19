@@ -12,10 +12,10 @@ const cx = classNames.bind(styles);
 
 export const MainPage = () => {
   const navigate = useNavigate();
-  const [name, setName] = useState("");
+  const [name, setName] = useState<string>("");
   const { postData, postSubjects } = usePostSubjects();
   const { searchSubject } = useSearchSubject();
-  const [alert, setAlert] = useState(false);
+  const [alert, setAlert] = useState<boolean>(false);
 
   const searchSubjectResult = searchSubject(name);
 

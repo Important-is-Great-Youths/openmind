@@ -7,11 +7,16 @@ import { useState } from "react";
 const cx = classNames.bind(styles);
 
 interface InputFieldProps {
+  className: string;
   onInputChange: (value: string) => void;
   isAlert: boolean;
 }
 
-const InputField = ({ onInputChange, isAlert = false }: InputFieldProps) => {
+const InputField = ({
+  className,
+  onInputChange,
+  isAlert = false,
+}: InputFieldProps) => {
   const [inputValue, setInputValue] = useState<string>("");
 
   const handleChange = (e: any) => {
@@ -21,7 +26,7 @@ const InputField = ({ onInputChange, isAlert = false }: InputFieldProps) => {
   };
 
   return (
-    <div className={cx("input-wrap")}>
+    <div className={cx("input-wrap") + className}>
       <input
         className={cx("input", {
           alert: isAlert,
