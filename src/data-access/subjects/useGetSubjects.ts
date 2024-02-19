@@ -4,7 +4,7 @@ import { axiosInstance } from "../../util/axiosInstance";
 // count(답변자의 수), next, previous, results(모든 subject의 데이터)를 가져오는 Hook
 
 export const useGetSubjects = (customLimit = 8, customOffset = 0) => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState(null);
   const [data, setData] = useState({ results: [] });
 

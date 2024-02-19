@@ -16,17 +16,18 @@ const LIMIT = 100;
 
 export const AnswerPage = () => {
   const { id } = useParams();
-  const [isAskFeedPageVisible, setIsAskFeedPageVisible] = useState(false);
+  const [isAskFeedPageVisible, setIsAskFeedPageVisible] =
+    useState<boolean>(false);
   const location = useLocation();
   const offset = useRef(0);
-  const [isLoading, setIsLoading] = useState(false);
-  const [total, setTotal] = useState(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [total, setTotal] = useState<number>(null);
   const [questionData, setQuestionData] = useState({
     data: [],
   });
-  const [askFeed, setAskFeed] = useState(true);
-  const [isDelete, setIsDelete] = useState(false);
-  const [isDeleteId, setIsDeleteId]: any = useState("");
+  const [askFeed, setAskFeed] = useState<boolean>(true);
+  const [isDelete, setIsDelete] = useState<boolean>(false);
+  const [isDeleteId, setIsDeleteId] = useState<number>();
 
   const { deleteQuestion } = useDeleteQuestion();
 
@@ -82,8 +83,8 @@ export const AnswerPage = () => {
                   askFeed={askFeed}
                   key={results.id}
                   data={results}
-                  setIsDelete={setIsDelete} // isDelete 상태 변경 함수 전달
-                  setIsDeleteId={setIsDeleteId}
+                  onSetIsDelete={setIsDelete} // isDelete 상태 변경 함수 전달
+                  onSetIsDeleteId={setIsDeleteId}
                 />
               );
             })}

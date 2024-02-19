@@ -2,7 +2,7 @@ import { axiosInstance } from "../../util/axiosInstance";
 import { useState, useEffect, useCallback } from "react";
 
 export const useGetQuestion = (questionId: number) => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState(null);
   const [data, setData] = useState(null);
 

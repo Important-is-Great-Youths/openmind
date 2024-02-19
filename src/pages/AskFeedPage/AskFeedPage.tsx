@@ -17,11 +17,12 @@ const LIMIT = 99;
 
 export const AskFeedPage = () => {
   const { id } = useParams();
-  const [isAskFeedPageVisible, setIsAskFeedPageVisible] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isAskFeedPageVisible, setIsAskFeedPageVisible] =
+    useState<boolean>(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const location = useLocation();
   const offset = useRef(0);
-  const [total, setTotal] = useState(null);
+  const [total, setTotal] = useState<number>(null);
   const [questionData, setQuestionData] = useState({
     data: [],
   });
