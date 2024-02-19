@@ -13,18 +13,24 @@ import usePostQuestionAnswers from "../../../data-access/questions/usePostQuesti
 
 const cx = classNames.bind(styles);
 
+interface FeedCardAnswerEditProps {
+  answerId: number;
+  questionId: number;
+  propFunction: () => void;
+}
+
 export default function FeedCardAnswerEdit({
   answerId,
   questionId,
   propFunction,
-}) {
+}: FeedCardAnswerEditProps) {
   // 사용자 명 가져오기
   const { id: subejctId } = useParams();
   const { data: subjectData } = useGetSubject(subejctId);
-  const { name } = subjectData || {};
+  const { name } = subjectData;
   // answer 있으면 가져오기
-  const { data: answerData } = useGetAnswer(answerId || "");
-  const { id, content, isRejected, createdAt } = answerData || {};
+  const { data: answerData } = useGetAnswer(answerId);
+  const { id, content, isRejected, createdAt } = answerData;
   const answer = answerData ? { id, content, isRejected, createdAt } : null;
 
   const answerContent = answer ? answer.content : "";

@@ -49,8 +49,6 @@ export default function FeedAnswerCard({
   const [invisible, setInvisible] = useState(true);
   const [answerEdit, setAnswerEdit] = useState(false);
   const { deleteQuestion } = useDeleteQuestion();
-  const answerId = answer ? answer.id : null;
-  const answerIsRejected = answer ? answer.isRejected : null;
 
   const delAndRejectionHandler = (event: React.MouseEvent<MouseEvent>) => {
     event.stopPropagation();
@@ -130,17 +128,17 @@ export default function FeedAnswerCard({
             )}
           </div>
           <FeedCardQuestion text={content} date={createdAt} />
-          {answerIsRejected && <p className={cx("rejectedText")}>답변 거절</p>}
+          {answer.isRejected && <p className={cx("rejectedText")}>답변 거절</p>}
           {answerEdit ? (
             <FeedCardAnswerEdit
-              answerId={answerId}
+              answerId={answer.id}
               questionId={questionId}
               propFunction={displayAnswerHandler}
             />
           ) : (
             answer && (
               <FeedCardAnswer
-                answerId={answerId}
+                answerId={answer.id}
                 style={answerStyle}
                 edit={answerEdit}
               />

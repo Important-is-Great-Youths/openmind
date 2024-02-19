@@ -3,7 +3,7 @@ import { useAsync } from "../../util/useAsync";
 
 // answerId를 받아 해당 질문의 id, questionId, content, isRejected, createdAt를 가져오는 Hook
 
-export const useGetAnswer = (answerId) => {
+export const useGetAnswer = (answerId: number) => {
   const getAnswer = () => axiosInstance.get(`answers/${answerId}/`);
   const { loading, error, data } = useAsync(getAnswer);
   return { loading, error, data };

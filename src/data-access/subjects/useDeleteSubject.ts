@@ -7,7 +7,7 @@ export const useDeleteSubject = () => {
   const [error, setError] = useState(null);
   const [deleteData, setDeleteData] = useState(null);
 
-  const deleteSubject = async (subjectId) => {
+  const deleteSubject = async (subjectId: number) => {
     try {
       setLoading(true);
       setError(null);

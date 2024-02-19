@@ -6,7 +6,7 @@ const usePatchAnswer = () => {
   const [error, setError] = useState(null);
   const [patchData, setPatchData] = useState(null);
 
-  const patchAnswerContent = async (answerId, content) => {
+  const patchAnswerContent = async (answerId: number, content: string) => {
     try {
       setLoading(true);
       setError(null);
@@ -24,7 +24,10 @@ const usePatchAnswer = () => {
     }
   };
 
-  const patchAnswerIsRejected = async (answerId, isRejected) => {
+  const patchAnswerIsRejected = async (
+    answerId: number,
+    isRejected: boolean
+  ) => {
     try {
       setLoading(true);
       setError(null);

@@ -16,7 +16,7 @@ export default function Reaction({ questionId }: ReactionProps) {
 
   const { data: questionData } = useGetQuestion(questionId);
   const { like: questionLike, dislike: questionDislike } = questionData || {};
-  const { postQuestionReaction } = usePostQuestionReaction(questionId);
+  // const { postQuestionReaction } = usePostQuestionReaction(questionId);
 
   const initialCountLike = parseInt(localStorage.getItem("like")) || 0;
   const initialCountHate = parseInt(localStorage.getItem("hate")) || 0;

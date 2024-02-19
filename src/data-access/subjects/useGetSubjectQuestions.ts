@@ -3,7 +3,13 @@ import { axiosInstance } from "../../util/axiosInstance";
 
 // 지정 subject의 count(질문의 수), next, previous, results(quesion의 데이터)를 가져오는 Hook
 
-export const useGetSubjectQuestions = ({ subjectId }) => {
+interface GetSubjectsQuestionsProps {
+  subjectId: number;
+}
+
+export const useGetSubjectQuestions = ({
+  subjectId,
+}: GetSubjectsQuestionsProps) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [data, setData] = useState({ results: [] });

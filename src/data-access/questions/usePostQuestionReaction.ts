@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { axiosInstance } from "../../util/axiosInstance";
 
-const usePostQuestionReaction = (questionId) => {
-  const [loading, setLoading] = useState(false);
+const usePostQuestionReaction = (questionId: number) => {
+  const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState(null);
-  const [reactionData, setReactionData] = useState(null);
+  const [reactionData, setReactionData] = useState<any>(null); // 여기서 any 대신 실제 데이터 타입을 지정하는 것이 좋습니다.
 
-  const postQuestionReaction = async (reactionType) => {
+  const postQuestionReaction = async (reactionType: string) => {
     try {
       setLoading(true);
       setError(null);
@@ -20,7 +20,7 @@ const usePostQuestionReaction = (questionId) => {
 
       setReactionData(response.data);
     } catch (error) {
-      setError(error);
+      setError(error); // axios의 에러 응답을 받아옵니다.
     } finally {
       setLoading(false);
     }

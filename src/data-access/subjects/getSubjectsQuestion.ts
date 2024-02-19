@@ -1,4 +1,4 @@
-export async function getSubjectsQuestion(id, limit = 99, offset = "") {
+export async function getSubjectsQuestion(id: number, limit = 99, offset = "") {
   const subjectId = id;
   const query = `?limit=${limit}`;
   const response = await fetch(

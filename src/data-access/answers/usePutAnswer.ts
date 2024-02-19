@@ -8,7 +8,11 @@ export const usePutAnswer = () => {
   const [error, setError] = useState(null);
   const [putData, setPutData] = useState(null);
 
-  const putAnswer = async (answerId, content, isRejected) => {
+  const putAnswer = async (
+    answerId: number,
+    content: string,
+    isRejected: boolean
+  ) => {
     try {
       setLoading(true);
       setError(null);

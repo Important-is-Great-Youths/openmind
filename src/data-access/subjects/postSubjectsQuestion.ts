@@ -1,4 +1,4 @@
-export async function postSubjectsQuestion(id, formData) {
+export async function postSubjectsQuestion(id: string, formData: string) {
   const response = await fetch(
     `https://openmind-api.vercel.app/2-3/subjects/${id}/questions/`,
     {

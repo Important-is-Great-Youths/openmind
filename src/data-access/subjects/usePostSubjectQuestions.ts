@@ -1,16 +1,23 @@
 import { useState } from "react";
 import { axiosInstance } from "../../util/axiosInstance";
 
-export const usePostSubjectQustions = () => {
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [postQuestionData, setPostQuestionData] = useState(null);
+interface postQuestionDataType {
+  subjectId: number;
+  content: string;
+  like: 0;
+  dislike: 0;
+  team: "2-3";
+}
 
-  const postSubjectQuestions = async (subjectId, questionData) => {
+export const usePostSubjectQustions = () => {
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<any>(null);
+  const [postQuestionData, setPostQuestionData] =
+    useState<postQuestionDataType>();
+
+  const postSubjectQuestions = async (subjectId: number, questionData: any) => {
     setLoading(true);
     setError(null);
-    setPostQuestionData(null);
-
     try {
       const response = await axiosInstance.post(
         `subjects/${subjectId}/questions/`,
