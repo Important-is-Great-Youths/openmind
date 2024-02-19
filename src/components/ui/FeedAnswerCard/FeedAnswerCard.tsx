@@ -44,10 +44,10 @@ export default function FeedAnswerCard({
   setIsDeleteId,
 }: FeedAnswerCardProps) {
   const { id: questionId, content, answer, createdAt } = data;
-  const [toggle, setToggle] = useState(false);
-  const [answerText, setAnswerText] = useState("");
-  const [invisible, setInvisible] = useState(true);
-  const [answerEdit, setAnswerEdit] = useState(false);
+  const [toggle, setToggle] = useState<boolean>(false);
+  const [answerText, setAnswerText] = useState<string>("");
+  const [invisible, setInvisible] = useState<boolean>(true);
+  const [answerEdit, setAnswerEdit] = useState<boolean>(false);
   const { deleteQuestion } = useDeleteQuestion();
   const answerId = answer && answer.id;
   const answerIsRejected = answer ? answer.isRejected : null;

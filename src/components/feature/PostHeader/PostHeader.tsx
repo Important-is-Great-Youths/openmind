@@ -36,7 +36,7 @@ export default function PostHeader({ id }: PostHeaderProps) {
           alt="프로필 이미지"
         />
         <h2 className={cx("username")}>{name}</h2>
-        <ButtonShare zIndex={setZIndex} />
+        <ButtonShare onSetZIndex={setZIndex} />
       </div>
     </>
   );

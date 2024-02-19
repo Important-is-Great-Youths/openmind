@@ -5,7 +5,11 @@ import { ReactComponent as IconArrowDown } from "../../../icon/icon-arrow-down.s
 
 const cx = classNames.bind(styles);
 
-function Dropdown({ onSortChange }: any) {
+interface DropdownProps {
+  onSortChange: (value: string) => void;
+}
+
+function Dropdown({ onSortChange }: DropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -32,6 +36,7 @@ function Dropdown({ onSortChange }: any) {
       setIsOpen(false);
     }
   };
+  
   useEffect(() => {
     document.addEventListener("click", handleClickOutside);
 

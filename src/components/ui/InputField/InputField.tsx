@@ -6,8 +6,13 @@ import { useState } from "react";
 
 const cx = classNames.bind(styles);
 
-const InputField = ({ onInputChange, isAlert = false }: any) => {
-  const [inputValue, setInputValue] = useState("");
+interface InputFieldProps {
+  onInputChange: (value: string) => void;
+  isAlert: boolean;
+}
+
+const InputField = ({ onInputChange, isAlert = false }: InputFieldProps) => {
+  const [inputValue, setInputValue] = useState<string>("");
 
   const handleChange = (e: any) => {
     const value = e.target.value;

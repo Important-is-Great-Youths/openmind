@@ -72,7 +72,7 @@ export const AskFeedPage = () => {
           <AskEmptyPage />
         )}
         <div className={cx("button")}>
-          <ButtonFloating text={"질문 작성하기"} onClick={handleButtonClick} />
+          <ButtonFloating text={"질문 작성하기"} onClick={handleButtonClick} small="" />
         </div>
         {isModalOpen && (
           <Modal

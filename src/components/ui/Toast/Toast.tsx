@@ -4,7 +4,7 @@ import classNames from "classnames/bind";
 
 export default function Toast() {
   const cx = classNames.bind(stylesheet);
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState<boolean>(true);
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {

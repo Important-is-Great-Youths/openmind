@@ -7,7 +7,7 @@ import { useState } from "react";
 const cx = classNames.bind(styles);
 
 const EditButton = () => {
-  const [selected, setSelected] = useState(false);
+  const [selected, setSelected] = useState<boolean>(false);
 
   const buttonClassName = cx("button", { selected });
   const handleButtonSelected = () => {

@@ -14,17 +14,21 @@ declare global {
   }
 }
 
-export default function ButtonShare({ zIndex }: any) {
+interface ButtonShareProps {
+  onSetZIndex: (value: boolean) => void;
+}
+
+export default function ButtonShare({ onSetZIndex }: ButtonShareProps) {
   const [showToast, setShowToast] = useState(false);
 
-  const shareToOpenMind = async (text: any) => {
+  const shareToOpenMind = async () => {
     try {
       await navigator.clipboard.writeText("https://www.codeit.kr");
       setShowToast(true);
-      zIndex(true);
+      onSetZIndex(true);
       setTimeout(() => {
         setShowToast(false);
-        zIndex(false);
+        onSetZIndex(false);
       }, 1000);
     } catch (err) {
       console.log(err);

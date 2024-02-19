@@ -16,7 +16,7 @@ const cx = classNames.bind(styles);
 interface FeedCardAnswerEditProps {
   answerId: number;
   questionId: number;
-  propFunction: any;
+  propFunction: () => void;
 }
 
 interface AnswerData {
@@ -45,8 +45,8 @@ export default function FeedCardAnswerEdit({
   const answerContent = answer ? answer.content : "";
   // answer 있으면 patch로 수정
   const { patchAnswerContent } = usePatchAnswer();
-  const [editText, setEditText] = useState(answerContent); // useState로 초기 상태 설정
-  const [isEmpty, setIsEmpty] = useState(editText ? false : true);
+  const [editText, setEditText] = useState<string>(answerContent); // useState로 초기 상태 설정
+  const [isEmpty, setIsEmpty] = useState<boolean>(editText ? false : true);
   // answer 없으면 post로 삽입
   const { postQuestionAnswer } = usePostQuestionAnswers(); // questionId, content
 
